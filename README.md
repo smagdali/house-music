@@ -37,6 +37,8 @@ Presets are declarative: activating one puts the whole house into that state. Ro
 ### Features
 
 - Very simple iOS and Apple Watch app with the right combination of presets for inputs and outputs
+- Generic, not hardcoded: MusicCast devices are auto-discovered (SSDP), rooms and inputs come from the devices themselves, and presets are user-defined, so the app works in any MusicCast home and can go in the App Store
+- Input/output curation in Settings: each device exposes far more inputs than we use, so configuration hides everything unused; only the curated inputs and rooms appear when defining presets
 - Live state: the app reflects the actual state of the devices, including changes made elsewhere (MusicCast app, remotes, front panels)
 - Universal volume control across the active preset's rooms
 - Per-room, per-preset volume baselines: activating a preset restores its baselines, and a "save this volume to preset" action calibrates the baseline from the current level
@@ -53,7 +55,7 @@ That's it.
 - The Master Bedroom RX-S602 is the only device on Wi-Fi; accepted as-is
 - DHCP reservations for the Yamahas are in place
 - Apple Developer account exists: team 86H54WCPYP, bundle prefix org.whitelabel, same setup as the [eightful](https://github.com/smagdali/eightful) repo (which is also the iOS + watchOS project template to crib from)
-- Distribution: App Store release preferred, TestFlight if we have to
+- Distribution: App Store release. This is why the app is generic with auto-discovery; our house is just one configuration
 
 ## Open questions
 
