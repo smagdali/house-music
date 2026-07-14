@@ -58,8 +58,9 @@ Consequences, mode by mode:
   from a receiver input). Scene = RX-V685 `input=audio4` as distribution server,
   target rooms joined as clients, each room restored to its baseline volume.
 - **DJ time**: no grouping at all; `setInput=audio4` + `setPureDirect=true` on
-  the RX-V685. Caveat: whether Pure Direct can coexist with simultaneous
-  distribution (for Decks-upstairs-while-DJing) needs a bench test on the unit.
+  the RX-V685. Confirmed by experience: Pure Direct and MusicCast distribution
+  are mutually exclusive, which is why DJ time is Living Room only. The app
+  must never combine Pure Direct with a multi-room preset.
 - **Telly time / TV in bed**: single-receiver scenes, trivial.
 - **Streaming/Spotify**: phone picks the AirPlay target as today. The app's job
   is just to have the room powered, on the right input, at baseline volume.
@@ -135,8 +136,9 @@ via the MusicCast app or `getFeatures`).
 
 ## Risks and open questions
 
-1. Does Pure Direct on the RX-V685 block simultaneous MusicCast distribution?
-   Test empirically.
+1. Pure Direct on the RX-V685 does block simultaneous MusicCast distribution
+   (confirmed by experience, no bench test needed). Encoded as a constraint in
+   the spec: no Pure Direct on multi-room presets.
 2. Wired group size beyond 9 clients is hinted at for 2018+ models; irrelevant
    at our scale but worth knowing if the fleet grows.
 

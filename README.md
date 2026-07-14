@@ -34,6 +34,8 @@ The Dining Room WiiM Mini is not part of this system (it cannot join MusicCast g
 
 Presets are declarative: activating one puts the whole house into that state. Rooms not in the preset turn off. Devices are assumed always available; no offline or partial-failure handling.
 
+Pure Direct and MusicCast distribution are mutually exclusive (confirmed by experience; that is why "DJ time" is Living Room only). The app must not offer Pure Direct on multi-room presets.
+
 ### Features
 
 - Very simple iOS and Apple Watch app with the right combination of presets for inputs and outputs
@@ -61,5 +63,4 @@ That's it.
 
 The original research questions (Yamaha APIs, AirPlay 2 vs MusicCast, WiiM per zone) are answered in [notes/research.md](notes/research.md) and [notes/network-discovery.md](notes/network-discovery.md). Still open:
 
-- Test whether Pure Direct on the RX-V685 coexists with simultaneous MusicCast distribution
 - Apple TV wake mechanism: receiver power-on plus input switch may cascade over CEC downstairs; if not, wake over the network (Companion protocol) needs investigating
