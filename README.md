@@ -46,7 +46,7 @@ Pure Direct and MusicCast distribution are mutually exclusive (confirmed by expe
 - Per-room, per-preset volume baselines: activating a preset restores its baselines, and a "save this volume to preset" action calibrates the baseline from the current level
 - Siri support for selecting presets: "Spotify in Dining Room", "TV in bed", "DJ time", "Decks upstairs", etc
 - Spotify Web API integration: presets that involve Spotify transfer the active session to the right room or group themselves, so "Spotify in Dining Room" works end to end without opening the Spotify app. We have a family plan; each user logs into their own account on their own device (more users may be added later)
-- Presets that use an Apple TV wake it where the HDMI chain supports it: the Living Room projector does CEC, the Master Bedroom one does not (acceptable; use the remote there)
+- Presets do not attempt to wake the Apple TVs (tested 2026-07-14: receiver power-on plus input switch does not wake an Apple TV over CEC). Picking up the Siri remote wakes the Apple TV, which cascades to the Living Room projector via CEC; the Master Bedroom projector has no CEC either way
 
 Explicitly not wanted: native internet radio presets (the built-in radio is a pain and we never use it); streaming stays phone-originated.
 
@@ -61,6 +61,4 @@ That's it.
 
 ## Open questions
 
-The original research questions (Yamaha APIs, AirPlay 2 vs MusicCast, WiiM per zone) are answered in [notes/research.md](notes/research.md) and [notes/network-discovery.md](notes/network-discovery.md). Still open:
-
-- Apple TV wake mechanism: receiver power-on plus input switch may cascade over CEC downstairs; if not, wake over the network (Companion protocol) needs investigating
+None. The original research questions (Yamaha APIs, AirPlay 2 vs MusicCast, WiiM per zone) are answered in [notes/research.md](notes/research.md) and [notes/network-discovery.md](notes/network-discovery.md); Pure Direct exclusivity and Apple TV wake were settled by testing.
