@@ -77,6 +77,36 @@ can take 2 to 3 minutes to reach working state; Yamaha recommends Link Control
 "speed", which assumes wired Ethernet. For snappy scene switching the Yamahas
 should be on Ethernet with `setLinkControl=speed`.
 
+## 2a. Spotify multiroom
+
+Every MusicCast device is its own Spotify Connect endpoint (input id `spotify`),
+and when an MC Link group exists the master advertises the whole group to
+Spotify as one target ("Living Room +1 Room" in the Connect picker). Verified
+live: with that group active, `dist/getDistributionInfo` on the RX-V685 reports
+`group_name: "Living Room +1 Room"`, server zone main, client 192.168.6.56
+(Dining Room), status working. So the Spotify picker is just showing MC Link
+state, and MC Link state is ours to control.
+
+What the app can drive directly via YXC:
+
+- Create, extend, shrink, or dissolve the group (`/dist` endpoints), including
+  while Spotify is playing; `setGroupName` controls the name Spotify displays.
+  A "Spotify upstairs" preset = form the group, set per-room baseline volumes,
+  set master input to `spotify`.
+- Playback control once Spotify is the active input: `netusb/setPlayback`
+  (play/pause/skip) and `netusb/getPlayInfo` for now-playing metadata and art.
+- Per-room volume as usual via zone `setVolume`.
+
+What YXC cannot do: move the phone's Spotify session onto the receiver, i.e.
+programmatically "pick the device" in the Connect list. Two options:
+
+1. Keep it manual (as today): the preset preps the group and volumes, and the
+   user taps the room in Spotify's picker. Zero extra moving parts.
+2. Full automation via the Spotify Web API (requires a Spotify login in our
+   app and Premium): `GET /me/player/devices` lists the Yamahas as Connect
+   devices and `PUT /me/player` transfers the active session to one, and can
+   start a specific playlist. Worth adding only if the manual tap annoys.
+
 ## 3. Buy a WiiM per WXA-50?
 
 No. A WiiM per zone would buy AirPlay 2 everywhere for phone-originated audio,
