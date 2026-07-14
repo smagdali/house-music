@@ -42,17 +42,22 @@ Presets are declarative: activating one puts the whole house into that state. Ro
 - Per-room, per-preset volume baselines: activating a preset restores its baselines, and a "save this volume to preset" action calibrates the baseline from the current level
 - Siri support for selecting presets: "Spotify in Dining Room", "TV in bed", "DJ time", "Decks upstairs", etc
 - Spotify Web API integration: presets that involve Spotify transfer the active session to the right room or group themselves, so "Spotify in Dining Room" works end to end without opening the Spotify app. We have a family plan; each user logs into their own account on their own device (more users may be added later)
+- Presets that use an Apple TV wake it where the HDMI chain supports it: the Living Room projector does CEC, the Master Bedroom one does not (acceptable; use the remote there)
 
 Explicitly not wanted: native internet radio presets (the built-in radio is a pain and we never use it); streaming stays phone-originated.
 
 That's it.
+
+## Infrastructure notes
+
+- The Master Bedroom RX-S602 is the only device on Wi-Fi; accepted as-is
+- DHCP reservations for the Yamahas are in place
+- Apple Developer account exists: team 86H54WCPYP, bundle prefix org.whitelabel, same setup as the [eightful](https://github.com/smagdali/eightful) repo (which is also the iOS + watchOS project template to crib from)
+- Distribution: App Store release preferred, TestFlight if we have to
 
 ## Open questions
 
 The original research questions (Yamaha APIs, AirPlay 2 vs MusicCast, WiiM per zone) are answered in [notes/research.md](notes/research.md) and [notes/network-discovery.md](notes/network-discovery.md). Still open:
 
 - Test whether Pure Direct on the RX-V685 coexists with simultaneous MusicCast distribution
-- Wire the Master Bedroom RX-S602 (the only device on Wi-Fi); set Link Control to "speed" everywhere and measure group formation time
-- DHCP reservations for the five Yamahas, or rely on discovery by device ID at app launch
-- Should presets wake the Apple TV / TV (HDMI-CEC), or is that out of scope?
-- Apple Developer account for Siri/watchOS distribution on two phones
+- Apple TV wake mechanism: receiver power-on plus input switch may cascade over CEC downstairs; if not, wake over the network (Companion protocol) needs investigating
