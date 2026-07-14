@@ -33,6 +33,7 @@ We have a multi-room home network with two Yamaha receivers. The DJ controller a
 - Universal volume control, but with the ability to calibrate the per-room baseline in Settings
 - When a preset is activated after a break, volume is returned to that baseline
 - Siri support for selecting presets: "Spotify in Dining Room", "TV in bed", "DJ time", "Decks upstairs", etc
+- Spotify Web API integration: presets that involve Spotify transfer the active session to the right room or group themselves, so "Spotify in Dining Room" works end to end without opening the Spotify app (requires Spotify login and Premium)
 
 That's it.
 

@@ -98,14 +98,12 @@ What the app can drive directly via YXC:
 - Per-room volume as usual via zone `setVolume`.
 
 What YXC cannot do: move the phone's Spotify session onto the receiver, i.e.
-programmatically "pick the device" in the Connect list. Two options:
-
-1. Keep it manual (as today): the preset preps the group and volumes, and the
-   user taps the room in Spotify's picker. Zero extra moving parts.
-2. Full automation via the Spotify Web API (requires a Spotify login in our
-   app and Premium): `GET /me/player/devices` lists the Yamahas as Connect
-   devices and `PUT /me/player` transfers the active session to one, and can
-   start a specific playlist. Worth adding only if the manual tap annoys.
+programmatically "pick the device" in the Connect list. Decision: the app
+integrates the Spotify Web API to close this gap (requires a Spotify login in
+our app and Premium): `GET /me/player/devices` lists the Yamahas as Connect
+devices and `PUT /me/player` transfers the active session to one, and can start
+a specific playlist. Spotify presets are then end to end with no manual tap;
+the app is the one stop shop.
 
 ## 3. Buy a WiiM per WXA-50?
 
