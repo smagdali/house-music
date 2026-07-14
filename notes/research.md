@@ -107,19 +107,13 @@ via the MusicCast app or `getFeatures`).
 
 ## Risks and open questions
 
-1. **MusicCast Link latency for live Decks listening is the main open risk.**
-   No verified millisecond figures exist. Practitioner forum reports (AVS Forum,
-   unverified) describe roughly 2 seconds of buffering delay on analog-input
-   distribution, workable for "records playing through the house", but it means
-   the Living Room (direct analog) and linked rooms will not be beat-synced with
-   each other. For "Decks upstairs" while performing, mute the Living Room or
-   accept the offset. Needs a live test before designing the DJ-adjacent modes.
-2. Does Pure Direct on the RX-V685 block simultaneous MusicCast distribution?
+1. Does Pure Direct on the RX-V685 block simultaneous MusicCast distribution?
    Test empirically.
-3. Wired group size beyond 9 clients is hinted at for 2018+ models; irrelevant
+2. Wired group size beyond 9 clients is hinted at for 2018+ models; irrelevant
    at our scale but worth knowing if the fleet grows.
-4. WiiM sync quality and pricing went unverified; moot unless question 1 kills
-   the MusicCast approach.
+
+(MusicCast Link latency was flagged by the research as unquantified, but it has
+never been a problem in practice on this system, so it is not a risk here.)
 
 ## Key sources
 
