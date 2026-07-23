@@ -20,19 +20,25 @@ The Dining Room WiiM Mini is not part of this system (it cannot join MusicCast g
 
 ### Play modes
 
-- Streaming from our iPhones or laptops (BBC Sounds, podcasts, etc)
-- Spotify from our iPhones or laptops
-- Playing from Decks into multiple rooms; most often just Living Room and Dining Room (upstairs) but occasionally whole house
+Sources and room combinations are selected independently: pick a source, pick the rooms. Named room combinations cover the common cases:
+
+- "Upstairs": Living Room and Dining Room
+- "Upstairs Downstairs": whole house except Office
+- "Whole House": includes the Office
+
+Modes:
+
+- Streaming from our iPhones or laptops (BBC Sounds, podcasts) to one or multiple rooms (multi-room via "Stream here", see Streaming routing below)
+- Playing from Spotify to one or multiple rooms (Spotify Connect interacting with MusicCast, tuned for maximum ease of use)
+- Playing from Decks into one or multiple rooms as selected; most often just "Upstairs", occasionally "Upstairs Downstairs" or "Whole House"
 - "DJ time": playing from Decks when DJing. Living Room only, with Pure Direct set on the RX-V685
 - "Telly time": Apple TV, Living Room output only
 - "TV in bed": Apple TV in Master Bedroom only
-- "Upstairs Downstairs": whole house except Office
-- "Whole House": includes the Office
 - "All off": everything off
 
 ### Preset semantics
 
-Presets are declarative: activating one puts the whole house into that state. Rooms not in the preset turn off. Devices are assumed always available; no offline or partial-failure handling.
+A preset is a source plus a room combination plus its volume baselines. Presets are declarative: activating one puts the whole house into that state. Rooms not in the preset turn off. Devices are assumed always available; no offline or partial-failure handling.
 
 Pure Direct and MusicCast distribution are mutually exclusive (confirmed by experience; that is why "DJ time" is Living Room only). The app must not offer Pure Direct on multi-room presets.
 
