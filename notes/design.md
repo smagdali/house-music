@@ -47,6 +47,13 @@ The preset powers the rooms, forms the group, sets baselines, transfers the
 Spotify session so the target is the active device, then opens the Spotify app
 for the user to pick music. One extra tap, no guessing.
 
+## Preset ordering is per-person
+
+Stefan and Kay have different listening habits, so the grid order of presets is
+personal, not shared. Preset definitions, curation, and baselines are household
+data (shared via CloudKit); ordering lives with each person's account and never
+syncs between them.
+
 ## 5. Config sync: CloudKit family sharing from day one
 
 Presets, curation, and baselines live in a shared CloudKit zone; being in the

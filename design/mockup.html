@@ -1,0 +1,396 @@
+<title>House Music: App Mockup v1</title>
+<style>
+  :root {
+    --ground: #f4f1ec;
+    --card: #ffffff;
+    --ink: #26211b;
+    --muted: #7d746a;
+    --line: #e2dcd3;
+    --accent: #b87a1e;
+    --glow: #e9a23b;
+    /* phone-internal tokens: the app itself is dark-first, both page themes */
+    --p-screen: #141210;
+    --p-surface: #211d19;
+    --p-raised: #2b2621;
+    --p-ink: #f1ede6;
+    --p-muted: #9c948a;
+    --p-line: #383129;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #17150f;
+      --card: #201d17;
+      --ink: #f0ece4;
+      --muted: #9a9186;
+      --line: #322d25;
+      --accent: #e9a23b;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #17150f; --card: #201d17; --ink: #f0ece4;
+    --muted: #9a9186; --line: #322d25; --accent: #e9a23b;
+  }
+  :root[data-theme="light"] {
+    --ground: #f4f1ec; --card: #ffffff; --ink: #26211b;
+    --muted: #7d746a; --line: #e2dcd3; --accent: #b87a1e;
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+    line-height: 1.5;
+    margin: 0;
+    padding: 2.5rem 1.25rem 5rem;
+  }
+  .wrap { max-width: 1120px; margin: 0 auto; }
+  .eyebrow {
+    text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.72rem;
+    font-weight: 600; color: var(--accent); margin: 0 0 0.4rem;
+  }
+  h1 { font-size: 1.9rem; font-weight: 700; margin: 0 0 0.35rem; text-wrap: balance; }
+  .lede { color: var(--muted); max-width: 58ch; margin: 0 0 0.5rem; }
+  .lede strong { color: var(--ink); font-weight: 600; }
+
+  .screens { display: flex; flex-wrap: wrap; gap: 2.5rem 2rem; margin-top: 2.5rem; }
+  .unit { flex: 1 1 320px; max-width: 360px; }
+  .unit h2 { font-size: 1.05rem; font-weight: 700; margin: 0 0 0.15rem; }
+  .unit .sub { color: var(--muted); font-size: 0.85rem; margin: 0 0 1rem; }
+
+  .notes {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 0.9rem 1.1rem; margin-top: 1.1rem; font-size: 0.84rem; color: var(--muted);
+  }
+  .notes ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.35rem; }
+  .notes li::marker { color: var(--accent); }
+
+  /* ---------- phone frame ---------- */
+  .phone {
+    width: 320px; max-width: 100%; margin: 0 auto;
+    background: #000; border-radius: 44px; padding: 10px;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.28);
+  }
+  .screen {
+    background: var(--p-screen); color: var(--p-ink);
+    border-radius: 36px; overflow: hidden;
+    display: flex; flex-direction: column;
+    height: 620px;
+  }
+  .statusbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.9rem 1.6rem 0.4rem; font-size: 0.78rem; font-weight: 600;
+  }
+  .appbar { display: flex; justify-content: space-between; align-items: baseline; padding: 0.5rem 1.25rem 0; }
+  .appbar .title { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.01em; }
+  .appbar .gear { color: var(--p-muted); font-size: 1.1rem; text-decoration: none; }
+
+  .nowplaying {
+    margin: 0.7rem 1.25rem 0; padding: 0.55rem 0.85rem;
+    background: var(--p-surface); border: 1px solid var(--p-line); border-radius: 12px;
+    font-size: 0.82rem; color: var(--p-muted);
+    display: flex; align-items: center; gap: 0.55rem;
+  }
+  .nowplaying .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--glow); flex: none;
+    box-shadow: 0 0 8px var(--glow); }
+  .nowplaying b { color: var(--p-ink); font-weight: 600; }
+
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; padding: 1rem 1.25rem 0; }
+  .preset {
+    background: var(--p-surface); border: 1px solid var(--p-line); border-radius: 16px;
+    padding: 0.85rem 0.9rem; min-height: 64px; cursor: pointer;
+    display: flex; flex-direction: column; justify-content: flex-end; gap: 0.15rem;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .preset .src { font-weight: 700; font-size: 0.95rem; }
+  .preset .rooms { font-size: 0.75rem; color: var(--p-muted); }
+  .preset.active { border-color: var(--glow); background: var(--p-raised); }
+  .preset.active .src { color: var(--glow); }
+  .preset:focus-visible { outline: 2px solid var(--glow); outline-offset: 2px; }
+  .preset.off .src { color: var(--p-muted); }
+
+  .custombtn {
+    margin: 0.9rem 1.25rem 0; padding: 0.7rem; text-align: center;
+    border: 1px dashed var(--p-line); border-radius: 14px; color: var(--p-muted);
+    font-size: 0.85rem; cursor: pointer;
+  }
+
+  .volume { margin-top: auto; padding: 1rem 1.25rem 1.6rem; }
+  .volume .row { display: flex; justify-content: space-between; font-size: 0.72rem;
+    color: var(--p-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.4rem; }
+  .volume .db { font-variant-numeric: tabular-nums; color: var(--p-ink); }
+  input[type="range"] {
+    width: 100%; appearance: none; -webkit-appearance: none; height: 4px; border-radius: 2px;
+    background: linear-gradient(to right, var(--glow) var(--fill, 55%), var(--p-line) var(--fill, 55%));
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    appearance: none; -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%;
+    background: var(--p-ink); border: none; box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+  }
+
+  /* segmented control (mockup-level and in-screen) */
+  .seg {
+    display: inline-flex; background: var(--card); border: 1px solid var(--line);
+    border-radius: 10px; padding: 3px; gap: 2px; margin: 0 0 0.9rem;
+  }
+  .seg button {
+    border: none; background: none; color: var(--muted); font: inherit; font-size: 0.8rem;
+    font-weight: 600; padding: 0.25rem 0.9rem; border-radius: 8px; cursor: pointer;
+  }
+  .seg button.on { background: var(--accent); color: var(--ground); }
+
+  /* custom editor chips */
+  .sectionlabel { padding: 1rem 1.25rem 0.3rem; font-size: 0.72rem; text-transform: uppercase;
+    letter-spacing: 0.12em; color: var(--p-muted); }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0 1.25rem; }
+  .chip {
+    border: 1px solid var(--p-line); background: var(--p-surface); color: var(--p-ink);
+    border-radius: 999px; padding: 0.4rem 0.85rem; font-size: 0.82rem; cursor: pointer;
+  }
+  .chip.on { border-color: var(--glow); color: var(--glow); background: var(--p-raised); }
+  .applyrow { display: flex; gap: 0.7rem; padding: 1.4rem 1.25rem 0; }
+  .applyrow .go {
+    flex: 1; background: var(--glow); color: #1a1408; font-weight: 700; border: none;
+    border-radius: 14px; padding: 0.8rem; font-size: 0.95rem; cursor: pointer;
+  }
+  .applyrow .save {
+    background: none; border: 1px solid var(--p-line); color: var(--p-ink);
+    border-radius: 14px; padding: 0.8rem 1rem; font-size: 0.85rem; cursor: pointer;
+  }
+
+  /* settings rows */
+  .setlist { padding: 0.6rem 1.25rem 0; display: grid; gap: 1px; }
+  .setrow {
+    background: var(--p-surface); padding: 0.75rem 0.9rem; font-size: 0.88rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .setrow:first-child { border-radius: 12px 12px 0 0; }
+  .setrow:last-child { border-radius: 0 0 12px 12px; }
+  .setrow .hint { color: var(--p-muted); font-size: 0.78rem; }
+  .toggle { width: 42px; height: 26px; border-radius: 13px; background: var(--glow); position: relative; flex: none; }
+  .toggle::after { content: ""; position: absolute; top: 3px; right: 3px; width: 20px; height: 20px;
+    border-radius: 50%; background: #fff; }
+  .toggle.offt { background: var(--p-line); }
+  .toggle.offt::after { right: auto; left: 3px; }
+
+  /* watch */
+  .watchwrap { display: flex; justify-content: center; padding-top: 2rem; }
+  .watch {
+    width: 210px; height: 250px; background: #000; border-radius: 56px; padding: 12px;
+    position: relative; box-shadow: 0 18px 40px rgba(0,0,0,0.28);
+  }
+  .watch .crown { position: absolute; right: -6px; top: 70px; width: 8px; height: 44px;
+    border-radius: 4px; background: #2c2c2e; }
+  .wscreen {
+    background: var(--p-screen); color: var(--p-ink); border-radius: 46px; height: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.7rem;
+    text-align: center;
+  }
+  .wnow { font-size: 0.62rem; color: var(--p-muted); }
+  .wcard {
+    background: var(--p-raised); border: 1px solid var(--glow); border-radius: 18px;
+    padding: 0.9rem 1.3rem; cursor: pointer;
+  }
+  .wcard .src { font-weight: 800; font-size: 0.95rem; color: var(--glow); letter-spacing: 0.03em; }
+  .wcard .rooms { font-size: 0.68rem; color: var(--p-muted); }
+  .wdots { display: flex; gap: 5px; }
+  .wdots span { width: 5px; height: 5px; border-radius: 50%; background: var(--p-line); }
+  .wdots span.on { background: var(--p-ink); }
+  .wvol { font-size: 0.64rem; color: var(--p-muted); font-variant-numeric: tabular-nums; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">House Music</p>
+  <h1>App mockup, round 1</h1>
+  <p class="lede">Clickable sketch of the four surfaces we agreed. Tap presets, drag the volume,
+  switch the viewer between <strong>Stefan</strong> and <strong>Kay</strong> to see per-person
+  preset ordering. The app is deliberately dark-first, like the gear it controls.</p>
+
+  <div class="screens">
+
+    <!-- ============ MAIN ============ -->
+    <div class="unit">
+      <h2>Main screen</h2>
+      <p class="sub">The daily driver: one tap to a preset.</p>
+      <div class="seg" id="personSeg" role="group" aria-label="View as">
+        <button class="on" data-person="stefan">Stefan's order</button>
+        <button data-person="kay">Kay's order</button>
+      </div>
+      <div class="phone"><div class="screen">
+        <div class="statusbar"><span>14:36</span><span>&#9679;&#9679;&#9679;</span></div>
+        <div class="appbar"><span class="title">House Music</span><span class="gear">&#9881;</span></div>
+        <div class="nowplaying"><span class="dot"></span><span id="npText"><b>Decks</b> to Upstairs</span></div>
+        <div class="grid" id="presetGrid"></div>
+        <div class="custombtn">+ Custom source &amp; rooms</div>
+        <div class="volume">
+          <div class="row"><span>Volume</span><span class="db" id="dbText">-28.5 dB</span></div>
+          <input type="range" id="vol" min="-60" max="0" value="-28.5" step="0.5" aria-label="Universal volume">
+        </div>
+      </div></div>
+      <div class="notes"><ul>
+        <li>Presets show source + rooms; the live strip reflects reality even if someone used the MusicCast app.</li>
+        <li>Grid order is per-person (definitions and baselines are shared, ordering is not). Long-press to reorder.</li>
+        <li>Volume is universal across the active preset's rooms, shown in dB; per-room baselines sit behind it.</li>
+      </ul></div>
+    </div>
+
+    <!-- ============ CUSTOM ============ -->
+    <div class="unit">
+      <h2>Custom editor</h2>
+      <p class="sub">Kay's two-axis model: pick a source, pick rooms.</p>
+      <div style="height:2.55rem"></div>
+      <div class="phone"><div class="screen">
+        <div class="statusbar"><span>14:36</span><span>&#9679;&#9679;&#9679;</span></div>
+        <div class="appbar"><span class="title">Custom</span><span class="gear">&#10005;</span></div>
+        <div class="sectionlabel">Source</div>
+        <div class="chips" data-single="true">
+          <span class="chip on">Decks</span><span class="chip">Spotify</span>
+          <span class="chip">Stream here</span><span class="chip">Apple TV LR</span>
+          <span class="chip">Apple TV BR</span>
+        </div>
+        <div class="sectionlabel">Room combinations</div>
+        <div class="chips" data-single="true">
+          <span class="chip on">Upstairs</span><span class="chip">Upstairs Downstairs</span>
+          <span class="chip">Whole House</span>
+        </div>
+        <div class="sectionlabel">Or pick rooms</div>
+        <div class="chips">
+          <span class="chip on">Living Room</span><span class="chip on">Dining Room</span>
+          <span class="chip">Master Bedroom</span><span class="chip">Bathroom</span>
+          <span class="chip">Office</span>
+        </div>
+        <div class="applyrow">
+          <button class="go">Make it so</button>
+          <button class="save">Save&hellip;</button>
+        </div>
+      </div></div>
+      <div class="notes"><ul>
+        <li>Sources and rooms the wizard curated are the only ones shown; the other 21 inputs never appear.</li>
+        <li>Combinations are shortcuts for the room set; picking rooms directly is always available.</li>
+        <li>"Save&hellip;" turns the current combo into a named preset for everyone; it lands at the end of each person's own order.</li>
+        <li>Pure Direct only appears when the combo is Living Room alone (the DJ time constraint).</li>
+      </ul></div>
+    </div>
+
+    <!-- ============ SETTINGS ============ -->
+    <div class="unit">
+      <h2>Settings</h2>
+      <p class="sub">Everything the wizard did, revisitable.</p>
+      <div style="height:2.55rem"></div>
+      <div class="phone"><div class="screen">
+        <div class="statusbar"><span>14:36</span><span>&#9679;&#9679;&#9679;</span></div>
+        <div class="appbar"><span class="title">Settings</span><span class="gear">&#10005;</span></div>
+        <div class="sectionlabel">Rooms</div>
+        <div class="setlist">
+          <div class="setrow"><span>Living Room <span class="hint">RX-V685</span></span><span class="toggle"></span></div>
+          <div class="setrow"><span>Dining Room <span class="hint">WXA-50</span></span><span class="toggle"></span></div>
+          <div class="setrow"><span>Master Bedroom <span class="hint">RX-S602</span></span><span class="toggle"></span></div>
+          <div class="setrow"><span>Bathroom <span class="hint">WXA-50</span></span><span class="toggle"></span></div>
+          <div class="setrow"><span>Office <span class="hint">WXA-50</span></span><span class="toggle"></span></div>
+        </div>
+        <div class="sectionlabel">Living Room inputs</div>
+        <div class="setlist">
+          <div class="setrow"><span>Decks &middot; Apple TV &middot; Stream here &middot; Spotify</span><span class="hint">edit</span></div>
+          <div class="setrow"><span class="hint">21 inputs hidden</span><span></span></div>
+        </div>
+        <div class="sectionlabel">Household</div>
+        <div class="setlist">
+          <div class="setrow"><span>Shared with Kay</span><span class="hint">via iCloud</span></div>
+          <div class="setrow"><span>Spotify</span><span class="hint">stefan &middot; connected</span></div>
+        </div>
+      </div></div>
+      <div class="notes"><ul>
+        <li>Rooms and input names come from the devices themselves; renaming happens on the receiver, not here.</li>
+        <li>Household sharing is the CloudKit family share: presets, curation, and baselines sync; ordering stays personal.</li>
+        <li>Each person connects their own Spotify account on their own phone.</li>
+      </ul></div>
+    </div>
+
+    <!-- ============ WATCH ============ -->
+    <div class="unit">
+      <h2>Watch</h2>
+      <p class="sub">Probably the most-used surface. One preset per page.</p>
+      <div class="watchwrap">
+        <div class="watch"><div class="crown"></div><div class="wscreen">
+          <div class="wnow">&#9654; Decks to Upstairs</div>
+          <div class="wcard"><div class="src">DECKS</div><div class="rooms">Upstairs</div></div>
+          <div class="wdots"><span class="on"></span><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="wvol">crown: volume &middot; -28.5 dB</div>
+        </div></div>
+      </div>
+      <div class="notes"><ul>
+        <li>Swipe between presets (in your personal order), tap to fire, crown nudges universal volume.</li>
+        <li>No editing on the Watch; it is a remote, not a control room.</li>
+        <li>A complication / smart-stack widget opens straight here.</li>
+      </ul></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const presets = {
+    stefan: [
+      { src: "Decks", rooms: "Upstairs" },
+      { src: "DJ time", rooms: "Living Room &middot; Pure Direct" },
+      { src: "Spotify", rooms: "Dining Room" },
+      { src: "Telly time", rooms: "Living Room" },
+      { src: "TV in bed", rooms: "Master Bedroom" },
+      { src: "All off", rooms: "everything", off: true },
+    ],
+    kay: [
+      { src: "Spotify", rooms: "Dining Room" },
+      { src: "Telly time", rooms: "Living Room" },
+      { src: "TV in bed", rooms: "Master Bedroom" },
+      { src: "Decks", rooms: "Upstairs" },
+      { src: "DJ time", rooms: "Living Room &middot; Pure Direct" },
+      { src: "All off", rooms: "everything", off: true },
+    ],
+  };
+  const grid = document.getElementById("presetGrid");
+  const np = document.getElementById("npText");
+  let person = "stefan", activeSrc = "Decks";
+
+  function render() {
+    grid.innerHTML = "";
+    presets[person].forEach(p => {
+      const el = document.createElement("div");
+      el.className = "preset" + (p.src === activeSrc ? " active" : "") + (p.off ? " off" : "");
+      el.tabIndex = 0;
+      el.innerHTML = '<span class="src">' + p.src + '</span><span class="rooms">' + p.rooms + "</span>";
+      el.addEventListener("click", () => {
+        activeSrc = p.src;
+        np.innerHTML = p.off ? "All quiet" : "<b>" + p.src + "</b> to " + p.rooms.split(" &middot;")[0];
+        render();
+      });
+      grid.appendChild(el);
+    });
+  }
+  render();
+
+  document.querySelectorAll("#personSeg button").forEach(b =>
+    b.addEventListener("click", () => {
+      person = b.dataset.person;
+      document.querySelectorAll("#personSeg button").forEach(x => x.classList.toggle("on", x === b));
+      render();
+    }));
+
+  const vol = document.getElementById("vol"), db = document.getElementById("dbText");
+  function setFill() {
+    const pct = ((vol.value - vol.min) / (vol.max - vol.min)) * 100;
+    vol.style.setProperty("--fill", pct + "%");
+    db.textContent = (+vol.value).toFixed(1) + " dB";
+  }
+  vol.addEventListener("input", setFill); setFill();
+
+  document.querySelectorAll('.chips[data-single="true"]').forEach(group =>
+    group.querySelectorAll(".chip").forEach(c =>
+      c.addEventListener("click", () => {
+        group.querySelectorAll(".chip").forEach(x => x.classList.remove("on"));
+        c.classList.add("on");
+      })));
+  document.querySelectorAll('.chips:not([data-single])').forEach(group =>
+    group.querySelectorAll(".chip").forEach(c =>
+      c.addEventListener("click", () => c.classList.toggle("on"))));
+</script>
