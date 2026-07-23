@@ -10,7 +10,7 @@ We have a multi-room home network with two Yamaha receivers. The DJ controller a
 
 | Room | Devices |
 |---|---|
-| Living Room | Yamaha RX-V685 with an Apple TV; DJ controller and SL1210s plugged in as "Decks" |
+| Living Room | Yamaha RX-V685 with an Apple TV; DJ controller and SL1210s plugged in as "Decks"; AirPort Express plugged in as "Stream here" (a permanent AirPlay 2 target) |
 | Dining Room | Yamaha WXA-50 (AirPlay 1) |
 | Master Bedroom | Yamaha RX-S602 with another Apple TV |
 | Master Bathroom | Yamaha WXA-50 |
@@ -35,6 +35,12 @@ The Dining Room WiiM Mini is not part of this system (it cannot join MusicCast g
 Presets are declarative: activating one puts the whole house into that state. Rooms not in the preset turn off. Devices are assumed always available; no offline or partial-failure handling.
 
 Pure Direct and MusicCast distribution are mutually exclusive (confirmed by experience; that is why "DJ time" is Living Room only). The app must not offer Pure Direct on multi-room presets.
+
+### Streaming routing
+
+Multi-room phone streaming uses the "Stream here" pattern: you always AirPlay to the AirPort Express (input `audio5` on the RX-V685), and the active preset decides which rooms hear it by distributing that input over MusicCast Link, exactly like the Decks. The phone-side target never changes; the room combination lives in the preset. This sidesteps the WXA-50s' lack of AirPlay 2 entirely for multi-room streaming. Note the Living Room amp must be on to serve distribution, even if silent there.
+
+Single-room streaming stays direct AirPlay to that room's device, and Spotify stays on Spotify Connect as above. If the Express ever dies, the fallback is AirPlaying to the RX-V685 itself and distributing its `airplay` input the same way.
 
 ### Features
 
