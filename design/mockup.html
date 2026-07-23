@@ -75,7 +75,7 @@
     background: var(--p-screen); color: var(--p-ink);
     border-radius: 36px; overflow: hidden;
     display: flex; flex-direction: column;
-    height: 620px;
+    height: 660px;
   }
   .statusbar {
     display: flex; justify-content: space-between; align-items: center;
@@ -99,7 +99,7 @@
   .preset {
     background: var(--pc, var(--p-surface)); color: var(--tile-ink);
     border: 3px solid transparent; border-radius: 18px;
-    padding: 0.85rem 0.9rem; min-height: 78px; cursor: pointer;
+    padding: 0.75rem 0.9rem; min-height: 68px; cursor: pointer;
     display: flex; flex-direction: column; justify-content: flex-end; gap: 0.1rem;
     transition: border-color 0.15s, transform 0.1s;
   }
@@ -117,7 +117,19 @@
     font-size: 0.95rem; font-weight: 700; cursor: pointer;
   }
 
-  .volume { margin-top: auto; padding: 1rem 1.25rem 1.6rem; }
+  .volume { margin-top: auto; padding: 1rem 1.25rem 1.6rem; flex: none; }
+  .volwrap { position: relative; }
+  .volwrap .tick {
+    position: absolute; top: 50%; transform: translate(-50%, -50%);
+    width: 3px; height: 16px; border-radius: 2px; background: var(--p-ink);
+    opacity: 0.85; pointer-events: none;
+  }
+  .volwrap .tick::after {
+    content: "baseline"; position: absolute; top: 100%; left: 50%;
+    transform: translateX(-50%); margin-top: 4px;
+    font-size: 0.58rem; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--p-muted); white-space: nowrap;
+  }
   .volume .row { display: flex; justify-content: space-between; align-items: baseline;
     font-size: 0.8rem; font-weight: 700; color: var(--p-muted);
     text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.4rem; }
@@ -229,8 +241,11 @@
         <div class="grid" id="presetGrid"></div>
         <div class="custombtn">+ Custom source &amp; rooms</div>
         <div class="volume">
-          <div class="row"><span>Volume</span><span class="db" id="dbText">-28.5 dB</span></div>
-          <input type="range" id="vol" min="-60" max="0" value="-28.5" step="0.5" aria-label="Universal volume">
+          <div class="row"><span>Volume</span><span class="db" id="dbText">-26.0 dB</span></div>
+          <div class="volwrap">
+            <input type="range" id="vol" min="-60" max="0" value="-26" step="0.5" aria-label="Universal volume">
+            <span class="tick" id="baselineTick"></span>
+          </div>
         </div>
       </div></div>
       <div class="notes"><ul>
@@ -238,6 +253,7 @@
         <li>Each preset has its own colour, carried through to the now-playing dot and the Watch.</li>
         <li>Reordering: long-press a tile enters wiggle mode (Home Screen convention), drag to your order. Order is per-person; definitions and baselines are shared.</li>
         <li>Volume is universal across the active preset's rooms, shown in dB; per-room baselines sit behind it.</li>
+        <li>The tick under the slider marks the active preset's baseline; firing a preset returns volume to it. Drag away freely; "save to preset" moves the tick to where you are.</li>
         <li>Type is large and heavy throughout, with contrast beyond WCAG AAA (white on near-black, dark ink on bright tiles).</li>
       </ul></div>
     </div>
@@ -344,6 +360,10 @@
     "Telly time": "#b9a7ff",
     "TV in bed": "#5fb2ff",
   };
+  const BASELINES = {
+    "Decks": -26, "DJ time": -14, "Spotify": -30,
+    "Telly time": -28, "TV in bed": -38,
+  };
   const presets = {
     stefan: [
       { src: "Decks", rooms: "Upstairs" },
@@ -378,6 +398,8 @@
         activeSrc = p.src;
         np.innerHTML = p.off ? "All quiet" : "<b>" + p.src + "</b> to " + p.rooms.split(" &middot;")[0];
         np.parentElement.style.setProperty("--npc", COLORS[p.src] || "#beb5a8");
+        if (BASELINES[p.src] !== undefined) { vol.value = BASELINES[p.src]; }
+        setBaselineTick(p.src); setFill();
         render();
       });
       grid.appendChild(el);
@@ -393,12 +415,21 @@
     }));
 
   const vol = document.getElementById("vol"), db = document.getElementById("dbText");
+  const tick = document.getElementById("baselineTick");
   function setFill() {
     const pct = ((vol.value - vol.min) / (vol.max - vol.min)) * 100;
     vol.style.setProperty("--fill", pct + "%");
     db.textContent = (+vol.value).toFixed(1) + " dB";
   }
-  vol.addEventListener("input", setFill); setFill();
+  function setBaselineTick(src) {
+    const b = BASELINES[src];
+    tick.style.display = b === undefined ? "none" : "";
+    if (b === undefined) return;
+    const pct = ((b - vol.min) / (vol.max - vol.min)) * 100;
+    tick.style.left = pct + "%";
+  }
+  vol.addEventListener("input", setFill);
+  setFill(); setBaselineTick(activeSrc);
 
   document.querySelectorAll('.chips[data-single="true"]').forEach(group =>
     group.querySelectorAll(".chip").forEach(c =>
