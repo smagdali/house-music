@@ -55,6 +55,20 @@ data (shared via CloudKit); ordering lives with each person's account and never
 syncs between them. Reordering uses the Home Screen convention: long-press a
 tile to enter wiggle mode, drag to taste.
 
+## Baselines: no wizard stage, long-press the slider to save
+
+The wizard does not set volume baselines (they cannot be judged without real
+music in real context, and it would bloat a two-minute setup). Presets are born
+with a safe default (-30 dB per room). Calibration is a gesture: long-press the
+volume slider to save the current level as the active preset's baseline; the
+baseline tick under the slider moves to match. Firing a preset always returns
+volume to its tick.
+
+## Deployment baseline
+
+iOS 17 / watchOS 10. App Intents and interactive widgets are mature there, it
+is the natural SwiftUI floor, and it reaches back to the iPhone XS (2018).
+
 ## Visual direction (round 2)
 
 Big, bold, and colour-coded, with contrast beyond WCAG AAA: white text on
