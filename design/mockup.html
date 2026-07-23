@@ -9,12 +9,13 @@
     --accent: #b87a1e;
     --glow: #e9a23b;
     /* phone-internal tokens: the app itself is dark-first, both page themes */
-    --p-screen: #141210;
+    --p-screen: #0d0b09;
     --p-surface: #211d19;
     --p-raised: #2b2621;
-    --p-ink: #f1ede6;
-    --p-muted: #9c948a;
-    --p-line: #383129;
+    --p-ink: #ffffff;
+    --p-muted: #beb5a8;
+    --p-line: #3e372e;
+    --tile-ink: #161006;
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -85,39 +86,43 @@
   .appbar .gear { color: var(--p-muted); font-size: 1.1rem; text-decoration: none; }
 
   .nowplaying {
-    margin: 0.7rem 1.25rem 0; padding: 0.55rem 0.85rem;
+    margin: 0.7rem 1.25rem 0; padding: 0.65rem 0.9rem;
     background: var(--p-surface); border: 1px solid var(--p-line); border-radius: 12px;
-    font-size: 0.82rem; color: var(--p-muted);
+    font-size: 0.95rem; font-weight: 600; color: var(--p-muted);
     display: flex; align-items: center; gap: 0.55rem;
   }
-  .nowplaying .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--glow); flex: none;
-    box-shadow: 0 0 8px var(--glow); }
-  .nowplaying b { color: var(--p-ink); font-weight: 600; }
+  .nowplaying .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--npc, var(--glow));
+    flex: none; box-shadow: 0 0 10px var(--npc, var(--glow)); }
+  .nowplaying b { color: var(--p-ink); font-weight: 800; }
 
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; padding: 1rem 1.25rem 0; }
   .preset {
-    background: var(--p-surface); border: 1px solid var(--p-line); border-radius: 16px;
-    padding: 0.85rem 0.9rem; min-height: 64px; cursor: pointer;
-    display: flex; flex-direction: column; justify-content: flex-end; gap: 0.15rem;
-    transition: border-color 0.15s, background 0.15s;
+    background: var(--pc, var(--p-surface)); color: var(--tile-ink);
+    border: 3px solid transparent; border-radius: 18px;
+    padding: 0.85rem 0.9rem; min-height: 78px; cursor: pointer;
+    display: flex; flex-direction: column; justify-content: flex-end; gap: 0.1rem;
+    transition: border-color 0.15s, transform 0.1s;
   }
-  .preset .src { font-weight: 700; font-size: 0.95rem; }
-  .preset .rooms { font-size: 0.75rem; color: var(--p-muted); }
-  .preset.active { border-color: var(--glow); background: var(--p-raised); }
-  .preset.active .src { color: var(--glow); }
-  .preset:focus-visible { outline: 2px solid var(--glow); outline-offset: 2px; }
-  .preset.off .src { color: var(--p-muted); }
+  .preset .src { font-weight: 800; font-size: 1.2rem; letter-spacing: -0.01em; line-height: 1.15; }
+  .preset .rooms { font-size: 0.85rem; font-weight: 700; color: rgba(10, 7, 2, 0.72); }
+  .preset.active { border-color: #ffffff; box-shadow: 0 0 0 3px rgba(255,255,255,0.25), 0 0 18px var(--pc); }
+  .preset:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+  .preset.off { background: var(--p-surface); color: var(--p-ink); border-color: var(--p-line); }
+  .preset.off .rooms { color: var(--p-muted); }
+  .preset.off.active { border-color: #fff; box-shadow: 0 0 0 3px rgba(255,255,255,0.25); }
 
   .custombtn {
-    margin: 0.9rem 1.25rem 0; padding: 0.7rem; text-align: center;
-    border: 1px dashed var(--p-line); border-radius: 14px; color: var(--p-muted);
-    font-size: 0.85rem; cursor: pointer;
+    margin: 0.9rem 1.25rem 0; padding: 0.8rem; text-align: center;
+    border: 2px dashed var(--p-muted); border-radius: 14px; color: var(--p-ink);
+    font-size: 0.95rem; font-weight: 700; cursor: pointer;
   }
 
   .volume { margin-top: auto; padding: 1rem 1.25rem 1.6rem; }
-  .volume .row { display: flex; justify-content: space-between; font-size: 0.72rem;
-    color: var(--p-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.4rem; }
-  .volume .db { font-variant-numeric: tabular-nums; color: var(--p-ink); }
+  .volume .row { display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 0.8rem; font-weight: 700; color: var(--p-muted);
+    text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.4rem; }
+  .volume .db { font-variant-numeric: tabular-nums; color: var(--p-ink);
+    font-size: 1.05rem; font-weight: 800; }
   input[type="range"] {
     width: 100%; appearance: none; -webkit-appearance: none; height: 4px; border-radius: 2px;
     background: linear-gradient(to right, var(--glow) var(--fill, 55%), var(--p-line) var(--fill, 55%));
@@ -143,10 +148,10 @@
     letter-spacing: 0.12em; color: var(--p-muted); }
   .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0 1.25rem; }
   .chip {
-    border: 1px solid var(--p-line); background: var(--p-surface); color: var(--p-ink);
-    border-radius: 999px; padding: 0.4rem 0.85rem; font-size: 0.82rem; cursor: pointer;
+    border: 2px solid var(--p-line); background: var(--p-surface); color: var(--p-ink);
+    border-radius: 999px; padding: 0.45rem 0.9rem; font-size: 0.92rem; font-weight: 700; cursor: pointer;
   }
-  .chip.on { border-color: var(--glow); color: var(--glow); background: var(--p-raised); }
+  .chip.on { border-color: var(--glow); color: var(--tile-ink); background: var(--glow); }
   .applyrow { display: flex; gap: 0.7rem; padding: 1.4rem 1.25rem 0; }
   .applyrow .go {
     flex: 1; background: var(--glow); color: #1a1408; font-weight: 700; border: none;
@@ -160,7 +165,7 @@
   /* settings rows */
   .setlist { padding: 0.6rem 1.25rem 0; display: grid; gap: 1px; }
   .setrow {
-    background: var(--p-surface); padding: 0.75rem 0.9rem; font-size: 0.88rem;
+    background: var(--p-surface); padding: 0.8rem 0.9rem; font-size: 0.95rem; font-weight: 600;
     display: flex; justify-content: space-between; align-items: center;
   }
   .setrow:first-child { border-radius: 12px 12px 0 0; }
@@ -185,17 +190,17 @@
     display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.7rem;
     text-align: center;
   }
-  .wnow { font-size: 0.62rem; color: var(--p-muted); }
+  .wnow { font-size: 0.72rem; font-weight: 700; color: var(--p-muted); }
   .wcard {
-    background: var(--p-raised); border: 1px solid var(--glow); border-radius: 18px;
-    padding: 0.9rem 1.3rem; cursor: pointer;
+    background: var(--glow); border-radius: 20px;
+    padding: 1rem 1.4rem; cursor: pointer; color: var(--tile-ink);
   }
-  .wcard .src { font-weight: 800; font-size: 0.95rem; color: var(--glow); letter-spacing: 0.03em; }
-  .wcard .rooms { font-size: 0.68rem; color: var(--p-muted); }
-  .wdots { display: flex; gap: 5px; }
-  .wdots span { width: 5px; height: 5px; border-radius: 50%; background: var(--p-line); }
+  .wcard .src { font-weight: 900; font-size: 1.15rem; letter-spacing: 0.02em; }
+  .wcard .rooms { font-size: 0.8rem; font-weight: 700; color: rgba(10, 7, 2, 0.72); }
+  .wdots { display: flex; gap: 6px; }
+  .wdots span { width: 6px; height: 6px; border-radius: 50%; background: var(--p-line); }
   .wdots span.on { background: var(--p-ink); }
-  .wvol { font-size: 0.64rem; color: var(--p-muted); font-variant-numeric: tabular-nums; }
+  .wvol { font-size: 0.74rem; font-weight: 700; color: var(--p-muted); font-variant-numeric: tabular-nums; }
 
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
@@ -230,8 +235,10 @@
       </div></div>
       <div class="notes"><ul>
         <li>Presets show source + rooms; the live strip reflects reality even if someone used the MusicCast app.</li>
-        <li>Grid order is per-person (definitions and baselines are shared, ordering is not). Long-press to reorder.</li>
+        <li>Each preset has its own colour, carried through to the now-playing dot and the Watch.</li>
+        <li>Reordering: long-press a tile enters wiggle mode (Home Screen convention), drag to your order. Order is per-person; definitions and baselines are shared.</li>
         <li>Volume is universal across the active preset's rooms, shown in dB; per-room baselines sit behind it.</li>
+        <li>Type is large and heavy throughout, with contrast beyond WCAG AAA (white on near-black, dark ink on bright tiles).</li>
       </ul></div>
     </div>
 
@@ -330,6 +337,13 @@
 </div>
 
 <script>
+  const COLORS = {
+    "Decks": "#f6a83c",
+    "DJ time": "#ff6b62",
+    "Spotify": "#3ddc6a",
+    "Telly time": "#b9a7ff",
+    "TV in bed": "#5fb2ff",
+  };
   const presets = {
     stefan: [
       { src: "Decks", rooms: "Upstairs" },
@@ -358,10 +372,12 @@
       const el = document.createElement("div");
       el.className = "preset" + (p.src === activeSrc ? " active" : "") + (p.off ? " off" : "");
       el.tabIndex = 0;
+      if (COLORS[p.src]) el.style.setProperty("--pc", COLORS[p.src]);
       el.innerHTML = '<span class="src">' + p.src + '</span><span class="rooms">' + p.rooms + "</span>";
       el.addEventListener("click", () => {
         activeSrc = p.src;
         np.innerHTML = p.off ? "All quiet" : "<b>" + p.src + "</b> to " + p.rooms.split(" &middot;")[0];
+        np.parentElement.style.setProperty("--npc", COLORS[p.src] || "#beb5a8");
         render();
       });
       grid.appendChild(el);

@@ -52,7 +52,16 @@ for the user to pick music. One extra tap, no guessing.
 Stefan and Kay have different listening habits, so the grid order of presets is
 personal, not shared. Preset definitions, curation, and baselines are household
 data (shared via CloudKit); ordering lives with each person's account and never
-syncs between them.
+syncs between them. Reordering uses the Home Screen convention: long-press a
+tile to enter wiggle mode, drag to taste.
+
+## Visual direction (round 2)
+
+Big, bold, and colour-coded, with contrast beyond WCAG AAA: white text on
+near-black, dark ink on bright preset tiles. Each preset has its own colour
+(Decks amber, DJ time red, Spotify green, Telly time violet, TV in bed blue;
+All off stays dark), carried through the now-playing indicator and the Watch.
+The app is dark-first, styled after the hi-fi gear it controls.
 
 ## 5. Config sync: CloudKit family sharing from day one
 
