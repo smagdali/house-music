@@ -20,7 +20,11 @@ struct CustomEditorView: View {
                     sectionLabel("Source")
                     chips(sources, id: \.self, label: { $0.label }, isOn: { $0 == source }) { choice in
                         source = choice
-                        if !rooms.contains(choice.deviceID) { rooms.insert(choice.deviceID) }
+                        // Physical inputs live on one device, so pre-select that
+                        // room; network sources (empty deviceID) leave rooms alone.
+                        if !choice.deviceID.isEmpty, !rooms.contains(choice.deviceID) {
+                            rooms.insert(choice.deviceID)
+                        }
                     }
 
                     sectionLabel("Room combinations")
@@ -90,17 +94,55 @@ struct CustomEditorView: View {
 
     // MARK: - Data
 
+    /// Networked sources (Spotify) can play on any room, so they appear once,
+    /// not per device; the room selection decides which device hosts them.
+    private static let networkInputs: Set<String> = ["spotify"]
+
     private var sources: [SourceRef] {
         var result: [SourceRef] = []
-        var index = 0
-        for device in model.config.devices {
-            for input in model.config.curatedInputs[device.id] ?? [] {
-                result.append(SourceRef(deviceID: device.id, inputID: input.id, label: input.label,
-                                        colorHex: Palette.colorHex(for: input.id, index: index)))
-                index += 1
+
+        // One chip per network source, if any device offers it. deviceID is
+        // resolved from the chosen rooms at apply time (see draft()).
+        for inputID in ["spotify"] {
+            if let sample = model.config.devices.lazy
+                .compactMap({ (model.config.curatedInputs[$0.id] ?? []).first { $0.id == inputID } })
+                .first {
+                result.append(SourceRef(deviceID: "", inputID: inputID, label: sample.label,
+                                        colorHex: Palette.colorHex(for: inputID, index: 0)))
             }
         }
+
+        // Physical inputs are tied to a device. Collect them, then room-qualify
+        // any label that appears on more than one device (e.g. two Apple TVs).
+        var physical: [(device: Device, input: InputChoice)] = []
+        for device in model.config.devices {
+            for input in model.config.curatedInputs[device.id] ?? []
+            where !Self.networkInputs.contains(input.id) && input.id != "airplay" {
+                physical.append((device, input))
+            }
+        }
+        let labelCounts = Dictionary(physical.map { ($0.input.label, 1) }, uniquingKeysWith: +)
+        var index = 1
+        for (device, input) in physical {
+            let repeated = (labelCounts[input.label] ?? 0) > 1
+            let label = repeated ? "\(input.label) \u{00B7} \(device.roomName)" : input.label
+            result.append(SourceRef(deviceID: device.id, inputID: input.id, label: label,
+                                    colorHex: Palette.colorHex(for: input.id, index: index)))
+            index += 1
+        }
         return result
+    }
+
+    /// Resolve a network source (deviceID == "") to a concrete host device: the
+    /// first selected room that offers the input, else the first selected room.
+    private func resolvedSource() -> SourceRef? {
+        guard var source else { return nil }
+        guard source.deviceID.isEmpty else { return source }
+        let host = rooms.first { (model.config.curatedInputs[$0] ?? []).contains { $0.id == source.inputID } }
+            ?? rooms.first
+        guard let host else { return nil }
+        source.deviceID = host
+        return source
     }
 
     private var comboNames: [String] { ["Upstairs", "Upstairs Downstairs", "Whole House"] }
@@ -120,12 +162,13 @@ struct CustomEditorView: View {
     private func comboMatches(_ name: String) -> Bool { rooms == comboRooms(name) }
 
     private var supportsPureDirect: Bool {
-        guard let source, rooms == [source.deviceID] else { return false }
+        // Pure Direct only makes sense for a physical input feeding one AVR room.
+        guard let source, !source.deviceID.isEmpty, rooms == [source.deviceID] else { return false }
         return model.config.device(source.deviceID)?.modelName.hasPrefix("RX") ?? false
     }
 
     private func draft(named: String) -> Preset {
-        var preset = Preset(id: basePreset?.id ?? UUID(), name: named, source: source,
+        var preset = Preset(id: basePreset?.id ?? UUID(), name: named, source: resolvedSource(),
                             rooms: Array(rooms), baselines: basePreset?.baselines ?? [:],
                             pureDirect: pureDirect && rooms.count == 1)
         // New rooms get a conservative default baseline: 30 percent of range.

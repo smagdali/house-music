@@ -105,15 +105,16 @@ struct WizardView: View {
     }
 
     /// Keep inputs the owner has renamed (label differs from the stock name)
-    /// plus spotify and airplay; hide the other twenty-odd.
+    /// plus spotify; hide the other twenty-odd. AirPlay is excluded: it is
+    /// always the phone pushing to a room, never a preset source.
     static func defaultCuration(_ inputs: [YXCNameText.Entry]) -> [InputChoice] {
         inputs.compactMap { entry in
             let stock = entry.id.uppercased() == entry.text.uppercased()
                 || entry.text.isEmpty
                 || entry.text.lowercased() == entry.id.lowercased()
-            let wanted = ["spotify", "airplay"].contains(entry.id) || !stock
+            let wanted = entry.id == "spotify" || !stock
             let noise = ["main_sync", "mc_link", "server", "net_radio", "bluetooth", "usb", "tuner",
-                         "napster", "qobuz", "tidal", "deezer", "amazon_music", "juke"].contains(entry.id)
+                         "airplay", "napster", "qobuz", "tidal", "deezer", "amazon_music", "juke"].contains(entry.id)
             guard wanted && !noise else { return nil }
             return InputChoice(id: entry.id, label: entry.text)
         }

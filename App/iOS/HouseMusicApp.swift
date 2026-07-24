@@ -26,6 +26,7 @@ struct HouseMusicApp: App {
                 handleSpotifyCallback(url)
             }
             .task {
+                await model.refreshSpotifyState()
                 await model.cloudReconcile()
             }
         }
@@ -39,6 +40,7 @@ struct HouseMusicApp: App {
         Task {
             try? await model.spotify.exchangeCode(code, verifier: verifier)
             SpotifyAuth.pendingVerifier = nil
+            await model.refreshSpotifyState()
         }
     }
 }

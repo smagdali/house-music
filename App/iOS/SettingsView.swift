@@ -4,7 +4,6 @@ import HouseMusicKit
 struct SettingsView: View {
     @Environment(AppModel.self) private var model
     @Environment(\.dismiss) private var dismiss
-    @State private var spotifyLoggedIn = false
     @State private var shareURL: URL?
 
     var body: some View {
@@ -42,11 +41,12 @@ struct SettingsView: View {
                 }
 
                 Section("Spotify") {
-                    if spotifyLoggedIn {
+                    if model.spotifyConnected {
+                        LabeledContent("Spotify", value: "Connected")
                         Button("Log out of Spotify", role: .destructive) {
                             Task {
                                 await model.spotify.logout()
-                                spotifyLoggedIn = false
+                                await model.refreshSpotifyState()
                             }
                         }
                     } else {
@@ -78,9 +78,7 @@ struct SettingsView: View {
             }
         }
         .preferredColorScheme(.dark)
-        .task {
-            spotifyLoggedIn = await model.spotify.isLoggedIn
-        }
+        .task { await model.refreshSpotifyState() }
     }
 }
 

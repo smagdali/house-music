@@ -25,6 +25,7 @@ final class AppModel {
     var busy = false
     var lastError: String?
     var toast: String?
+    var spotifyConnected = false
 
     var needsOnboarding: Bool { config.devices.isEmpty }
 
@@ -56,6 +57,10 @@ final class AppModel {
                 muted = state.mute
             }
         }
+    }
+
+    func refreshSpotifyState() async {
+        spotifyConnected = await spotify.isLoggedIn
     }
 
     func startPolling() -> Task<Void, Never> {
