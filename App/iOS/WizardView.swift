@@ -27,12 +27,12 @@ struct WizardView: View {
                     .buttonStyle(WizardButton())
             case .scanning:
                 HStack(spacing: 10) {
-                    if scanning { ProgressView().tint(Color(hex: "E9A23B")) }
+                    ProgressView().tint(Color(hex: "E9A23B"))
                     Text(found.isEmpty ? "Scanning\u{2026}" : "Found \(found.count) device\(found.count == 1 ? "" : "s")")
                         .font(.system(size: 24, weight: .heavy))
                 }
-                if found.isEmpty && !scanning {
-                    Text("Nothing found. Make sure House Music has Local Network access in Settings and every device is on the same Wi-Fi.")
+                if found.isEmpty {
+                    Text("Looking for your devices. Make sure House Music has Local Network access in Settings and every device is on the same Wi-Fi.")
                         .font(.system(size: 15))
                         .multilineTextAlignment(.center)
                         .foregroundStyle(Color(hex: "BEB5A8"))
@@ -52,14 +52,12 @@ struct WizardView: View {
                     .scrollContentBackground(.hidden)
                     .animation(.default, value: found)
                 }
-                Button(scanning ? "Done (\(kept.count))" : "Set up \(kept.count) rooms") { finish() }
+                Text("Keep going until every room appears, then tap Done.")
+                    .font(.system(size: 13))
+                    .foregroundStyle(Color(hex: "7D746A"))
+                Button(kept.isEmpty ? "Done" : "Done (\(kept.count))") { finish() }
                     .buttonStyle(WizardButton())
                     .disabled(kept.isEmpty)
-                if !scanning {
-                    Button("Scan again") { startScan() }
-                        .font(.system(size: 15, weight: .bold))
-                        .foregroundStyle(Color(hex: "BEB5A8"))
-                }
             case .done:
                 Image(systemName: "hifispeaker.2.fill").font(.system(size: 48))
                 Text("Ready").font(.system(size: 26, weight: .heavy))
@@ -76,21 +74,25 @@ struct WizardView: View {
                 set: { on in if on { kept.insert(id) } else { kept.remove(id) } })
     }
 
-    /// Start (or restart) a progressive scan. Devices appear in the list as they
-    /// answer, across several passes, so slow responders are not missed. The
-    /// user taps Done whenever the expected rooms are all present.
+    /// Scan continuously until the user taps Done. Each cycle sweeps the network
+    /// and accumulates any new rooms into the list (deduped by device id), so a
+    /// device that misses one cycle, or is powered on mid-setup, gets picked up
+    /// on a later one without the user doing anything.
     private func startScan() {
         scanTask?.cancel()
-        found = []; kept = []
         phase = .scanning
         scanning = true
         scanTask = Task {
-            for await device in model.discovery.discoveryStream() {
-                if !found.contains(where: { $0.id == device.id }) {
-                    found.append(device)
-                    found.sort { $0.roomName < $1.roomName }
-                    kept.insert(device.id)
+            while !Task.isCancelled {
+                for await device in model.discovery.discoveryStream(passes: 3) {
+                    if !found.contains(where: { $0.id == device.id }) {
+                        found.append(device)
+                        found.sort { $0.roomName < $1.roomName }
+                        kept.insert(device.id)
+                    }
                 }
+                if Task.isCancelled { break }
+                try? await Task.sleep(for: .seconds(1))
             }
             scanning = false
         }
@@ -140,23 +142,62 @@ struct WizardView: View {
         }
     }
 
-    /// Seed presets: All off, Spotify per room, and a solo preset per renamed
-    /// input. The user sculpts from there; baselines start at 30 percent.
+    /// Seed the starter preset set. Local (Debug) builds seed our actual house
+    /// spec when this house is recognized; the App Store (Release) build always
+    /// seeds the generic set.
     static func starterPresets(_ config: HouseConfig) -> [Preset] {
+        #if HOUSE_SEED
+        if let house = houseStarterPresets(config) { return house }
+        #endif
+        return genericStarterPresets(config)
+    }
+
+    /// Generic starter set for any MusicCast home: one "Spotify <Room>" per room
+    /// plus "All off". The user builds everything else with the Custom editor.
+    static func genericStarterPresets(_ config: HouseConfig) -> [Preset] {
         var presets: [Preset] = []
-        var colorIndex = 0
         for device in config.devices {
-            for input in config.curatedInputs[device.id] ?? [] where input.id != "airplay" {
-                let source = SourceRef(deviceID: device.id, inputID: input.id, label: input.label,
-                                       colorHex: Palette.colorHex(for: input.id, index: colorIndex))
-                colorIndex += 1
-                let name = input.id == "spotify" ? "Spotify \(device.roomName)" : input.label
-                presets.append(Preset(name: name, source: source, rooms: [device.id],
-                                      baselines: [device.id: Int(0.3 * Double(device.volumeRange.upperBound))]))
-            }
+            guard (config.curatedInputs[device.id] ?? []).contains(where: { $0.id == "spotify" }) else { continue }
+            let source = SourceRef(deviceID: device.id, inputID: "spotify", label: "Spotify",
+                                   colorHex: Palette.colorHex(for: "spotify", index: 0))
+            presets.append(Preset(name: "Spotify \(device.roomName)", source: source, rooms: [device.id],
+                                  baselines: [device.id: Int(0.3 * Double(device.volumeRange.upperBound))]))
         }
         presets.append(Preset(name: "All off", source: nil, rooms: []))
         return presets
+    }
+
+    /// Our house's spec presets, mapped onto whatever was discovered. Returns nil
+    /// if the expected rooms/inputs are not present (e.g. a Debug build on some
+    /// other network), so it falls back to the generic set.
+    static func houseStarterPresets(_ config: HouseConfig) -> [Preset]? {
+        func device(_ room: String) -> Device? { config.devices.first { $0.roomName == room } }
+        func hasInput(_ d: Device, _ id: String) -> Bool {
+            (config.curatedInputs[d.id] ?? []).contains { $0.id == id }
+        }
+        func base(_ d: Device) -> Int { Int(0.3 * Double(d.volumeRange.upperBound)) }
+
+        guard let living = device("Living Room"),
+              let dining = device("Dining Room"),
+              let bedroom = device("Master Bedroom"),
+              hasInput(living, "audio4"), hasInput(living, "hdmi1"), hasInput(bedroom, "hdmi1")
+        else { return nil }
+
+        let decks = SourceRef(deviceID: living.id, inputID: "audio4", label: "Decks", colorHex: "F6A83C")
+        let atvLR = SourceRef(deviceID: living.id, inputID: "hdmi1", label: "Apple TV", colorHex: "B9A7FF")
+        let atvBR = SourceRef(deviceID: bedroom.id, inputID: "hdmi1", label: "Apple TV", colorHex: "B9A7FF")
+        let spotify = SourceRef(deviceID: dining.id, inputID: "spotify", label: "Spotify", colorHex: "3DDC6A")
+
+        return [
+            Preset(name: "Decks", source: decks, rooms: [living.id, dining.id],
+                   baselines: [living.id: base(living), dining.id: base(dining)]),
+            Preset(name: "DJ time", source: decks, rooms: [living.id],
+                   baselines: [living.id: base(living)], pureDirect: true),
+            Preset(name: "Spotify", source: spotify, rooms: [dining.id], baselines: [dining.id: base(dining)]),
+            Preset(name: "Telly time", source: atvLR, rooms: [living.id], baselines: [living.id: base(living)]),
+            Preset(name: "TV in bed", source: atvBR, rooms: [bedroom.id], baselines: [bedroom.id: base(bedroom)]),
+            Preset(name: "All off", source: nil, rooms: []),
+        ]
     }
 }
 

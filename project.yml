@@ -51,6 +51,11 @@ targets:
         SUPPORTS_MACCATALYST: NO
         SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
         SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD: NO
+      configs:
+        # HOUSE_SEED seeds our actual house presets on local (Debug) builds only.
+        # Release (App Store) builds never define it and get the generic set.
+        Debug:
+          SWIFT_ACTIVE_COMPILATION_CONDITIONS: DEBUG HOUSE_SEED
 
   HouseMusicWatch:
     type: application
