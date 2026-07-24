@@ -81,9 +81,8 @@
     display: flex; justify-content: space-between; align-items: center;
     padding: 0.9rem 1.6rem 0.4rem; font-size: 0.78rem; font-weight: 600;
   }
-  .appbar { display: flex; justify-content: space-between; align-items: baseline; padding: 0.5rem 1.25rem 0; }
-  .appbar .title { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.01em; }
-  .appbar .gear { color: var(--p-muted); font-size: 1.1rem; text-decoration: none; }
+  .appbar { display: flex; justify-content: flex-end; align-items: center; padding: 0.1rem 1.1rem 0; }
+  .appbar .gear { color: var(--p-ink); font-size: 1.6rem; text-decoration: none; cursor: pointer; }
 
   .nowplaying {
     margin: 0.7rem 1.25rem 0; padding: 0.65rem 0.9rem;
@@ -242,7 +241,7 @@
       </div>
       <div class="phone"><div class="screen">
         <div class="statusbar"><span>14:36</span><span>&#9679;&#9679;&#9679;</span></div>
-        <div class="appbar"><span class="title">House Music</span><span class="gear">&#9881;</span></div>
+        <div class="appbar"><span class="gear">&#9881;</span></div>
         <div class="nowplaying"><span class="dot"></span><span id="npText"><b>Decks</b> to Upstairs</span><button class="pp" id="muteBtn" aria-label="Mute all rooms">&#128266;</button></div>
         <div class="grid" id="presetGrid"></div>
         <div class="custombtn">+ Custom source &amp; rooms</div>
@@ -272,7 +271,7 @@
       <div style="height:2.55rem"></div>
       <div class="phone"><div class="screen">
         <div class="statusbar"><span>14:36</span><span>&#9679;&#9679;&#9679;</span></div>
-        <div class="appbar"><span class="title">Custom</span><span class="gear">&#10005;</span></div>
+        <div class="appbar"><span class="gear">&#10005;</span></div>
         <div class="sectionlabel">Source</div>
         <div class="chips" data-single="true">
           <span class="chip on">Decks</span><span class="chip">Spotify</span>
@@ -310,7 +309,7 @@
       <div style="height:2.55rem"></div>
       <div class="phone"><div class="screen">
         <div class="statusbar"><span>14:36</span><span>&#9679;&#9679;&#9679;</span></div>
-        <div class="appbar"><span class="title">Settings</span><span class="gear">&#10005;</span></div>
+        <div class="appbar"><span class="gear">&#10005;</span></div>
         <div class="sectionlabel">Rooms</div>
         <div class="setlist">
           <div class="setrow"><span>Living Room <span class="hint">RX-V685</span></span><span class="toggle"></span></div>
