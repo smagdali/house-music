@@ -45,6 +45,7 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: org.whitelabel.housemusic
         INFOPLIST_FILE: App/iOS/Info.plist
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         CODE_SIGN_ENTITLEMENTS: App/iOS/HouseMusic.entitlements
         TARGETED_DEVICE_FAMILY: "1"
         SUPPORTS_MACCATALYST: NO
@@ -68,6 +69,7 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: org.whitelabel.housemusic.watchkitapp
         INFOPLIST_FILE: App/Watch/Info.plist
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         CODE_SIGN_ENTITLEMENTS: App/Watch/HouseMusicWatch.entitlements
 
 schemes:

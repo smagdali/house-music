@@ -148,6 +148,9 @@ final class AppModel {
         store.saveConfig(config)
         presets = store.orderedPresets(config)
         SyncBridge.shared.pushConfig(config)
+        #if os(iOS)
+        Task { await cloudPush() }
+        #endif
     }
 
     func adoptConfig(_ fresh: HouseConfig) {

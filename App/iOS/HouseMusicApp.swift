@@ -1,10 +1,11 @@
 import SwiftUI
+import CloudKit
 import HouseMusicKit
 
 @main
 struct HouseMusicApp: App {
+    @UIApplicationDelegateAdaptor(ShareAcceptDelegate.self) var delegate
     @State private var model = AppModel.shared
-    @State private var spotifyVerifier: String?
 
     init() {
         SyncBridge.shared.activate()
@@ -24,6 +25,9 @@ struct HouseMusicApp: App {
             .onOpenURL { url in
                 handleSpotifyCallback(url)
             }
+            .task {
+                await model.cloudReconcile()
+            }
         }
     }
 
@@ -35,6 +39,17 @@ struct HouseMusicApp: App {
         Task {
             try? await model.spotify.exchangeCode(code, verifier: verifier)
             SpotifyAuth.pendingVerifier = nil
+        }
+    }
+}
+
+/// Accepts a CloudKit share invite (the household config from the other phone).
+final class ShareAcceptDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication,
+                     userDidAcceptCloudKitShareWith metadata: CKShare.Metadata) {
+        Task {
+            await CloudSync.shared.accept(metadata)
+            await AppModel.shared.cloudReconcile()
         }
     }
 }

@@ -5,6 +5,7 @@ struct SettingsView: View {
     @Environment(AppModel.self) private var model
     @Environment(\.dismiss) private var dismiss
     @State private var spotifyLoggedIn = false
+    @State private var shareURL: URL?
 
     var body: some View {
         NavigationStack {
@@ -54,7 +55,15 @@ struct SettingsView: View {
                 }
 
                 Section("Household") {
-                    LabeledContent("Sharing", value: "This device only")
+                    if let shareURL {
+                        ShareLink(item: shareURL) {
+                            Label("Invite household member", systemImage: "person.badge.plus")
+                        }
+                    } else {
+                        Button("Set up household sharing") {
+                            Task { shareURL = try? await CloudSync.shared.makeShareURL() }
+                        }
+                    }
                     Button("Re-run device setup") {
                         model.adoptConfig(HouseConfig())
                         dismiss()

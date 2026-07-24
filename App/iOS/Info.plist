@@ -35,6 +35,8 @@
     <array>
         <string>spotify</string>
     </array>
+    <key>CKSharingSupported</key>
+    <true/>
     <key>NSLocalNetworkUsageDescription</key>
     <string>House Music finds and controls the audio devices (Yamaha MusicCast receivers) on your home network.</string>
     <key>UIApplicationSceneManifest</key>

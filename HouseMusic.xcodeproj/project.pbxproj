@@ -12,15 +12,19 @@
 		25622F37759647448D744C0D /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E75ACD5B4B3F059CD0E6DB7 /* AppModel.swift */; };
 		28CB9FEAFB0A4BB0AB949532 /* HouseMusicWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F440FD35FA0F2519C1637116 /* HouseMusicWatchApp.swift */; };
 		328EB0B355C51DE876D306DF /* HouseMusicKit in Frameworks */ = {isa = PBXBuildFile; productRef = FBDF66331E1AAAFFD5B011A2 /* HouseMusicKit */; };
+		3CAAB50584493902C6CA7968 /* CloudSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2364F8D7D517002FAF008417 /* CloudSync.swift */; };
 		7F895E88415A4B9299D140EB /* HouseMusicKit in Frameworks */ = {isa = PBXBuildFile; productRef = 42F71B831EB1552F941F3191 /* HouseMusicKit */; };
 		803CD18C23AC8ECE7E1CEE40 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174D7A0EC43316E13F9EC39 /* MainView.swift */; };
 		804E4D02FD8A6ED31837EF9E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DC39CAF757E675D4C4294D /* SettingsView.swift */; };
+		824878FF8984121AF99473F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A69DC6FDE72884F5F3F3103 /* Assets.xcassets */; };
 		85C18DA6E088E961BF413F53 /* PresetIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB41D8A3F48392E4B9BBC09 /* PresetIntents.swift */; };
 		91BD5EB526FF307334B7F5A7 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E75ACD5B4B3F059CD0E6DB7 /* AppModel.swift */; };
 		A63B23AC9258DBCDD781C077 /* CustomEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3017F0B83C12AD15703FB048 /* CustomEditorView.swift */; };
 		A7979492F76327E4D3796DBF /* PresetIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB41D8A3F48392E4B9BBC09 /* PresetIntents.swift */; };
 		B71857F1DB719CE2DE568203 /* SyncBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6316F0B236EBD9EACF932EFA /* SyncBridge.swift */; };
 		BD462D55E19CBE17E13187E3 /* HouseMusicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1657B39B6C27CFF392222A04 /* HouseMusicApp.swift */; };
+		C1CE7D942CD283B6709C6CE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FB500269F17978E291B0D21 /* Assets.xcassets */; };
+		F9CBF7A5016B6AEEF5AA26FC /* CloudSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2364F8D7D517002FAF008417 /* CloudSync.swift */; };
 		FD902EDA971D154C7FB2E449 /* HouseMusicWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = CB54D6B65C5FFFBF1B233FC0 /* HouseMusicWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
@@ -49,11 +53,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0A69DC6FDE72884F5F3F3103 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E75ACD5B4B3F059CD0E6DB7 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		1657B39B6C27CFF392222A04 /* HouseMusicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMusicApp.swift; sourceTree = "<group>"; };
+		2364F8D7D517002FAF008417 /* CloudSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudSync.swift; sourceTree = "<group>"; };
 		2FB41D8A3F48392E4B9BBC09 /* PresetIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetIntents.swift; sourceTree = "<group>"; };
 		3017F0B83C12AD15703FB048 /* CustomEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEditorView.swift; sourceTree = "<group>"; };
 		4174D7A0EC43316E13F9EC39 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		4FB500269F17978E291B0D21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6316F0B236EBD9EACF932EFA /* SyncBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncBridge.swift; sourceTree = "<group>"; };
 		839362AC7B8CBF8181254392 /* house-music */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "house-music"; path = .; sourceTree = SOURCE_ROOT; };
 		99DC39CAF757E675D4C4294D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -96,6 +103,7 @@
 		5635238AC3EC94FD141EE356 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				4FB500269F17978E291B0D21 /* Assets.xcassets */,
 				3017F0B83C12AD15703FB048 /* CustomEditorView.swift */,
 				1657B39B6C27CFF392222A04 /* HouseMusicApp.swift */,
 				4174D7A0EC43316E13F9EC39 /* MainView.swift */,
@@ -109,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				0E75ACD5B4B3F059CD0E6DB7 /* AppModel.swift */,
+				2364F8D7D517002FAF008417 /* CloudSync.swift */,
 				2FB41D8A3F48392E4B9BBC09 /* PresetIntents.swift */,
 				6316F0B236EBD9EACF932EFA /* SyncBridge.swift */,
 			);
@@ -127,6 +136,7 @@
 		925D5AFF93A04F42BC21E4DC /* Watch */ = {
 			isa = PBXGroup;
 			children = (
+				0A69DC6FDE72884F5F3F3103 /* Assets.xcassets */,
 				F440FD35FA0F2519C1637116 /* HouseMusicWatchApp.swift */,
 			);
 			path = Watch;
@@ -157,6 +167,7 @@
 			buildConfigurationList = 2E05BAE6ECFA3FCD56240F14 /* Build configuration list for PBXNativeTarget "HouseMusicWatch" */;
 			buildPhases = (
 				5E0D41F4E88ACFD8B7F24555 /* Sources */,
+				1DF5F29DA911F1B7C32B5D81 /* Resources */,
 				9B762A2228704EC6CCEB46AE /* Frameworks */,
 			);
 			buildRules = (
@@ -176,6 +187,7 @@
 			buildConfigurationList = 2C2B76DA6E5E618016058C65 /* Build configuration list for PBXNativeTarget "HouseMusic" */;
 			buildPhases = (
 				CC1E3C2AA7AC41AE3711A5F1 /* Sources */,
+				EC10ED5409292482FDE9A5B2 /* Resources */,
 				DDCFE2A231565067D585B52B /* Frameworks */,
 				88D9EEA6F03DD5454E053FF8 /* Embed Watch Content */,
 			);
@@ -234,12 +246,32 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		1DF5F29DA911F1B7C32B5D81 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				824878FF8984121AF99473F3 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC10ED5409292482FDE9A5B2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C1CE7D942CD283B6709C6CE8 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5E0D41F4E88ACFD8B7F24555 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				25622F37759647448D744C0D /* AppModel.swift in Sources */,
+				F9CBF7A5016B6AEEF5AA26FC /* CloudSync.swift in Sources */,
 				28CB9FEAFB0A4BB0AB949532 /* HouseMusicWatchApp.swift in Sources */,
 				85C18DA6E088E961BF413F53 /* PresetIntents.swift in Sources */,
 				17C880DE22054B746495273E /* SyncBridge.swift in Sources */,
@@ -251,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				91BD5EB526FF307334B7F5A7 /* AppModel.swift in Sources */,
+				3CAAB50584493902C6CA7968 /* CloudSync.swift in Sources */,
 				A63B23AC9258DBCDD781C077 /* CustomEditorView.swift in Sources */,
 				BD462D55E19CBE17E13187E3 /* HouseMusicApp.swift in Sources */,
 				803CD18C23AC8ECE7E1CEE40 /* MainView.swift in Sources */,
