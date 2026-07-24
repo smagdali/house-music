@@ -97,9 +97,9 @@
   .nowplaying .pp {
     margin-left: auto; flex: none; width: 34px; height: 34px; border-radius: 50%;
     border: 2px solid var(--p-muted); background: none; color: var(--p-ink);
-    font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
   }
-  .nowplaying .pp[hidden] { display: none; }
+  .nowplaying .pp.muted { background: var(--p-ink); border-color: var(--p-ink); }
 
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; padding: 1rem 1.25rem 0; }
   .preset {
@@ -243,7 +243,7 @@
       <div class="phone"><div class="screen">
         <div class="statusbar"><span>14:36</span><span>&#9679;&#9679;&#9679;</span></div>
         <div class="appbar"><span class="title">House Music</span><span class="gear">&#9881;</span></div>
-        <div class="nowplaying"><span class="dot"></span><span id="npText"><b>Decks</b> to Upstairs</span><button class="pp" id="ppBtn" hidden aria-label="Play/pause">&#9646;&#9646;</button></div>
+        <div class="nowplaying"><span class="dot"></span><span id="npText"><b>Decks</b> to Upstairs</span><button class="pp" id="muteBtn" aria-label="Mute all rooms">&#128266;</button></div>
         <div class="grid" id="presetGrid"></div>
         <div class="custombtn">+ Custom source &amp; rooms</div>
         <div class="volume">
@@ -257,7 +257,7 @@
       <div class="notes"><ul>
         <li>Presets show source + rooms; the live strip reflects reality even if someone used the MusicCast app.</li>
         <li>Each preset has its own colour, carried through to the now-playing dot and the Watch.</li>
-        <li>Play/pause appears in the strip (and on the Watch) only for sources that can honour it: Spotify and direct AirPlay. Decks and Apple TV never show it; Stream here is paused from the phone's own controls.</li>
+        <li>The strip's button is mute, not play/pause: it works identically for every source (including Decks and Apple TV) and mutes all the preset's rooms at once. True pause stays with the system's own controls where they exist.</li>
         <li>Reordering: long-press a tile enters wiggle mode (Home Screen convention), drag to your order. Order is per-person; definitions and baselines are shared.</li>
         <li>Volume is universal across the active preset's rooms, shown in dB; per-room baselines sit behind it.</li>
         <li>The tick under the slider marks the active preset's baseline; firing a preset returns volume to it. Drag away freely; long-press the slider to save the current level as the baseline (the tick moves to you).</li>
@@ -367,7 +367,6 @@
     "Telly time": "#b9a7ff",
     "TV in bed": "#5fb2ff",
   };
-  const CAN_PAUSE = new Set(["Spotify"]);
   const BASELINES = {
     "Decks": -26, "DJ time": -14, "Spotify": -30,
     "Telly time": -28, "TV in bed": -38,
@@ -408,7 +407,6 @@
         np.parentElement.style.setProperty("--npc", COLORS[p.src] || "#beb5a8");
         if (BASELINES[p.src] !== undefined) { vol.value = BASELINES[p.src]; }
         setBaselineTick(p.src); setFill();
-        document.getElementById("ppBtn").hidden = !CAN_PAUSE.has(p.src);
         render();
       });
       grid.appendChild(el);
@@ -439,6 +437,12 @@
   }
   vol.addEventListener("input", setFill);
   setFill(); setBaselineTick(activeSrc);
+
+  const muteBtn = document.getElementById("muteBtn");
+  muteBtn.addEventListener("click", () => {
+    const m = muteBtn.classList.toggle("muted");
+    muteBtn.innerHTML = m ? "&#128263;" : "&#128266;";
+  });
 
   document.querySelectorAll('.chips[data-single="true"]').forEach(group =>
     group.querySelectorAll(".chip").forEach(c =>

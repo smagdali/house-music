@@ -64,18 +64,19 @@ volume slider to save the current level as the active preset's baseline; the
 baseline tick under the slider moves to match. Firing a preset always returns
 volume to its tick.
 
-## Play/pause is contextual
+## Mute, not play/pause
 
-Play/pause appears in the now-playing strip and on the Watch only when the
-active source can honour it:
+The transport control in the now-playing strip and on the Watch is mute, not
+play/pause. Mute (YXC setMute) works identically on every zone of every device
+for every source, so the button is always present and always honest; muting a
+preset mutes all its rooms. True pause remains available where the platform
+already provides it (Control Center, lock screen, watch Now Playing for
+Spotify/AirPlay; Siri remote for Apple TV).
 
-1. Spotify: yes (YXC netusb setPlayback or Spotify Web API).
-2. AirPlay direct to a Yamaha: yes via netusb setPlayback (AirPlay control
-   back-channel to the sender); confirm live on our units.
-3. Stream here (AirPort Express analog): no in-app control possible; the
-   system's own controls (lock screen, watch Now Playing) cover it.
-4. Decks: not applicable, control hidden for analog sources.
-5. Apple TV: not controllable by third-party apps; Siri remote owns it.
+Considered and rejected: contextual play/pause per source (button appears and
+disappears; Decks and Apple TV can never honour it), and reverse-engineering
+the Apple TV Companion protocol for pause (no public API exists; pyatv-style
+pairing is disproportionate for one button).
 
 ## Deployment baseline
 
