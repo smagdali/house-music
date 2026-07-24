@@ -64,6 +64,19 @@ volume slider to save the current level as the active preset's baseline; the
 baseline tick under the slider moves to match. Firing a preset always returns
 volume to its tick.
 
+## Play/pause is contextual
+
+Play/pause appears in the now-playing strip and on the Watch only when the
+active source can honour it:
+
+1. Spotify: yes (YXC netusb setPlayback or Spotify Web API).
+2. AirPlay direct to a Yamaha: yes via netusb setPlayback (AirPlay control
+   back-channel to the sender); confirm live on our units.
+3. Stream here (AirPort Express analog): no in-app control possible; the
+   system's own controls (lock screen, watch Now Playing) cover it.
+4. Decks: not applicable, control hidden for analog sources.
+5. Apple TV: not controllable by third-party apps; Siri remote owns it.
+
 ## Deployment baseline
 
 iOS 17 / watchOS 10. App Intents and interactive widgets are mature there, it
