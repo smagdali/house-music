@@ -54,6 +54,16 @@ struct WizardView: View {
         .padding(24)
         .background(Color(hex: "0D0B09").ignoresSafeArea())
         .foregroundStyle(.white)
+        .onAppear {
+            // Debug hook: drive the wizard from automated runs.
+            let env = ProcessInfo.processInfo.environment
+            if env["HM_AUTOSCAN"] == "1", phase == .welcome {
+                Task {
+                    await scan()
+                    if env["HM_AUTOFINISH"] == "1" { finish() }
+                }
+            }
+        }
     }
 
     private func binding(_ id: DeviceID) -> Binding<Bool> {

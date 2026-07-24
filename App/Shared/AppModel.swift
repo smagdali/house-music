@@ -33,6 +33,14 @@ final class AppModel {
         monitor = HouseMonitor(client: client)
         discovery = DeviceDiscovery(client: client)
         config = store.loadConfig()
+        // Debug: preload a config from a JSON file path (for screenshots/UI runs
+        // where the simulator's Local Network privacy blocks discovery).
+        if let path = ProcessInfo.processInfo.environment["HM_SEED_CONFIG"],
+           let data = try? Data(contentsOf: URL(fileURLWithPath: path)),
+           let seeded = try? JSONDecoder().decode(HouseConfig.self, from: data) {
+            config = seeded
+            store.saveConfig(seeded)
+        }
         presets = store.orderedPresets(config)
     }
 

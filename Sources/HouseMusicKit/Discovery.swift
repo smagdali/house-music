@@ -20,19 +20,70 @@ public struct DeviceDiscovery: Sendable {
         return Device(id: info.deviceID, modelName: info.modelName, roomName: room, ipAddress: host)
     }
 
-    /// SSDP M-Search sweep. Returns confirmed MusicCast devices, deduped by device_id.
+    /// Find devices: SSDP M-Search first; if multicast is blocked (some APs,
+    /// some network stacks), fall back to a unicast sweep of the local /24.
     public func discover(timeout: TimeInterval = 3) async -> [Device] {
-        let hosts = await ssdpHosts(timeout: timeout)
+        var hosts = await ssdpHosts(timeout: timeout)
+        if hosts.isEmpty {
+            hosts = Self.localSubnetHosts()
+        }
         var found: [DeviceID: Device] = [:]
         await withTaskGroup(of: Device?.self) { group in
-            for host in hosts {
-                group.addTask { await probe(host: host) }
+            var iterator = hosts.makeIterator()
+            var inFlight = 0
+            func addNext(_ group: inout TaskGroup<Device?>) {
+                if let host = iterator.next() {
+                    group.addTask { await probe(host: host, timeout: 1.5) }
+                    inFlight += 1
+                }
             }
+            for _ in 0..<40 { addNext(&group) }
             for await device in group {
+                inFlight -= 1
                 if let device { found[device.id] = device }
+                addNext(&group)
             }
         }
         return found.values.sorted { $0.roomName < $1.roomName }
+    }
+
+    /// Probe with a custom timeout (short for sweeps).
+    func probe(host: String, timeout: TimeInterval) async -> Device? {
+        let quick = YXCClient(session: client.session, timeout: timeout)
+        guard let info = try? await quick.deviceInfo(host: host),
+              let names = try? await quick.nameText(host: host) else { return nil }
+        let room = names.zoneList.first { $0.id == "main" }?.text ?? info.modelName
+        return Device(id: info.deviceID, modelName: info.modelName, roomName: room, ipAddress: host)
+    }
+
+    /// All addresses in this machine's IPv4 /24, for the unicast fallback.
+    public static func localSubnetHosts() -> [String] {
+        var address: String?
+        var interfaces: UnsafeMutablePointer<ifaddrs>?
+        guard getifaddrs(&interfaces) == 0 else { return [] }
+        defer { freeifaddrs(interfaces) }
+        var cursor = interfaces
+        while let current = cursor {
+            let flags = Int32(current.pointee.ifa_flags)
+            if let sa = current.pointee.ifa_addr, sa.pointee.sa_family == UInt8(AF_INET),
+               (flags & IFF_LOOPBACK) == 0, (flags & IFF_UP) != 0 {
+                var host = [CChar](repeating: 0, count: Int(NI_MAXHOST))
+                if getnameinfo(sa, socklen_t(sa.pointee.sa_len), &host, socklen_t(host.count),
+                               nil, 0, NI_NUMERICHOST) == 0 {
+                    let name = String(cString: host)
+                    if name.hasPrefix("192.168.") || name.hasPrefix("10.") || name.hasPrefix("172.") {
+                        address = name
+                        break
+                    }
+                }
+            }
+            cursor = current.pointee.ifa_next
+        }
+        guard let address else { return [] }
+        let parts = address.split(separator: ".")
+        guard parts.count == 4 else { return [] }
+        let prefix = parts[0...2].joined(separator: ".")
+        return (1...254).map { "\(prefix).\($0)" }.filter { $0 != address }
     }
 
     /// Send an SSDP M-Search and collect responder IPs.

@@ -1,6 +1,16 @@
 # House Music
 
 Multi-room audio controller for a mixed Yamaha MusicCast / AirPlay home network.
+iOS + Apple Watch, SwiftUI, targeting iOS 17 / watchOS 10.
+
+## Build
+
+1. `xcodegen generate` to produce `HouseMusic.xcodeproj` from [project.yml](project.yml).
+2. Open in Xcode and run, or `xcodebuild -scheme HouseMusic -destination 'platform=iOS Simulator,name=iPhone 17 Pro' build`.
+3. `swift test` runs the kit unit tests. `HM_LIVE=1 swift test --filter LiveIntegrationTests` exercises the real receivers on the LAN (reads plus one muted volume round-trip on the Office, restored).
+4. TestFlight: fill in [deploy/.env](deploy/env.example) and run [scripts/testflight.sh](scripts/testflight.sh).
+
+Layout: [HouseMusicKit](Sources/HouseMusicKit) is the platform-agnostic core (YXC client, discovery, preset engine, Spotify, config store); [App/](App) holds the iOS app, Watch app, and shared model.
 
 ## Spec
 
