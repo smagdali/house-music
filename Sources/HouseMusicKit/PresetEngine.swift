@@ -68,14 +68,17 @@ public struct PresetEngine: Sendable {
             if let h = try? host(id) { try? await client.setPower(host: h, on: false) }
         }
 
-        // Members on, at baseline, unmuted.
+        // Members on, at baseline, unmuted. A device just woken from standby
+        // rejects writes with response_code 5 for up to about half a second, so
+        // volume and mute are retried and treated as best-effort: a cold room
+        // must not throw here and abort the grouping that follows.
         for id in plan.powerOn {
             let h = try host(id)
             try await client.setPower(host: h, on: true)
             if let units = plan.baselines[id] {
-                try await client.setVolume(host: h, units: units)
+                await retryWhileWaking { try await client.setVolume(host: h, units: units) }
             }
-            try await client.setMute(host: h, muted: false)
+            await retryWhileWaking { try await client.setMute(host: h, muted: false) }
         }
 
         guard let serverID = plan.serverDevice, let input = plan.serverInput else { return }
@@ -86,8 +89,10 @@ public struct PresetEngine: Sendable {
             let clientIPs = try plan.clientDevices.map { try host($0) }
             try await client.makeGroup(serverHost: serverHost, clientIPs: clientIPs,
                                        groupID: YXCClient.newGroupID(), name: preset.name)
+            // Distribution auto-switches clients to mc_link; assert it too, but
+            // best-effort so a slow client cannot abort an already-formed group.
             for ip in clientIPs {
-                try await client.setInput(host: ip, input: "mc_link")
+                await retryWhileWaking { try await client.setInput(host: ip, input: "mc_link") }
             }
         }
 
@@ -95,6 +100,18 @@ public struct PresetEngine: Sendable {
             try await client.setPureDirect(host: serverHost, enabled: true)
         } else {
             try? await client.setPureDirect(host: serverHost, enabled: false)
+        }
+    }
+
+    /// Retry a write that a freshly-woken device rejects with response_code 5
+    /// (not-ready). Best-effort: after the budget, or on any other error, it
+    /// returns quietly so one uncooperative room cannot abort the whole preset.
+    private func retryWhileWaking(_ write: () async throws -> Void) async {
+        for _ in 0..<6 {
+            do { try await write(); return }
+            catch HouseMusicError.yxcError(let code, _) where code == 5 {
+                try? await Task.sleep(for: .milliseconds(500))
+            } catch { return }
         }
     }
 
