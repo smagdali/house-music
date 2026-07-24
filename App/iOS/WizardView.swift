@@ -8,8 +8,10 @@ struct WizardView: View {
     @State private var found: [Device] = []
     @State private var kept: Set<DeviceID> = []
     @State private var curated: [DeviceID: [InputChoice]] = [:]
+    @State private var scanning = false
+    @State private var scanTask: Task<Void, Never>?
 
-    enum Phase { case welcome, scanning, rooms, done }
+    enum Phase { case welcome, scanning, done }
 
     var body: some View {
         VStack(spacing: 24) {
@@ -21,30 +23,43 @@ struct WizardView: View {
                 Text("One tap to put music, telly, or the decks in any combination of rooms.")
                     .multilineTextAlignment(.center)
                     .foregroundStyle(Color(hex: "BEB5A8"))
-                Button("Find my devices") { Task { await scan() } }
+                Button("Find my devices") { startScan() }
                     .buttonStyle(WizardButton())
             case .scanning:
-                ProgressView().controlSize(.large).tint(Color(hex: "E9A23B"))
-                Text("Scanning your network\u{2026}")
-                    .foregroundStyle(Color(hex: "BEB5A8"))
-            case .rooms:
-                Text("Found \(found.count) devices")
-                    .font(.system(size: 26, weight: .heavy))
-                List {
-                    ForEach(found) { device in
-                        Toggle(isOn: binding(device.id)) {
-                            VStack(alignment: .leading) {
-                                Text(device.roomName).font(.system(size: 17, weight: .bold))
-                                Text(device.modelName).font(.system(size: 13)).foregroundStyle(.secondary)
-                            }
-                        }
-                        .tint(Color(hex: "E9A23B"))
-                    }
+                HStack(spacing: 10) {
+                    if scanning { ProgressView().tint(Color(hex: "E9A23B")) }
+                    Text(found.isEmpty ? "Scanning\u{2026}" : "Found \(found.count) device\(found.count == 1 ? "" : "s")")
+                        .font(.system(size: 24, weight: .heavy))
                 }
-                .scrollContentBackground(.hidden)
-                Button("Set up \(kept.count) rooms") { finish() }
+                if found.isEmpty && !scanning {
+                    Text("Nothing found. Make sure House Music has Local Network access in Settings and every device is on the same Wi-Fi.")
+                        .font(.system(size: 15))
+                        .multilineTextAlignment(.center)
+                        .foregroundStyle(Color(hex: "BEB5A8"))
+                        .padding(.horizontal, 8)
+                } else {
+                    List {
+                        ForEach(found) { device in
+                            Toggle(isOn: binding(device.id)) {
+                                VStack(alignment: .leading) {
+                                    Text(device.roomName).font(.system(size: 17, weight: .bold))
+                                    Text(device.modelName).font(.system(size: 13)).foregroundStyle(.secondary)
+                                }
+                            }
+                            .tint(Color(hex: "E9A23B"))
+                        }
+                    }
+                    .scrollContentBackground(.hidden)
+                    .animation(.default, value: found)
+                }
+                Button(scanning ? "Done (\(kept.count))" : "Set up \(kept.count) rooms") { finish() }
                     .buttonStyle(WizardButton())
                     .disabled(kept.isEmpty)
+                if !scanning {
+                    Button("Scan again") { startScan() }
+                        .font(.system(size: 15, weight: .bold))
+                        .foregroundStyle(Color(hex: "BEB5A8"))
+                }
             case .done:
                 Image(systemName: "hifispeaker.2.fill").font(.system(size: 48))
                 Text("Ready").font(.system(size: 26, weight: .heavy))
@@ -54,16 +69,6 @@ struct WizardView: View {
         .padding(24)
         .background(Color(hex: "0D0B09").ignoresSafeArea())
         .foregroundStyle(.white)
-        .onAppear {
-            // Debug hook: drive the wizard from automated runs.
-            let env = ProcessInfo.processInfo.environment
-            if env["HM_AUTOSCAN"] == "1", phase == .welcome {
-                Task {
-                    await scan()
-                    if env["HM_AUTOFINISH"] == "1" { finish() }
-                }
-            }
-        }
     }
 
     private func binding(_ id: DeviceID) -> Binding<Bool> {
@@ -71,25 +76,30 @@ struct WizardView: View {
                 set: { on in if on { kept.insert(id) } else { kept.remove(id) } })
     }
 
-    private func scan() async {
+    /// Start (or restart) a progressive scan. Devices appear in the list as they
+    /// answer, across several passes, so slow responders are not missed. The
+    /// user taps Done whenever the expected rooms are all present.
+    private func startScan() {
+        scanTask?.cancel()
+        found = []; kept = []
         phase = .scanning
-        var devices = await model.discovery.discover()
-        if devices.isEmpty {
-            // SSDP can be blocked by AP isolation; fall back to probing common addresses.
-            devices = []
-        }
-        // Enrich with volume range and curated inputs.
-        for index in devices.indices {
-            if let features = try? await model.client.features(host: devices[index].ipAddress) {
-                devices[index].volumeMax = features.zone.first { $0.id == "main" }?.volumeMax
+        scanning = true
+        scanTask = Task {
+            for await device in model.discovery.discoveryStream() {
+                if !found.contains(where: { $0.id == device.id }) {
+                    found.append(device)
+                    found.sort { $0.roomName < $1.roomName }
+                    kept.insert(device.id)
+                }
             }
-            if let names = try? await model.client.nameText(host: devices[index].ipAddress) {
-                curated[devices[index].id] = Self.defaultCuration(names.inputList)
-            }
+            scanning = false
         }
-        found = devices
-        kept = Set(devices.map(\.id))
-        phase = .rooms
+    }
+
+    private func stopScan() {
+        scanTask?.cancel()
+        scanTask = nil
+        scanning = false
     }
 
     /// Keep inputs the owner has renamed (label differs from the stock name)
@@ -108,13 +118,26 @@ struct WizardView: View {
     }
 
     private func finish() {
-        let devices = found.filter { kept.contains($0.id) }
-        var config = HouseConfig(devices: devices,
-                                 curatedInputs: curated.filter { kept.contains($0.key) })
-        config.presets = Self.starterPresets(config)
-        model.adoptConfig(config)
-        model.persist()
+        stopScan()
         phase = .done
+        Task {
+            // Enrich the kept devices with volume range and curated inputs; the
+            // discovery stream only yields id/model/room/ip.
+            var devices = found.filter { kept.contains($0.id) }
+            for index in devices.indices {
+                if let features = try? await model.client.features(host: devices[index].ipAddress) {
+                    devices[index].volumeMax = features.zone.first { $0.id == "main" }?.volumeMax
+                }
+                if let names = try? await model.client.nameText(host: devices[index].ipAddress) {
+                    curated[devices[index].id] = Self.defaultCuration(names.inputList)
+                }
+            }
+            var config = HouseConfig(devices: devices,
+                                     curatedInputs: curated.filter { kept.contains($0.key) })
+            config.presets = Self.starterPresets(config)
+            model.adoptConfig(config)
+            model.persist()
+        }
     }
 
     /// Seed presets: All off, Spotify per room, and a solo preset per renamed

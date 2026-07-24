@@ -1,6 +1,12 @@
 import Foundation
 import Network
 
+/// Thread-safe set of device IDs already yielded during a discovery stream.
+actor SeenSet {
+    private var ids = Set<String>()
+    func insert(_ id: String) -> Bool { ids.insert(id).inserted }
+}
+
 /// Finds MusicCast devices. Primary path: SSDP M-Search for MediaRenderer,
 /// then confirm via YXC getDeviceInfo/getNameText. Fallback: probe previously
 /// known IPs directly (IPs are DHCP-reserved in this house, but we re-key by
@@ -45,6 +51,43 @@ public struct DeviceDiscovery: Sendable {
             }
         }
         return found.values.sorted { $0.roomName < $1.roomName }
+    }
+
+    /// Progressive discovery: yields each device as it answers, and keeps
+    /// sweeping for `passes` rounds so slow responders that miss one round get
+    /// picked up in the next. Deduped by device_id across rounds. The caller
+    /// decides when enough have appeared (a Done button), or lets it finish.
+    public func discoveryStream(passes: Int = 6, perProbeTimeout: TimeInterval = 2.5,
+                                concurrency: Int = 24) -> AsyncStream<Device> {
+        AsyncStream { continuation in
+            let task = Task {
+                var hosts = await ssdpHosts(timeout: 2)
+                if hosts.isEmpty { hosts = Self.localSubnetHosts() }
+                let seen = SeenSet()
+                for _ in 0..<passes {
+                    if Task.isCancelled { break }
+                    await withTaskGroup(of: Device?.self) { group in
+                        var iterator = hosts.makeIterator()
+                        var launched = 0
+                        func addNext() {
+                            if let host = iterator.next() {
+                                group.addTask { await probe(host: host, timeout: perProbeTimeout) }
+                                launched += 1
+                            }
+                        }
+                        for _ in 0..<concurrency { addNext() }
+                        for await device in group {
+                            if let device, await seen.insert(device.id) {
+                                continuation.yield(device)
+                            }
+                            addNext()
+                        }
+                    }
+                }
+                continuation.finish()
+            }
+            continuation.onTermination = { _ in task.cancel() }
+        }
     }
 
     /// Probe with a custom timeout (short for sweeps).
