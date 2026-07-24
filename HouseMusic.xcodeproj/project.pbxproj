@@ -1,0 +1,527 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		166E693148E35879C4C8D9F2 /* WizardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4970D254C8520AD87B3FAF1 /* WizardView.swift */; };
+		17C880DE22054B746495273E /* SyncBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6316F0B236EBD9EACF932EFA /* SyncBridge.swift */; };
+		25622F37759647448D744C0D /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E75ACD5B4B3F059CD0E6DB7 /* AppModel.swift */; };
+		28CB9FEAFB0A4BB0AB949532 /* HouseMusicWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F440FD35FA0F2519C1637116 /* HouseMusicWatchApp.swift */; };
+		328EB0B355C51DE876D306DF /* HouseMusicKit in Frameworks */ = {isa = PBXBuildFile; productRef = FBDF66331E1AAAFFD5B011A2 /* HouseMusicKit */; };
+		7F895E88415A4B9299D140EB /* HouseMusicKit in Frameworks */ = {isa = PBXBuildFile; productRef = 42F71B831EB1552F941F3191 /* HouseMusicKit */; };
+		803CD18C23AC8ECE7E1CEE40 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174D7A0EC43316E13F9EC39 /* MainView.swift */; };
+		804E4D02FD8A6ED31837EF9E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DC39CAF757E675D4C4294D /* SettingsView.swift */; };
+		85C18DA6E088E961BF413F53 /* PresetIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB41D8A3F48392E4B9BBC09 /* PresetIntents.swift */; };
+		91BD5EB526FF307334B7F5A7 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E75ACD5B4B3F059CD0E6DB7 /* AppModel.swift */; };
+		A63B23AC9258DBCDD781C077 /* CustomEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3017F0B83C12AD15703FB048 /* CustomEditorView.swift */; };
+		A7979492F76327E4D3796DBF /* PresetIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FB41D8A3F48392E4B9BBC09 /* PresetIntents.swift */; };
+		B71857F1DB719CE2DE568203 /* SyncBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6316F0B236EBD9EACF932EFA /* SyncBridge.swift */; };
+		BD462D55E19CBE17E13187E3 /* HouseMusicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1657B39B6C27CFF392222A04 /* HouseMusicApp.swift */; };
+		FD902EDA971D154C7FB2E449 /* HouseMusicWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = CB54D6B65C5FFFBF1B233FC0 /* HouseMusicWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2ABA269DD61F71CC25A1DDD3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F74975AE1F1E7A30EEDE9D98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 98644814D0BF088D760FFE1B;
+			remoteInfo = HouseMusicWatch;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		88D9EEA6F03DD5454E053FF8 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				FD902EDA971D154C7FB2E449 /* HouseMusicWatch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0E75ACD5B4B3F059CD0E6DB7 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		1657B39B6C27CFF392222A04 /* HouseMusicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMusicApp.swift; sourceTree = "<group>"; };
+		2FB41D8A3F48392E4B9BBC09 /* PresetIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetIntents.swift; sourceTree = "<group>"; };
+		3017F0B83C12AD15703FB048 /* CustomEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEditorView.swift; sourceTree = "<group>"; };
+		4174D7A0EC43316E13F9EC39 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		6316F0B236EBD9EACF932EFA /* SyncBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncBridge.swift; sourceTree = "<group>"; };
+		839362AC7B8CBF8181254392 /* house-music */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "house-music"; path = .; sourceTree = SOURCE_ROOT; };
+		99DC39CAF757E675D4C4294D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B4970D254C8520AD87B3FAF1 /* WizardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardView.swift; sourceTree = "<group>"; };
+		BD046F2FF99847D5FB0A9E1F /* HouseMusic.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = HouseMusic.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB54D6B65C5FFFBF1B233FC0 /* HouseMusicWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HouseMusicWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F440FD35FA0F2519C1637116 /* HouseMusicWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMusicWatchApp.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9B762A2228704EC6CCEB46AE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				328EB0B355C51DE876D306DF /* HouseMusicKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDCFE2A231565067D585B52B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F895E88415A4B9299D140EB /* HouseMusicKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		429CF42F536125D46BD786F6 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				5635238AC3EC94FD141EE356 /* iOS */,
+				7275ACA7F646D1084BBB425E /* Shared */,
+				925D5AFF93A04F42BC21E4DC /* Watch */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		5635238AC3EC94FD141EE356 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				3017F0B83C12AD15703FB048 /* CustomEditorView.swift */,
+				1657B39B6C27CFF392222A04 /* HouseMusicApp.swift */,
+				4174D7A0EC43316E13F9EC39 /* MainView.swift */,
+				99DC39CAF757E675D4C4294D /* SettingsView.swift */,
+				B4970D254C8520AD87B3FAF1 /* WizardView.swift */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		7275ACA7F646D1084BBB425E /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				0E75ACD5B4B3F059CD0E6DB7 /* AppModel.swift */,
+				2FB41D8A3F48392E4B9BBC09 /* PresetIntents.swift */,
+				6316F0B236EBD9EACF932EFA /* SyncBridge.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		76A53EC7F388E892A983C227 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BD046F2FF99847D5FB0A9E1F /* HouseMusic.app */,
+				CB54D6B65C5FFFBF1B233FC0 /* HouseMusicWatch.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		925D5AFF93A04F42BC21E4DC /* Watch */ = {
+			isa = PBXGroup;
+			children = (
+				F440FD35FA0F2519C1637116 /* HouseMusicWatchApp.swift */,
+			);
+			path = Watch;
+			sourceTree = "<group>";
+		};
+		E65103F8B28A18B6D998C672 = {
+			isa = PBXGroup;
+			children = (
+				429CF42F536125D46BD786F6 /* App */,
+				FBA270F216CB0D8C2CAB99C3 /* Packages */,
+				76A53EC7F388E892A983C227 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FBA270F216CB0D8C2CAB99C3 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				839362AC7B8CBF8181254392 /* house-music */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		98644814D0BF088D760FFE1B /* HouseMusicWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2E05BAE6ECFA3FCD56240F14 /* Build configuration list for PBXNativeTarget "HouseMusicWatch" */;
+			buildPhases = (
+				5E0D41F4E88ACFD8B7F24555 /* Sources */,
+				9B762A2228704EC6CCEB46AE /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HouseMusicWatch;
+			packageProductDependencies = (
+				FBDF66331E1AAAFFD5B011A2 /* HouseMusicKit */,
+			);
+			productName = HouseMusicWatch;
+			productReference = CB54D6B65C5FFFBF1B233FC0 /* HouseMusicWatch.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C891441C5CE8E021A7B1E867 /* HouseMusic */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C2B76DA6E5E618016058C65 /* Build configuration list for PBXNativeTarget "HouseMusic" */;
+			buildPhases = (
+				CC1E3C2AA7AC41AE3711A5F1 /* Sources */,
+				DDCFE2A231565067D585B52B /* Frameworks */,
+				88D9EEA6F03DD5454E053FF8 /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				52686A21D515CC321064A181 /* PBXTargetDependency */,
+			);
+			name = HouseMusic;
+			packageProductDependencies = (
+				42F71B831EB1552F941F3191 /* HouseMusicKit */,
+			);
+			productName = HouseMusic;
+			productReference = BD046F2FF99847D5FB0A9E1F /* HouseMusic.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F74975AE1F1E7A30EEDE9D98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					98644814D0BF088D760FFE1B = {
+						DevelopmentTeam = 86H54WCPYP;
+						ProvisioningStyle = Automatic;
+					};
+					C891441C5CE8E021A7B1E867 = {
+						DevelopmentTeam = 86H54WCPYP;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 0F5B5E23CDF0435C3CECCC0E /* Build configuration list for PBXProject "HouseMusic" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = E65103F8B28A18B6D998C672;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				2118C342AAAE3549C8602598 /* XCLocalSwiftPackageReference "." */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 76A53EC7F388E892A983C227 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C891441C5CE8E021A7B1E867 /* HouseMusic */,
+				98644814D0BF088D760FFE1B /* HouseMusicWatch */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5E0D41F4E88ACFD8B7F24555 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25622F37759647448D744C0D /* AppModel.swift in Sources */,
+				28CB9FEAFB0A4BB0AB949532 /* HouseMusicWatchApp.swift in Sources */,
+				85C18DA6E088E961BF413F53 /* PresetIntents.swift in Sources */,
+				17C880DE22054B746495273E /* SyncBridge.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC1E3C2AA7AC41AE3711A5F1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				91BD5EB526FF307334B7F5A7 /* AppModel.swift in Sources */,
+				A63B23AC9258DBCDD781C077 /* CustomEditorView.swift in Sources */,
+				BD462D55E19CBE17E13187E3 /* HouseMusicApp.swift in Sources */,
+				803CD18C23AC8ECE7E1CEE40 /* MainView.swift in Sources */,
+				A7979492F76327E4D3796DBF /* PresetIntents.swift in Sources */,
+				804E4D02FD8A6ED31837EF9E /* SettingsView.swift in Sources */,
+				B71857F1DB719CE2DE568203 /* SyncBridge.swift in Sources */,
+				166E693148E35879C4C8D9F2 /* WizardView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		52686A21D515CC321064A181 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 98644814D0BF088D760FFE1B /* HouseMusicWatch */;
+			targetProxy = 2ABA269DD61F71CC25A1DDD3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		02A07C5FAC5D12F417300A2D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = App/Watch/HouseMusicWatch.entitlements;
+				INFOPLIST_FILE = App/Watch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = org.whitelabel.housemusic.watchkitapp;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		6A2E0E34CE3C025548B71943 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = App/iOS/HouseMusic.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = App/iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.whitelabel.housemusic;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		AEFF4A4390F01410780D053C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 86H54WCPYP;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		E0616A528C1D178C3AD923AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = App/Watch/HouseMusicWatch.entitlements;
+				INFOPLIST_FILE = App/Watch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = org.whitelabel.housemusic.watchkitapp;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		E68EA4D5BE9DCED40A0D2DA2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 86H54WCPYP;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		FF25E93C43812AD45F86B8E5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = App/iOS/HouseMusic.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = App/iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.whitelabel.housemusic;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0F5B5E23CDF0435C3CECCC0E /* Build configuration list for PBXProject "HouseMusic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E68EA4D5BE9DCED40A0D2DA2 /* Debug */,
+				AEFF4A4390F01410780D053C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		2C2B76DA6E5E618016058C65 /* Build configuration list for PBXNativeTarget "HouseMusic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF25E93C43812AD45F86B8E5 /* Debug */,
+				6A2E0E34CE3C025548B71943 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		2E05BAE6ECFA3FCD56240F14 /* Build configuration list for PBXNativeTarget "HouseMusicWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E0616A528C1D178C3AD923AC /* Debug */,
+				02A07C5FAC5D12F417300A2D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		2118C342AAAE3549C8602598 /* XCLocalSwiftPackageReference "." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = .;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		42F71B831EB1552F941F3191 /* HouseMusicKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = HouseMusicKit;
+		};
+		FBDF66331E1AAAFFD5B011A2 /* HouseMusicKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = HouseMusicKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = F74975AE1F1E7A30EEDE9D98 /* Project object */;
+}
