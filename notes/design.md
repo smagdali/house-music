@@ -98,3 +98,10 @@ same iCloud family makes the share invitation one tap. A baseline saved on one
 phone appears on the other. Accepted cost: this is the largest chunk of
 non-audio engineering in the app. (Family Sharing alone does not sync app data
 across Apple IDs; CloudKit record sharing is the mechanism.)
+
+## Spotify app registration (2026-07-24)
+
+Client ID 5a444101070b4b4983069d17237b30b3, redirect URI
+housemusic://spotify-callback, PKCE flow (no client secret in the app, ever).
+App is in development mode; both household Spotify accounts must be added
+under User Management in the dashboard.
