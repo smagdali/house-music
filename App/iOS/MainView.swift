@@ -5,6 +5,7 @@ struct MainView: View {
     @Environment(AppModel.self) private var model
     @State private var showCustom = false
     @State private var showSettings = false
+    @State private var showHelp = false
     @State private var showReorder = false
     @State private var editingPreset: Preset?
     @State private var pollTask: Task<Void, Never>?
@@ -53,6 +54,7 @@ struct MainView: View {
         .foregroundStyle(.white)
         .sheet(isPresented: $showCustom) { CustomEditorView(basePreset: nil) }
         .sheet(isPresented: $showSettings) { SettingsView() }
+        .sheet(isPresented: $showHelp) { NavigationStack { HelpView() }.preferredColorScheme(.dark) }
         .sheet(isPresented: $showReorder) { ReorderView() }
         .sheet(item: $editingPreset) { CustomEditorView(basePreset: $0) }
         .overlay(alignment: .bottom) { toastView }
@@ -61,8 +63,13 @@ struct MainView: View {
     }
 
     private var header: some View {
-        HStack {
+        HStack(spacing: 20) {
             Spacer()
+            Button { showHelp = true } label: {
+                Image(systemName: "questionmark.circle")
+                    .font(.system(size: 28, weight: .semibold))
+                    .foregroundStyle(.white)
+            }
             Button { showSettings = true } label: {
                 Image(systemName: "gearshape.fill")
                     .font(.system(size: 30, weight: .semibold))

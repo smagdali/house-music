@@ -28,6 +28,7 @@ struct LaunchComplication: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: "HouseMusicLaunch", provider: LaunchProvider()) { _ in
             ComplicationView()
+                .containerBackground(for: .widget) { Color.clear }
         }
         .configurationDisplayName("House Music")
         .description("Open House Music to control your rooms.")
@@ -44,11 +45,13 @@ struct ComplicationView: View {
             ZStack {
                 AccessoryWidgetBackground()
                 Image(systemName: "hifispeaker.2.fill")
-                    .font(.system(size: 17, weight: .bold))
+                    .font(.system(size: 16, weight: .bold))
             }
+            .widgetAccentable()
         case .accessoryCorner:
             Image(systemName: "hifispeaker.2.fill")
-                .font(.system(size: 20, weight: .bold))
+                .font(.system(size: 18, weight: .bold))
+                .widgetAccentable()
                 .widgetLabel("House Music")
         case .accessoryInline:
             Label("House Music", systemImage: "hifispeaker.2.fill")
@@ -56,6 +59,7 @@ struct ComplicationView: View {
             HStack(spacing: 8) {
                 Image(systemName: "hifispeaker.2.fill")
                     .font(.system(size: 22, weight: .bold))
+                    .widgetAccentable()
                 VStack(alignment: .leading, spacing: 1) {
                     Text("House Music").font(.system(size: 16, weight: .heavy))
                     Text("Tap to control").font(.system(size: 12, weight: .semibold)).foregroundStyle(.secondary)
@@ -64,6 +68,7 @@ struct ComplicationView: View {
             }
         default:
             Image(systemName: "hifispeaker.2.fill")
+                .widgetAccentable()
         }
     }
 }

@@ -15,6 +15,7 @@
 		328EB0B355C51DE876D306DF /* HouseMusicKit in Frameworks */ = {isa = PBXBuildFile; productRef = FBDF66331E1AAAFFD5B011A2 /* HouseMusicKit */; };
 		361D3DAA1FC5D7C995095FF2 /* HouseMusicComplications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE49F63F6D7AE677E8D0F84 /* HouseMusicComplications.swift */; };
 		3CAAB50584493902C6CA7968 /* CloudSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2364F8D7D517002FAF008417 /* CloudSync.swift */; };
+		5F8194A661815E9A745DF81D /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066C80E04DB44DEB40A027BC /* HelpView.swift */; };
 		7F895E88415A4B9299D140EB /* HouseMusicKit in Frameworks */ = {isa = PBXBuildFile; productRef = 42F71B831EB1552F941F3191 /* HouseMusicKit */; };
 		803CD18C23AC8ECE7E1CEE40 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174D7A0EC43316E13F9EC39 /* MainView.swift */; };
 		804E4D02FD8A6ED31837EF9E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DC39CAF757E675D4C4294D /* SettingsView.swift */; };
@@ -73,6 +74,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		066C80E04DB44DEB40A027BC /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		0A69DC6FDE72884F5F3F3103 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E75ACD5B4B3F059CD0E6DB7 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		1657B39B6C27CFF392222A04 /* HouseMusicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMusicApp.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 			children = (
 				4FB500269F17978E291B0D21 /* Assets.xcassets */,
 				3017F0B83C12AD15703FB048 /* CustomEditorView.swift */,
+				066C80E04DB44DEB40A027BC /* HelpView.swift */,
 				1657B39B6C27CFF392222A04 /* HouseMusicApp.swift */,
 				4174D7A0EC43316E13F9EC39 /* MainView.swift */,
 				99DC39CAF757E675D4C4294D /* SettingsView.swift */,
@@ -349,6 +352,7 @@
 				91BD5EB526FF307334B7F5A7 /* AppModel.swift in Sources */,
 				3CAAB50584493902C6CA7968 /* CloudSync.swift in Sources */,
 				A63B23AC9258DBCDD781C077 /* CustomEditorView.swift in Sources */,
+				5F8194A661815E9A745DF81D /* HelpView.swift in Sources */,
 				BD462D55E19CBE17E13187E3 /* HouseMusicApp.swift in Sources */,
 				803CD18C23AC8ECE7E1CEE40 /* MainView.swift in Sources */,
 				A7979492F76327E4D3796DBF /* PresetIntents.swift in Sources */,
