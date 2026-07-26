@@ -46,7 +46,12 @@ struct CustomEditorView: View {
                     HStack(spacing: 12) {
                         Button {
                             Task {
-                                await model.fire(draft(named: basePreset?.name ?? "Custom"))
+                                // Ad-hoc fires name the MusicCast group after the
+                                // source and rooms (e.g. "Decks \u{00B7} Whole House")
+                                // so it reads well in Spotify Connect, not "Custom".
+                                let name = basePreset?.name
+                                    ?? model.describe(source: source?.label ?? "Custom", rooms: rooms)
+                                await model.fire(draft(named: name))
                                 dismiss()
                             }
                         } label: {

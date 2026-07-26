@@ -196,9 +196,27 @@ final class AppModel {
         return liveStateSummary
     }
 
-    /// Compact description of the live house when no saved preset matches:
-    /// "<Source> \u{00B7} <rooms>", collapsing to "Whole House" and listing
-    /// several independent sources as "<A> \u{00B7} Room, <B> \u{00B7} Room".
+    /// "Whole House" when every configured room is included, otherwise the room
+    /// names joined with " + " in device order.
+    func roomList(_ rooms: some Sequence<DeviceID>) -> String {
+        let ids = Set(rooms)
+        let ordered = config.devices.filter { ids.contains($0.id) }.map(\.roomName)
+        return ordered.count == config.devices.count && !ordered.isEmpty
+            ? "Whole House"
+            : ordered.joined(separator: " + ")
+    }
+
+    /// "<Source> \u{00B7} <rooms>", e.g. "Decks \u{00B7} Whole House". Used for the
+    /// now-playing strip and the MusicCast group name, so an ad-hoc setup reads
+    /// well in Spotify Connect instead of the bare "Custom".
+    func describe(source label: String, rooms: some Sequence<DeviceID>) -> String {
+        let rooms = roomList(rooms)
+        return rooms.isEmpty ? label : "\(label) \u{00B7} \(rooms)"
+    }
+
+    /// Compact description of the live house when no saved preset matches,
+    /// collapsing to "Whole House" and listing several independent sources as
+    /// "<A> \u{00B7} Room, <B> \u{00B7} Room".
     private var liveStateSummary: String {
         let onRooms = config.devices.filter { roomStates[$0.id]?.power == true }
         guard !onRooms.isEmpty else { return "All quiet" }
@@ -207,11 +225,6 @@ final class AppModel {
             let input = roomStates[device.id]?.input ?? ""
             return (config.curatedInputs[device.id] ?? []).first { $0.id == input }?.label ?? input
         }
-        func roomList(_ rooms: [Device]) -> String {
-            rooms.count == config.devices.count
-                ? "Whole House"
-                : rooms.map(\.roomName).joined(separator: " + ")
-        }
 
         // A room on mc_link is a client receiving another room's stream; a room
         // on any other input is its own source.
@@ -219,12 +232,16 @@ final class AppModel {
         let clients = onRooms.filter { (roomStates[$0.id]?.input ?? "") == "mc_link" }
 
         if sources.count == 1, let server = sources.first {
-            return "\(inputLabel(server)) \u{00B7} \(roomList([server] + clients))"
+            // A muted source room feeding mc_link clients is a silent server
+            // (e.g. Stream here): name its input but list only the audible rooms.
+            let serverSilent = (roomStates[server.id]?.mute ?? false) && !clients.isEmpty
+            let rooms = (serverSilent ? clients : [server] + clients).map(\.id)
+            return describe(source: inputLabel(server), rooms: rooms)
         }
         if !sources.isEmpty {
             return sources.map { "\(inputLabel($0)) \u{00B7} \($0.roomName)" }.joined(separator: ", ")
         }
-        return "Playing \u{00B7} \(roomList(onRooms))"
+        return describe(source: "Playing", rooms: onRooms.map(\.id))
     }
 }
 

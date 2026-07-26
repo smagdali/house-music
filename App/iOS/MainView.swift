@@ -152,10 +152,7 @@ struct PresetTile: View {
     }
 
     private var roomsLabel: String {
-        if preset.isAllOff { return "everything" }
-        let names = preset.rooms.compactMap { model.config.device($0)?.roomName }
-        if names.count == model.config.devices.count { return "Whole House" }
-        return names.joined(separator: " + ")
+        preset.isAllOff ? "everything" : model.roomList(preset.rooms)
     }
 }
 
