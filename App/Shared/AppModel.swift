@@ -185,6 +185,47 @@ final class AppModel {
         guard let hex = preset.source?.colorHex else { return Color(white: 0.16) }
         return Color(hex: hex)
     }
+
+    /// Now-playing strip text. A saved preset shows its name; an unmatched
+    /// ("custom") state is described from what is actually playing rather than
+    /// the opaque "Mixed state".
+    var nowPlayingText: String {
+        if let active = activePreset {
+            return active.isAllOff ? "All quiet" : active.name
+        }
+        return liveStateSummary
+    }
+
+    /// Compact description of the live house when no saved preset matches:
+    /// "<Source> \u{00B7} <rooms>", collapsing to "Whole House" and listing
+    /// several independent sources as "<A> \u{00B7} Room, <B> \u{00B7} Room".
+    private var liveStateSummary: String {
+        let onRooms = config.devices.filter { roomStates[$0.id]?.power == true }
+        guard !onRooms.isEmpty else { return "All quiet" }
+
+        func inputLabel(_ device: Device) -> String {
+            let input = roomStates[device.id]?.input ?? ""
+            return (config.curatedInputs[device.id] ?? []).first { $0.id == input }?.label ?? input
+        }
+        func roomList(_ rooms: [Device]) -> String {
+            rooms.count == config.devices.count
+                ? "Whole House"
+                : rooms.map(\.roomName).joined(separator: " + ")
+        }
+
+        // A room on mc_link is a client receiving another room's stream; a room
+        // on any other input is its own source.
+        let sources = onRooms.filter { (roomStates[$0.id]?.input ?? "") != "mc_link" }
+        let clients = onRooms.filter { (roomStates[$0.id]?.input ?? "") == "mc_link" }
+
+        if sources.count == 1, let server = sources.first {
+            return "\(inputLabel(server)) \u{00B7} \(roomList([server] + clients))"
+        }
+        if !sources.isEmpty {
+            return sources.map { "\(inputLabel($0)) \u{00B7} \($0.roomName)" }.joined(separator: ", ")
+        }
+        return "Playing \u{00B7} \(roomList(onRooms))"
+    }
 }
 
 extension Color {
@@ -198,9 +239,15 @@ extension Color {
 }
 
 enum Palette {
+    /// The app's accent / selection colour (chips, buttons, slider). Preset
+    /// tiles must never use this or a look-alike, or an active tile is
+    /// indistinguishable from a selected control.
+    static let highlight = "E9A23B"
+
     /// Preset tile colours by input flavour; deterministic assignment order.
+    /// Kept clear of `highlight`: analog uses a burnt orange, not the accent gold.
     static let sourceColors = [
-        "F6A83C", // amber (analog / decks)
+        "E8602B", // burnt orange (analog / decks)
         "3DDC6A", // green (spotify)
         "B9A7FF", // violet (hdmi / tv)
         "5FB2FF", // blue
@@ -211,7 +258,7 @@ enum Palette {
     static func colorHex(for inputID: String, index: Int) -> String {
         if inputID == "spotify" { return "3DDC6A" }
         if inputID.hasPrefix("hdmi") { return "B9A7FF" }
-        if inputID.hasPrefix("audio") || inputID == "phono" || inputID == "aux" { return "F6A83C" }
+        if inputID.hasPrefix("audio") || inputID == "phono" || inputID == "aux" { return "E8602B" }
         if inputID == "airplay" { return "5FB2FF" }
         return sourceColors[index % sourceColors.count]
     }

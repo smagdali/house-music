@@ -52,15 +52,19 @@ public actor HouseMonitor {
             return config.devices.allSatisfy { !(states[$0.id]?.power ?? false) }
         }
         guard let source = preset.source else { return false }
+        let audible = Set(preset.rooms)
+        // The source host serves the group even when it is not a chosen room
+        // (silent server, e.g. "Stream here"): it is on and on the source input,
+        // while the audible rooms receive the stream over mc_link.
+        let silentServer = !audible.contains(source.deviceID)
         for device in config.devices {
             guard let state = states[device.id] else { return false }
-            let isMember = preset.rooms.contains(device.id)
-            if state.power != isMember { return false }
-            if isMember {
-                let expected = device.id == source.deviceID ? source.inputID : "mc_link"
-                if preset.rooms.count > 1 && state.input != expected { return false }
-                if preset.rooms.count == 1 && device.id == source.deviceID && state.input != source.inputID { return false }
-            }
+            let isServer = device.id == source.deviceID
+            let shouldBeOn = audible.contains(device.id) || (isServer && silentServer)
+            if state.power != shouldBeOn { return false }
+            guard shouldBeOn else { continue }
+            let expected = isServer ? source.inputID : "mc_link"
+            if state.input != expected { return false }
         }
         return true
     }

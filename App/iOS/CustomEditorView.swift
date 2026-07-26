@@ -18,13 +18,12 @@ struct CustomEditorView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
                     sectionLabel("Source")
+                    // Source and rooms are independent axes: picking a source
+                    // never changes the room selection. A source whose host is
+                    // not a chosen room (e.g. "Stream here") is served silently
+                    // by that host, see PresetEngine's silent server.
                     chips(sources, id: \.self, label: { $0.label }, isOn: { $0 == source }) { choice in
                         source = choice
-                        // Physical inputs live on one device, so pre-select that
-                        // room; network sources (empty deviceID) leave rooms alone.
-                        if !choice.deviceID.isEmpty, !rooms.contains(choice.deviceID) {
-                            rooms.insert(choice.deviceID)
-                        }
                     }
 
                     sectionLabel("Room combinations")

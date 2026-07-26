@@ -57,6 +57,24 @@ final class PresetEngineTests: XCTestCase {
         XCTAssertTrue(plan.clientDevices.isEmpty)
     }
 
+    func testStreamHereSilentServerPlan() {
+        // "Stream here": AirPort Express on the Living Room's audio5, sent to
+        // rooms that do not include the Living Room. The Living Room must still
+        // serve the group, silently.
+        let streamHere = SourceRef(deviceID: Self.living.id, inputID: "audio5", label: "Stream here", colorHex: "5FB2FF")
+        let preset = Preset(name: "Stream here", source: streamHere,
+                            rooms: [Self.bathroom.id, Self.office.id])
+        let plan = PresetEngine.plan(for: preset, config: config)
+
+        XCTAssertTrue(plan.silentServer)
+        XCTAssertEqual(plan.serverDevice, Self.living.id)
+        XCTAssertTrue(plan.powerOn.contains(Self.living.id))          // host serves
+        XCTAssertFalse(plan.powerOff.contains(Self.living.id))        // never powered off
+        XCTAssertEqual(Set(plan.clientDevices), [Self.bathroom.id, Self.office.id])
+        XCTAssertFalse(plan.dissolveGroup)
+        XCTAssertEqual(Set(plan.powerOff), [Self.bedroom.id, Self.dining.id])
+    }
+
     func testClampedVolume() {
         XCTAssertEqual(200.clamped(to: 0...161), 161)
         XCTAssertEqual((-5).clamped(to: 0...161), 0)

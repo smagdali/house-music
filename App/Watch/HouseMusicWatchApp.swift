@@ -104,8 +104,5 @@ struct WatchPresetCard: View {
         preset.source == nil ? Color(hex: "211D19") : model.color(for: preset)
     }
 
-    private var nowLabel: String {
-        guard let activePreset = model.activePreset else { return "Mixed state" }
-        return activePreset.isAllOff ? "All quiet" : activePreset.name
-    }
+    private var nowLabel: String { model.nowPlayingText }
 }

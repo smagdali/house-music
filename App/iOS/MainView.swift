@@ -79,7 +79,7 @@ struct MainView: View {
                 .fill(model.activePreset.map { model.color(for: $0) } ?? Color(hex: "BEB5A8"))
                 .frame(width: 10, height: 10)
                 .shadow(color: model.activePreset.map { model.color(for: $0) } ?? .clear, radius: 6)
-            Text(nowPlayingText)
+            Text(model.nowPlayingText)
                 .font(.system(size: 16, weight: .semibold))
                 .lineLimit(1)
             Spacer()
@@ -100,12 +100,6 @@ struct MainView: View {
         .background(RoundedRectangle(cornerRadius: 14).fill(Color(hex: "211D19")))
         .padding(.horizontal, 20)
         .padding(.top, 8)
-    }
-
-    private var nowPlayingText: String {
-        guard let active = model.activePreset else { return "Mixed state" }
-        if active.isAllOff { return "All quiet" }
-        return "\(active.name)"
     }
 
     @ViewBuilder

@@ -20,25 +20,36 @@ public struct PresetEngine: Sendable {
         public var baselines: [DeviceID: Int] = [:]
         public var pureDirect: Bool = false
         public var dissolveGroup: Bool = false
+        /// The source device serves the group but is not a chosen (audible)
+        /// room, so it plays silently, e.g. "Stream here": the Living Room
+        /// ingests the AirPlay stream and distributes it while muted locally.
+        public var silentServer: Bool = false
     }
 
     /// Compute the plan for a preset against the full device list.
     public static func plan(for preset: Preset, config: HouseConfig) -> Plan {
         var plan = Plan()
         let members = Set(preset.rooms)
-        plan.powerOff = config.devices.map(\.id).filter { !members.contains($0) }
-        plan.powerOn = preset.rooms
         plan.baselines = preset.baselines
         plan.pureDirect = preset.pureDirect && preset.rooms.count == 1
 
         if let source = preset.source {
             plan.serverDevice = source.deviceID
             plan.serverInput = source.inputID
+            plan.silentServer = !members.contains(source.deviceID)
             plan.clientDevices = preset.rooms.filter { $0 != source.deviceID }
-            plan.dissolveGroup = plan.clientDevices.isEmpty
+            // No group only when the source room plays alone.
+            plan.dissolveGroup = plan.clientDevices.isEmpty && !plan.silentServer
         } else {
             plan.dissolveGroup = true
         }
+
+        // The audible rooms plus, if it isn't one of them, the source's host
+        // device (needed on to serve distribution). Everything else powers off.
+        var onSet = members
+        if let server = plan.serverDevice { onSet.insert(server) }
+        plan.powerOn = config.devices.map(\.id).filter { onSet.contains($0) }
+        plan.powerOff = config.devices.map(\.id).filter { !onSet.contains($0) }
         return plan
     }
 
@@ -71,10 +82,15 @@ public struct PresetEngine: Sendable {
         // Members on, at baseline, unmuted. A device just woken from standby
         // rejects writes with response_code 5 for up to about half a second, so
         // volume and mute are retried and treated as best-effort: a cold room
-        // must not throw here and abort the grouping that follows.
+        // must not throw here and abort the grouping that follows. The silent
+        // server is the exception: it comes on muted, with no baseline.
         for id in plan.powerOn {
             let h = try host(id)
             try await client.setPower(host: h, on: true)
+            if plan.silentServer && id == plan.serverDevice {
+                await retryWhileWaking { try await client.setMute(host: h, muted: true) }
+                continue
+            }
             if let units = plan.baselines[id] {
                 await retryWhileWaking { try await client.setVolume(host: h, units: units) }
             }
@@ -84,6 +100,10 @@ public struct PresetEngine: Sendable {
         guard let serverID = plan.serverDevice, let input = plan.serverInput else { return }
         let serverHost = try host(serverID)
         try await client.setInput(host: serverHost, input: input)
+        // Changing input can clear mute, so re-assert the silent server's mute.
+        if plan.silentServer {
+            await retryWhileWaking { try await client.setMute(host: serverHost, muted: true) }
+        }
 
         if !plan.clientDevices.isEmpty {
             let clientIPs = try plan.clientDevices.map { try host($0) }

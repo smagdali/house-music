@@ -184,7 +184,7 @@ struct WizardView: View {
               hasInput(living, "audio4"), hasInput(living, "hdmi1"), hasInput(bedroom, "hdmi1")
         else { return nil }
 
-        let decks = SourceRef(deviceID: living.id, inputID: "audio4", label: "Decks", colorHex: "F6A83C")
+        let decks = SourceRef(deviceID: living.id, inputID: "audio4", label: "Decks", colorHex: "E8602B")
         let atvLR = SourceRef(deviceID: living.id, inputID: "hdmi1", label: "Apple TV", colorHex: "B9A7FF")
         let atvBR = SourceRef(deviceID: bedroom.id, inputID: "hdmi1", label: "Apple TV", colorHex: "B9A7FF")
         let spotify = SourceRef(deviceID: dining.id, inputID: "spotify", label: "Spotify", colorHex: "3DDC6A")
