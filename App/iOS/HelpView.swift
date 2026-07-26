@@ -12,7 +12,6 @@ struct HelpView: View {
                 section("AirKay: streaming from your phone", [
                     "AirKay is the AirPort Express wired into the Living Room amp, a permanent AirPlay target.",
                     "To play phone or laptop audio (podcasts, BBC Sounds) in any rooms: AirPlay to \u{201C}AirKay\u{201D} from Control Centre, then in House Music pick AirKay as the source and choose the rooms.",
-                    "The Living Room amp turns on to serve the stream even when the Living Room isn\u{2019}t one of the chosen rooms; it just stays silent there.",
                     "For one room quickly, you can AirPlay straight to that room\u{2019}s speaker instead, no app needed.",
                 ])
 
