@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="75%">
+      <stop offset="0%" stop-color="#33220F"/>
+      <stop offset="55%" stop-color="#1A120B"/>
+      <stop offset="100%" stop-color="#0C0A08"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="44%" r="46%">
+      <stop offset="0%" stop-color="#E8602B" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#E8602B" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="iris" cx="50%" cy="38%" r="65%">
+      <stop offset="0%" stop-color="#E3C97C"/>
+      <stop offset="45%" stop-color="#BE9F52"/>
+      <stop offset="78%" stop-color="#8E7C3E"/>
+      <stop offset="100%" stop-color="#6A5B32"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+  <rect width="1024" height="1024" fill="url(#glow)"/>
+
+  <!-- headphone band (behind the head) -->
+  <path d="M 232 470 Q 512 60 792 470" fill="none" stroke="#141009" stroke-width="40" stroke-linecap="round"/>
+  <path d="M 232 470 Q 512 84 792 470" fill="none" stroke="#3A2F24" stroke-width="12" stroke-linecap="round"/>
+
+  <!-- chest -->
+  <path d="M 300 700 Q 512 620 724 700 L 700 900 Q 512 860 324 900 Z" fill="#9A8C76"/>
+  <ellipse cx="512" cy="770" rx="150" ry="90" fill="#F1E6D4" opacity="0.55"/>
+
+  <!-- ears (rooted into the head) -->
+  <path d="M 296 330 L 250 110 L 476 268 Z" fill="#8E8168"/>
+  <path d="M 728 330 L 774 110 L 548 268 Z" fill="#8E8168"/>
+  <path d="M 315 322 L 282 150 L 452 268 Z" fill="#E7A9A2"/>
+  <path d="M 709 322 L 742 150 L 572 268 Z" fill="#E7A9A2"/>
+  <path d="M 300 315 L 268 168 L 356 250 Z" fill="#F1E6D4" opacity="0.5"/>
+  <path d="M 724 315 L 756 168 L 668 250 Z" fill="#F1E6D4" opacity="0.5"/>
+
+  <!-- head -->
+  <ellipse cx="512" cy="440" rx="258" ry="240" fill="#A89A84"/>
+  <!-- cheek ruffs -->
+  <ellipse cx="322" cy="556" rx="96" ry="82" fill="#A89A84"/>
+  <ellipse cx="702" cy="556" rx="96" ry="82" fill="#A89A84"/>
+  <!-- soft ticking on the crown -->
+  <path d="M 512 250 Q 470 240 452 300 M 512 250 Q 554 240 572 300" stroke="#8B7E68" stroke-width="10" fill="none" stroke-linecap="round"/>
+
+  <!-- soft tabby 'M' on the forehead (gentle, not a frown) -->
+  <path d="M 460 292 Q 480 330 494 356 M 564 292 Q 544 330 530 356 M 512 286 L 512 350"
+        stroke="#8B7E68" stroke-width="8" stroke-linecap="round" fill="none" opacity="0.8"/>
+
+  <!-- eyes: big, round, kawaii -->
+  <g>
+    <ellipse cx="390" cy="414" rx="92" ry="88" fill="#2E2820"/>
+    <ellipse cx="634" cy="414" rx="92" ry="88" fill="#2E2820"/>
+    <ellipse cx="390" cy="416" rx="82" ry="80" fill="url(#iris)"/>
+    <ellipse cx="634" cy="416" rx="82" ry="80" fill="url(#iris)"/>
+    <circle cx="390" cy="420" r="48" fill="#140F09"/>
+    <circle cx="634" cy="420" r="48" fill="#140F09"/>
+    <!-- chunky sparkle highlights -->
+    <circle cx="366" cy="394" r="26" fill="#FFFFFF" opacity="0.96"/>
+    <circle cx="610" cy="394" r="26" fill="#FFFFFF" opacity="0.96"/>
+    <circle cx="414" cy="446" r="12" fill="#FFFFFF" opacity="0.85"/>
+    <circle cx="658" cy="446" r="12" fill="#FFFFFF" opacity="0.85"/>
+  </g>
+
+  <!-- cheek blush -->
+  <ellipse cx="322" cy="512" rx="52" ry="28" fill="#E89680" opacity="0.4"/>
+  <ellipse cx="702" cy="512" rx="52" ry="28" fill="#E89680" opacity="0.4"/>
+
+  <!-- muzzle -->
+  <ellipse cx="512" cy="556" rx="168" ry="128" fill="#F1E6D4"/>
+  <ellipse cx="512" cy="628" rx="108" ry="70" fill="#FBF6ED"/>
+
+  <!-- nose + mouth -->
+  <path d="M 476 540 L 548 540 Q 560 540 548 558 L 518 592 Q 512 598 506 592 L 476 558 Q 464 540 476 540 Z"
+        fill="#C98B86" stroke="#6E4F44" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M 512 596 L 512 616 M 512 616 Q 486 646 462 620 M 512 616 Q 538 646 562 620"
+        stroke="#8B7E68" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- whiskers -->
+  <g stroke="#FBF6ED" stroke-width="5" stroke-linecap="round" opacity="0.85" fill="none">
+    <path d="M 430 566 Q 300 548 214 522"/>
+    <path d="M 432 588 Q 300 592 206 606"/>
+    <path d="M 594 566 Q 724 548 810 522"/>
+    <path d="M 592 588 Q 724 592 818 606"/>
+  </g>
+
+  <!-- headphone cushions over the sides -->
+  <ellipse cx="238" cy="470" rx="46" ry="64" fill="#141009"/>
+  <ellipse cx="238" cy="470" rx="27" ry="42" fill="#E8602B"/>
+  <ellipse cx="786" cy="470" rx="46" ry="64" fill="#141009"/>
+  <ellipse cx="786" cy="470" rx="27" ry="42" fill="#E8602B"/>
+
+  <!-- turntable with a paw on it -->
+  <circle cx="512" cy="884" r="150" fill="#141009"/>
+  <circle cx="512" cy="884" r="142" fill="none" stroke="#2A2018" stroke-width="3"/>
+  <circle cx="512" cy="884" r="112" fill="none" stroke="#2A2018" stroke-width="2"/>
+  <circle cx="512" cy="884" r="84" fill="none" stroke="#2A2018" stroke-width="2"/>
+  <circle cx="512" cy="884" r="52" fill="#E8602B"/>
+  <circle cx="512" cy="884" r="12" fill="#141009"/>
+  <!-- paw resting on the front edge of the platter, with a contact shadow -->
+  <g transform="translate(596 900) rotate(18)">
+    <ellipse cx="2" cy="26" rx="58" ry="18" fill="#000000" opacity="0.28"/>
+    <path d="M -52 8 Q -56 -34 -20 -42 Q 0 -46 20 -42 Q 56 -34 52 8 Q 42 34 0 34 Q -42 34 -52 8 Z" fill="#A89A84"/>
+    <path d="M -24 -40 L -22 -4 M 0 -44 L 0 0 M 24 -40 L 22 -4" stroke="#8B7E68" stroke-width="5" stroke-linecap="round"/>
+  </g>
+</svg>
