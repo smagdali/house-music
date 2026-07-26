@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D17BD9F0CB3BCA548BE358B /* HouseMusicWatchWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BD816C1C12F9752DA0831F59 /* HouseMusicWatchWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		166E693148E35879C4C8D9F2 /* WizardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4970D254C8520AD87B3FAF1 /* WizardView.swift */; };
 		17C880DE22054B746495273E /* SyncBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6316F0B236EBD9EACF932EFA /* SyncBridge.swift */; };
 		25622F37759647448D744C0D /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E75ACD5B4B3F059CD0E6DB7 /* AppModel.swift */; };
 		28CB9FEAFB0A4BB0AB949532 /* HouseMusicWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F440FD35FA0F2519C1637116 /* HouseMusicWatchApp.swift */; };
 		328EB0B355C51DE876D306DF /* HouseMusicKit in Frameworks */ = {isa = PBXBuildFile; productRef = FBDF66331E1AAAFFD5B011A2 /* HouseMusicKit */; };
+		361D3DAA1FC5D7C995095FF2 /* HouseMusicComplications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE49F63F6D7AE677E8D0F84 /* HouseMusicComplications.swift */; };
 		3CAAB50584493902C6CA7968 /* CloudSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2364F8D7D517002FAF008417 /* CloudSync.swift */; };
 		7F895E88415A4B9299D140EB /* HouseMusicKit in Frameworks */ = {isa = PBXBuildFile; productRef = 42F71B831EB1552F941F3191 /* HouseMusicKit */; };
 		803CD18C23AC8ECE7E1CEE40 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174D7A0EC43316E13F9EC39 /* MainView.swift */; };
@@ -36,9 +38,27 @@
 			remoteGlobalIDString = 98644814D0BF088D760FFE1B;
 			remoteInfo = HouseMusicWatch;
 		};
+		97A26E852909628FE5128503 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F74975AE1F1E7A30EEDE9D98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 48AB15265AB6F01939097E2D;
+			remoteInfo = HouseMusicWatchWidget;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		610EFD044C9F44194D1A20AA /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				0D17BD9F0CB3BCA548BE358B /* HouseMusicWatchWidget.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		88D9EEA6F03DD5454E053FF8 /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -58,6 +78,7 @@
 		1657B39B6C27CFF392222A04 /* HouseMusicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMusicApp.swift; sourceTree = "<group>"; };
 		2364F8D7D517002FAF008417 /* CloudSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudSync.swift; sourceTree = "<group>"; };
 		2FB41D8A3F48392E4B9BBC09 /* PresetIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetIntents.swift; sourceTree = "<group>"; };
+		2FE49F63F6D7AE677E8D0F84 /* HouseMusicComplications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMusicComplications.swift; sourceTree = "<group>"; };
 		3017F0B83C12AD15703FB048 /* CustomEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEditorView.swift; sourceTree = "<group>"; };
 		4174D7A0EC43316E13F9EC39 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		4FB500269F17978E291B0D21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -66,6 +87,7 @@
 		99DC39CAF757E675D4C4294D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B4970D254C8520AD87B3FAF1 /* WizardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardView.swift; sourceTree = "<group>"; };
 		BD046F2FF99847D5FB0A9E1F /* HouseMusic.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = HouseMusic.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD816C1C12F9752DA0831F59 /* HouseMusicWatchWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HouseMusicWatchWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB54D6B65C5FFFBF1B233FC0 /* HouseMusicWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HouseMusicWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F440FD35FA0F2519C1637116 /* HouseMusicWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMusicWatchApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -96,6 +118,7 @@
 				5635238AC3EC94FD141EE356 /* iOS */,
 				7275ACA7F646D1084BBB425E /* Shared */,
 				925D5AFF93A04F42BC21E4DC /* Watch */,
+				B8817AA3AA644695B8F68B4D /* WatchWidget */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -129,6 +152,7 @@
 			children = (
 				BD046F2FF99847D5FB0A9E1F /* HouseMusic.app */,
 				CB54D6B65C5FFFBF1B233FC0 /* HouseMusicWatch.app */,
+				BD816C1C12F9752DA0831F59 /* HouseMusicWatchWidget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -140,6 +164,14 @@
 				F440FD35FA0F2519C1637116 /* HouseMusicWatchApp.swift */,
 			);
 			path = Watch;
+			sourceTree = "<group>";
+		};
+		B8817AA3AA644695B8F68B4D /* WatchWidget */ = {
+			isa = PBXGroup;
+			children = (
+				2FE49F63F6D7AE677E8D0F84 /* HouseMusicComplications.swift */,
+			);
+			path = WatchWidget;
 			sourceTree = "<group>";
 		};
 		E65103F8B28A18B6D998C672 = {
@@ -162,6 +194,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		48AB15265AB6F01939097E2D /* HouseMusicWatchWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D5F0C152A0EC8B760E30A3C4 /* Build configuration list for PBXNativeTarget "HouseMusicWatchWidget" */;
+			buildPhases = (
+				9B177EFD3E31E355FCF723E9 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HouseMusicWatchWidget;
+			packageProductDependencies = (
+			);
+			productName = HouseMusicWatchWidget;
+			productReference = BD816C1C12F9752DA0831F59 /* HouseMusicWatchWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		98644814D0BF088D760FFE1B /* HouseMusicWatch */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2E05BAE6ECFA3FCD56240F14 /* Build configuration list for PBXNativeTarget "HouseMusicWatch" */;
@@ -169,10 +218,12 @@
 				5E0D41F4E88ACFD8B7F24555 /* Sources */,
 				1DF5F29DA911F1B7C32B5D81 /* Resources */,
 				9B762A2228704EC6CCEB46AE /* Frameworks */,
+				610EFD044C9F44194D1A20AA /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				294F49A1866B7AAC971BCD07 /* PBXTargetDependency */,
 			);
 			name = HouseMusicWatch;
 			packageProductDependencies = (
@@ -213,6 +264,10 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					48AB15265AB6F01939097E2D = {
+						DevelopmentTeam = 86H54WCPYP;
+						ProvisioningStyle = Automatic;
+					};
 					98644814D0BF088D760FFE1B = {
 						DevelopmentTeam = 86H54WCPYP;
 						ProvisioningStyle = Automatic;
@@ -242,6 +297,7 @@
 			targets = (
 				C891441C5CE8E021A7B1E867 /* HouseMusic */,
 				98644814D0BF088D760FFE1B /* HouseMusicWatch */,
+				48AB15265AB6F01939097E2D /* HouseMusicWatchWidget */,
 			);
 		};
 /* End PBXProject section */
@@ -278,6 +334,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9B177EFD3E31E355FCF723E9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				361D3DAA1FC5D7C995095FF2 /* HouseMusicComplications.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CC1E3C2AA7AC41AE3711A5F1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -297,6 +361,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		294F49A1866B7AAC971BCD07 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 48AB15265AB6F01939097E2D /* HouseMusicWatchWidget */;
+			targetProxy = 97A26E852909628FE5128503 /* PBXContainerItemProxy */;
+		};
 		52686A21D515CC321064A181 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 98644814D0BF088D760FFE1B /* HouseMusicWatch */;
@@ -337,6 +406,23 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		738E3C09FD76F9306E5A84A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = App/WatchWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.whitelabel.housemusic.watchkitapp.widget;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Release;
 		};
@@ -485,6 +571,23 @@
 			};
 			name = Debug;
 		};
+		EDEBE50B8F4EDC93ABDF6E2E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = App/WatchWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.whitelabel.housemusic.watchkitapp.widget;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
 		FF25E93C43812AD45F86B8E5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -533,6 +636,15 @@
 			buildConfigurations = (
 				E0616A528C1D178C3AD923AC /* Debug */,
 				02A07C5FAC5D12F417300A2D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D5F0C152A0EC8B760E30A3C4 /* Build configuration list for PBXNativeTarget "HouseMusicWatchWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EDEBE50B8F4EDC93ABDF6E2E /* Debug */,
+				738E3C09FD76F9306E5A84A8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
