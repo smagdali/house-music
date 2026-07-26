@@ -42,22 +42,16 @@ struct ComplicationView: View {
     var body: some View {
         switch family {
         case .accessoryCircular:
-            ZStack {
-                AccessoryWidgetBackground()
-                nutmeg.frame(width: 26, height: 26)
-            }
-            .widgetAccentable()
+            nutmeg.clipShape(Circle())
         case .accessoryCorner:
-            nutmeg.frame(width: 24, height: 24)
-                .widgetAccentable()
+            nutmeg.frame(width: 26, height: 26).clipShape(Circle())
                 .widgetLabel("House Music")
         case .accessoryInline:
             // Inline only supports SF Symbols, not custom images.
             Label("House Music", systemImage: "cat.fill")
         case .accessoryRectangular:
             HStack(spacing: 8) {
-                nutmeg.frame(width: 28, height: 28)
-                    .widgetAccentable()
+                nutmeg.frame(width: 40, height: 40).clipShape(RoundedRectangle(cornerRadius: 8))
                 VStack(alignment: .leading, spacing: 1) {
                     Text("House Music").font(.system(size: 16, weight: .heavy))
                     Text("Tap to control").font(.system(size: 12, weight: .semibold)).foregroundStyle(.secondary)
@@ -65,12 +59,13 @@ struct ComplicationView: View {
                 Spacer()
             }
         default:
-            nutmeg.frame(width: 26, height: 26).widgetAccentable()
+            nutmeg.frame(width: 26, height: 26).clipShape(Circle())
         }
     }
 
-    /// Nutmeg silhouette, tinted by the watch face like any complication glyph.
+    /// The full app icon, rendered in its own colours (the watch face may still
+    /// tint it monochrome depending on the face).
     private var nutmeg: some View {
-        Image("Nutmeg").resizable().scaledToFit()
+        Image("Nutmeg").resizable().renderingMode(.original).scaledToFit()
     }
 }
