@@ -67,6 +67,7 @@ targets:
           - "Info.plist"
           - "*.entitlements"
       - path: App/Shared
+      - path: App/WatchWidget/SharedSelection.swift
     dependencies:
       - target: HouseMusicWatchWidget
         embed: true
@@ -87,10 +88,12 @@ targets:
       - path: App/WatchWidget
         excludes:
           - "Info.plist"
+          - "*.entitlements"
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: org.whitelabel.housemusic.watchkitapp.widget
         INFOPLIST_FILE: App/WatchWidget/Info.plist
+        CODE_SIGN_ENTITLEMENTS: App/WatchWidget/HouseMusicWatchWidget.entitlements
 
 schemes:
   HouseMusic:

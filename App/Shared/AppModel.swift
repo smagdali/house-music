@@ -1,6 +1,9 @@
 import Foundation
 import SwiftUI
 import HouseMusicKit
+#if os(watchOS)
+import WidgetKit
+#endif
 
 /// One observable model shared by the iOS and watchOS apps.
 @Observable
@@ -57,7 +60,19 @@ final class AppModel {
                 muted = state.mute
             }
         }
+        #if os(watchOS)
+        publishSelection()
+        #endif
     }
+
+    #if os(watchOS)
+    /// Share the current selection with the watch complication and refresh it.
+    private func publishSelection() {
+        let hex = activePreset?.source.map { Palette.colorHex(for: $0.inputID) } ?? "3E372E"
+        SharedSelection.write(name: nowPlayingText, colorHex: hex)
+        WidgetCenter.shared.reloadAllTimelines()
+    }
+    #endif
 
     func refreshSpotifyState() async {
         spotifyConnected = await spotify.isLoggedIn

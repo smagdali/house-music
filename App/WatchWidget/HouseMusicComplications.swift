@@ -4,68 +4,84 @@ import SwiftUI
 @main
 struct HouseMusicWidgetBundle: WidgetBundle {
     var body: some Widget {
-        LaunchComplication()
+        SelectionComplication()
     }
 }
 
-struct LaunchEntry: TimelineEntry {
+struct SelectionEntry: TimelineEntry {
     let date: Date
+    let name: String
+    let colorHex: String
 }
 
-/// Static provider: the complication is a launch shortcut, so there is no
-/// changing timeline to schedule (tapping it opens House Music on the watch).
-struct LaunchProvider: TimelineProvider {
-    func placeholder(in context: Context) -> LaunchEntry { LaunchEntry(date: Date()) }
-    func getSnapshot(in context: Context, completion: @escaping (LaunchEntry) -> Void) {
-        completion(LaunchEntry(date: Date()))
+/// Reads the current selection from the shared App Group. The app reloads the
+/// timeline whenever it changes, so a single non-expiring entry is enough.
+struct SelectionProvider: TimelineProvider {
+    private func current() -> SelectionEntry {
+        let s = SharedSelection.read()
+        return SelectionEntry(date: Date(), name: s.name, colorHex: s.colorHex)
     }
-    func getTimeline(in context: Context, completion: @escaping (Timeline<LaunchEntry>) -> Void) {
-        completion(Timeline(entries: [LaunchEntry(date: Date())], policy: .never))
+    func placeholder(in context: Context) -> SelectionEntry {
+        SelectionEntry(date: Date(), name: "Decks", colorHex: "E8602B")
+    }
+    func getSnapshot(in context: Context, completion: @escaping (SelectionEntry) -> Void) {
+        completion(current())
+    }
+    func getTimeline(in context: Context, completion: @escaping (Timeline<SelectionEntry>) -> Void) {
+        completion(Timeline(entries: [current()], policy: .never))
     }
 }
 
-struct LaunchComplication: Widget {
+struct SelectionComplication: Widget {
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: "HouseMusicLaunch", provider: LaunchProvider()) { _ in
-            ComplicationView()
-                .containerBackground(for: .widget) { Color.clear }
+        StaticConfiguration(kind: "HouseMusicSelection", provider: SelectionProvider()) { entry in
+            ComplicationView(entry: entry)
         }
-        .configurationDisplayName("House Music")
-        .description("Open House Music to control your rooms.")
+        .configurationDisplayName("Now Playing")
+        .description("Shows what House Music is playing; tap to control.")
         .supportedFamilies([.accessoryCircular, .accessoryCorner, .accessoryInline, .accessoryRectangular])
     }
 }
 
 struct ComplicationView: View {
     @Environment(\.widgetFamily) private var family
+    let entry: SelectionEntry
+
+    private var color: Color { Color(hexString: entry.colorHex) }
 
     var body: some View {
         switch family {
         case .accessoryCircular:
-            nutmeg.clipShape(Circle())
-        case .accessoryCorner:
-            nutmeg.frame(width: 26, height: 26).clipShape(Circle())
-                .widgetLabel("House Music")
-        case .accessoryInline:
-            // Inline only supports SF Symbols, not custom images.
-            Label("House Music", systemImage: "cat.fill")
-        case .accessoryRectangular:
-            HStack(spacing: 8) {
-                nutmeg.frame(width: 40, height: 40).clipShape(RoundedRectangle(cornerRadius: 8))
-                VStack(alignment: .leading, spacing: 1) {
-                    Text("House Music").font(.system(size: 16, weight: .heavy))
-                    Text("Tap to control").font(.system(size: 12, weight: .semibold)).foregroundStyle(.secondary)
-                }
-                Spacer()
-            }
-        default:
-            nutmeg.frame(width: 26, height: 26).clipShape(Circle())
-        }
-    }
+            Text(SharedSelection.abbreviate(entry.name))
+                .font(.system(size: 22, weight: .heavy))
+                .minimumScaleFactor(0.4)
+                .lineLimit(1)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .containerBackground(color, for: .widget)
 
-    /// The full app icon, rendered in its own colours (the watch face may still
-    /// tint it monochrome depending on the face).
-    private var nutmeg: some View {
-        Image("Nutmeg").resizable().renderingMode(.original).scaledToFit()
+        case .accessoryRectangular:
+            HStack {
+                Text(entry.name)
+                    .font(.system(size: 20, weight: .heavy))
+                    .minimumScaleFactor(0.5)
+                    .lineLimit(2)
+                Spacer(minLength: 0)
+            }
+            .padding(.horizontal, 10)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+            .containerBackground(color, for: .widget)
+
+        case .accessoryCorner:
+            Text(SharedSelection.abbreviate(entry.name))
+                .font(.system(size: 18, weight: .heavy))
+                .widgetLabel(entry.name)
+
+        case .accessoryInline:
+            Text(entry.name)
+
+        default:
+            Text(SharedSelection.abbreviate(entry.name))
+                .font(.system(size: 20, weight: .heavy))
+        }
     }
 }
