@@ -44,20 +44,20 @@ struct ComplicationView: View {
         case .accessoryCircular:
             ZStack {
                 AccessoryWidgetBackground()
-                Image(systemName: "hifispeaker.2.fill")
-                    .font(.system(size: 16, weight: .bold))
+                Image(systemName: "cat.fill")
+                    .font(.system(size: 24, weight: .bold))
             }
             .widgetAccentable()
         case .accessoryCorner:
-            Image(systemName: "hifispeaker.2.fill")
+            Image(systemName: "cat.fill")
                 .font(.system(size: 18, weight: .bold))
                 .widgetAccentable()
                 .widgetLabel("House Music")
         case .accessoryInline:
-            Label("House Music", systemImage: "hifispeaker.2.fill")
+            Label("House Music", systemImage: "cat.fill")
         case .accessoryRectangular:
             HStack(spacing: 8) {
-                Image(systemName: "hifispeaker.2.fill")
+                Image(systemName: "cat.fill")
                     .font(.system(size: 22, weight: .bold))
                     .widgetAccentable()
                 VStack(alignment: .leading, spacing: 1) {
@@ -67,7 +67,7 @@ struct ComplicationView: View {
                 Spacer()
             }
         default:
-            Image(systemName: "hifispeaker.2.fill")
+            Image(systemName: "cat.fill")
                 .widgetAccentable()
         }
     }
