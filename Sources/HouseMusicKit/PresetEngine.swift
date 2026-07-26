@@ -66,12 +66,15 @@ public struct PresetEngine: Sendable {
         }
 
         // Tear down any existing group first so devices are in a known state.
-        if let serverID = plan.serverDevice ?? config.devices.first?.id,
-           let serverHost = try? host(serverID),
-           let info = try? await client.distributionInfo(host: serverHost),
-           info.isGrouped, info.role == "server" {
+        // Scan every device, not just the incoming server: switching between
+        // presets served by different devices would otherwise leave the old
+        // group's server as a zombie (powered off but still "serving"), which
+        // strands a Spotify Connect session pointed at the dead group.
+        for device in config.devices {
+            guard let info = try? await client.distributionInfo(host: device.ipAddress),
+                  info.isGrouped, info.role == "server" else { continue }
             let clients = info.clientList?.map(\.ipAddress) ?? []
-            try? await client.dissolveGroup(serverHost: serverHost, clientIPs: clients)
+            try? await client.dissolveGroup(serverHost: device.ipAddress, clientIPs: clients)
         }
 
         // Non-members off (best effort).
