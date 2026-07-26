@@ -96,11 +96,15 @@ struct WatchPresetCard: View {
                 Task { await model.toggleMute() }
             } label: {
                 Image(systemName: model.muted ? "speaker.slash.fill" : "speaker.wave.2.fill")
-                    .font(.system(size: 14, weight: .bold))
+                    .font(.system(size: 15, weight: .bold))
+                    .foregroundStyle(model.muted ? Color(hex: "0D0B09") : .white)
+                    .frame(width: 34, height: 34)
+                    .background(Circle().fill(model.muted ? Color.white : Color(hex: "211D19")))
+                    .overlay(Circle().strokeBorder(Color(hex: "BEB5A8").opacity(model.muted ? 0 : 0.6), lineWidth: 2))
             }
-            .buttonStyle(.bordered)
-            .clipShape(Capsule())
+            .buttonStyle(.plain)
             .disabled(model.activePreset == nil)
+            .opacity(model.activePreset == nil ? 0.4 : 1)
         }
         .padding(.horizontal, 6)
     }
