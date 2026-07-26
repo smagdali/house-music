@@ -62,7 +62,7 @@ struct WatchPresetCard: View {
     let active: Bool
 
     var body: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: 6) {
             Text(nowLabel)
                 .font(.system(size: 11, weight: .bold))
                 .foregroundStyle(.secondary)
@@ -71,19 +71,24 @@ struct WatchPresetCard: View {
             Button {
                 Task { await model.fire(preset) }
             } label: {
-                VStack(spacing: 2) {
-                    Text(preset.name.uppercased())
-                        .font(.system(size: 16, weight: .black))
+                VStack(alignment: .leading, spacing: 3) {
+                    Text(preset.name)
+                        .font(.system(size: 22, weight: .black))
                         .minimumScaleFactor(0.6)
                         .lineLimit(2)
-                        .multilineTextAlignment(.center)
+                    Text(roomsLabel)
+                        .font(.system(size: 13, weight: .bold))
+                        .opacity(0.72)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.7)
                 }
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 18)
-                .background(RoundedRectangle(cornerRadius: 16).fill(tileColor))
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                .padding(.horizontal, 14)
+                .padding(.vertical, 14)
+                .background(RoundedRectangle(cornerRadius: 18).fill(tileColor))
                 .foregroundStyle(preset.source == nil ? Color.white : Color(hex: "161006"))
-                .overlay(RoundedRectangle(cornerRadius: 16)
-                    .strokeBorder(active ? Color.white : Color.clear, lineWidth: 2))
+                .overlay(RoundedRectangle(cornerRadius: 18)
+                    .strokeBorder(active ? Color.white : Color.clear, lineWidth: 3))
             }
             .buttonStyle(.plain)
 
@@ -102,6 +107,10 @@ struct WatchPresetCard: View {
 
     private var tileColor: Color {
         preset.source == nil ? Color(hex: "211D19") : model.color(for: preset)
+    }
+
+    private var roomsLabel: String {
+        preset.isAllOff ? "everything" : model.roomList(preset.rooms)
     }
 
     private var nowLabel: String { model.nowPlayingText }
