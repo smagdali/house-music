@@ -50,7 +50,7 @@ struct CustomEditorView: View {
                                 // source and rooms (e.g. "Decks \u{00B7} Whole House")
                                 // so it reads well in Spotify Connect, not "Custom".
                                 let name = basePreset?.name
-                                    ?? model.describe(source: source?.label ?? "Custom", rooms: rooms)
+                                    ?? model.describe(source: source?.label ?? "Custom", rooms: rooms, short: true)
                                 await model.fire(draft(named: name))
                                 dismiss()
                             }

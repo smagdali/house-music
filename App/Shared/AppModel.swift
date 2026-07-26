@@ -197,10 +197,16 @@ final class AppModel {
     }
 
     /// "Whole House" when every configured room is included, otherwise the room
-    /// names joined with " + " in device order.
-    func roomList(_ rooms: some Sequence<DeviceID>) -> String {
+    /// names joined with " + " in device order. `short` drops a trailing " Room"
+    /// ("Living Room" -> "Living") to keep the MusicCast group name compact in
+    /// Spotify Connect; the in-app UI keeps full names.
+    func roomList(_ rooms: some Sequence<DeviceID>, short: Bool = false) -> String {
         let ids = Set(rooms)
-        let ordered = config.devices.filter { ids.contains($0.id) }.map(\.roomName)
+        let ordered = config.devices.filter { ids.contains($0.id) }.map { device -> String in
+            short && device.roomName.hasSuffix(" Room")
+                ? String(device.roomName.dropLast(5))
+                : device.roomName
+        }
         return ordered.count == config.devices.count && !ordered.isEmpty
             ? "Whole House"
             : ordered.joined(separator: " + ")
@@ -209,8 +215,8 @@ final class AppModel {
     /// "<Source> \u{00B7} <rooms>", e.g. "Decks \u{00B7} Whole House". Used for the
     /// now-playing strip and the MusicCast group name, so an ad-hoc setup reads
     /// well in Spotify Connect instead of the bare "Custom".
-    func describe(source label: String, rooms: some Sequence<DeviceID>) -> String {
-        let rooms = roomList(rooms)
+    func describe(source label: String, rooms: some Sequence<DeviceID>, short: Bool = false) -> String {
+        let rooms = roomList(rooms, short: short)
         return rooms.isEmpty ? label : "\(label) \u{00B7} \(rooms)"
     }
 
