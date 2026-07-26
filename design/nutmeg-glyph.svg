@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+  <defs>
+    <mask id="cut">
+      <rect width="100" height="100" fill="black"/>
+      <!-- visible silhouette (white) -->
+      <path d="M30 44 L23 13 L54 37 Z" fill="white"/>
+      <path d="M70 44 L77 13 L46 37 Z" fill="white"/>
+      <ellipse cx="50" cy="58" rx="33" ry="31" fill="white"/>
+      <path d="M13 57 Q50 3 87 57" stroke="white" stroke-width="8" fill="none"/>
+      <ellipse cx="13" cy="59" rx="10" ry="14" fill="white"/>
+      <ellipse cx="87" cy="59" rx="10" ry="14" fill="white"/>
+      <!-- cut-outs (black) for the face -->
+      <path d="M32 42 L28 22 L46 37 Z" fill="black"/>
+      <path d="M68 42 L72 22 L54 37 Z" fill="black"/>
+      <ellipse cx="39" cy="55" rx="5.5" ry="8" fill="black"/>
+      <ellipse cx="61" cy="55" rx="5.5" ry="8" fill="black"/>
+      <path d="M50 66 l-7 6 M50 66 l7 6" stroke="black" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </mask>
+  </defs>
+  <rect width="100" height="100" fill="black" mask="url(#cut)"/>
+</svg>

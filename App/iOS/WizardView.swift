@@ -32,11 +32,22 @@ struct WizardView: View {
                         .font(.system(size: 24, weight: .heavy))
                 }
                 if found.isEmpty {
-                    Text("Looking for your devices. Make sure House Music has Local Network access in Settings and every device is on the same Wi-Fi.")
-                        .font(.system(size: 15))
-                        .multilineTextAlignment(.center)
-                        .foregroundStyle(Color(hex: "BEB5A8"))
-                        .padding(.horizontal, 8)
+                    VStack(spacing: 14) {
+                        Text("Looking for your devices. House Music needs Local Network access, and every device must be on the same Wi-Fi.")
+                            .font(.system(size: 15))
+                            .multilineTextAlignment(.center)
+                            .foregroundStyle(Color(hex: "BEB5A8"))
+                            .padding(.horizontal, 8)
+                        // iOS only prompts for Local Network once and can't be
+                        // re-triggered, so link straight to the app's settings.
+                        Button("Open Settings") {
+                            if let url = URL(string: UIApplication.openSettingsURLString) {
+                                UIApplication.shared.open(url)
+                            }
+                        }
+                        .font(.system(size: 15, weight: .heavy))
+                        .foregroundStyle(Color(hex: "E9A23B"))
+                    }
                 } else {
                     List {
                         ForEach(found) { device in

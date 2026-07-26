@@ -12,6 +12,7 @@
 		17C880DE22054B746495273E /* SyncBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6316F0B236EBD9EACF932EFA /* SyncBridge.swift */; };
 		25622F37759647448D744C0D /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E75ACD5B4B3F059CD0E6DB7 /* AppModel.swift */; };
 		28CB9FEAFB0A4BB0AB949532 /* HouseMusicWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F440FD35FA0F2519C1637116 /* HouseMusicWatchApp.swift */; };
+		30496EB0A1E07039055E230C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB5ECBDE9531199DBDAB5373 /* Assets.xcassets */; };
 		328EB0B355C51DE876D306DF /* HouseMusicKit in Frameworks */ = {isa = PBXBuildFile; productRef = FBDF66331E1AAAFFD5B011A2 /* HouseMusicKit */; };
 		361D3DAA1FC5D7C995095FF2 /* HouseMusicComplications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE49F63F6D7AE677E8D0F84 /* HouseMusicComplications.swift */; };
 		3CAAB50584493902C6CA7968 /* CloudSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2364F8D7D517002FAF008417 /* CloudSync.swift */; };
@@ -87,6 +88,7 @@
 		6316F0B236EBD9EACF932EFA /* SyncBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncBridge.swift; sourceTree = "<group>"; };
 		839362AC7B8CBF8181254392 /* house-music */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "house-music"; path = .; sourceTree = SOURCE_ROOT; };
 		99DC39CAF757E675D4C4294D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		AB5ECBDE9531199DBDAB5373 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B4970D254C8520AD87B3FAF1 /* WizardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardView.swift; sourceTree = "<group>"; };
 		BD046F2FF99847D5FB0A9E1F /* HouseMusic.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = HouseMusic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD816C1C12F9752DA0831F59 /* HouseMusicWatchWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HouseMusicWatchWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -172,6 +174,7 @@
 		B8817AA3AA644695B8F68B4D /* WatchWidget */ = {
 			isa = PBXGroup;
 			children = (
+				AB5ECBDE9531199DBDAB5373 /* Assets.xcassets */,
 				2FE49F63F6D7AE677E8D0F84 /* HouseMusicComplications.swift */,
 			);
 			path = WatchWidget;
@@ -202,6 +205,7 @@
 			buildConfigurationList = D5F0C152A0EC8B760E30A3C4 /* Build configuration list for PBXNativeTarget "HouseMusicWatchWidget" */;
 			buildPhases = (
 				9B177EFD3E31E355FCF723E9 /* Sources */,
+				E8E51FEB7EAF6A228D9B707F /* Resources */,
 			);
 			buildRules = (
 			);
@@ -311,6 +315,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				824878FF8984121AF99473F3 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E8E51FEB7EAF6A228D9B707F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30496EB0A1E07039055E230C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

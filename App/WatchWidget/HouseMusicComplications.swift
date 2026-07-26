@@ -44,21 +44,19 @@ struct ComplicationView: View {
         case .accessoryCircular:
             ZStack {
                 AccessoryWidgetBackground()
-                Image(systemName: "cat.fill")
-                    .font(.system(size: 24, weight: .bold))
+                nutmeg.frame(width: 26, height: 26)
             }
             .widgetAccentable()
         case .accessoryCorner:
-            Image(systemName: "cat.fill")
-                .font(.system(size: 18, weight: .bold))
+            nutmeg.frame(width: 24, height: 24)
                 .widgetAccentable()
                 .widgetLabel("House Music")
         case .accessoryInline:
+            // Inline only supports SF Symbols, not custom images.
             Label("House Music", systemImage: "cat.fill")
         case .accessoryRectangular:
             HStack(spacing: 8) {
-                Image(systemName: "cat.fill")
-                    .font(.system(size: 22, weight: .bold))
+                nutmeg.frame(width: 28, height: 28)
                     .widgetAccentable()
                 VStack(alignment: .leading, spacing: 1) {
                     Text("House Music").font(.system(size: 16, weight: .heavy))
@@ -67,8 +65,12 @@ struct ComplicationView: View {
                 Spacer()
             }
         default:
-            Image(systemName: "cat.fill")
-                .widgetAccentable()
+            nutmeg.frame(width: 26, height: 26).widgetAccentable()
         }
+    }
+
+    /// Nutmeg silhouette, tinted by the watch face like any complication glyph.
+    private var nutmeg: some View {
+        Image("Nutmeg").resizable().scaledToFit()
     }
 }
