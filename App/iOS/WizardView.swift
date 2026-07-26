@@ -207,7 +207,7 @@ struct WizardView: View {
                    baselines: [living.id: base(living)], pureDirect: true),
             Preset(name: "Spotify", source: spotify, rooms: [dining.id], baselines: [dining.id: base(dining)]),
             Preset(name: "Telly time", source: atvLR, rooms: [living.id], baselines: [living.id: 55]),
-            Preset(name: "TV in bed", source: atvBR, rooms: [bedroom.id], baselines: [bedroom.id: base(bedroom)]),
+            Preset(name: "TV in bed", source: atvBR, rooms: [bedroom.id], baselines: [bedroom.id: 48]),
             Preset(name: "All off", source: nil, rooms: []),
         ]
     }
