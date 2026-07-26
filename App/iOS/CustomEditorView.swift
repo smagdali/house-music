@@ -22,7 +22,7 @@ struct CustomEditorView: View {
                     // never changes the room selection. A source whose host is
                     // not a chosen room (e.g. "Stream here") is served silently
                     // by that host, see PresetEngine's silent server.
-                    chips(sources, id: \.self, label: { $0.label }, isOn: { $0 == source }) { choice in
+                    chips(sources, id: \.self, label: { $0.label }, isOn: { matchesSource($0) }) { choice in
                         source = choice
                     }
 
@@ -145,6 +145,15 @@ struct CustomEditorView: View {
         guard let host else { return nil }
         source.deviceID = host
         return source
+    }
+
+    /// A chip is selected when it is the same source as the draft, compared by
+    /// identity (device + input), not by label or colour which a saved preset
+    /// may carry stale. Network sources (empty deviceID) match on input alone.
+    private func matchesSource(_ chip: SourceRef) -> Bool {
+        guard let source else { return false }
+        guard !chip.deviceID.isEmpty else { return chip.inputID == source.inputID }
+        return chip.deviceID == source.deviceID && chip.inputID == source.inputID
     }
 
     private var comboNames: [String] { ["Upstairs", "Upstairs Downstairs", "Whole House"] }
