@@ -181,9 +181,12 @@ final class AppModel {
         return Double(baseline) / span
     }
 
+    /// Tile colour is derived from the source input, not the preset's stored
+    /// colorHex, so palette changes apply to every preset at once (including
+    /// old presets rehydrated from CloudKit) with no regeneration.
     func color(for preset: Preset) -> Color {
-        guard let hex = preset.source?.colorHex else { return Color(white: 0.16) }
-        return Color(hex: hex)
+        guard let source = preset.source else { return Color(white: 0.16) }
+        return Color(hex: Palette.colorHex(for: source.inputID, index: 0))
     }
 
     /// Now-playing strip text. A saved preset shows its name; an unmatched
