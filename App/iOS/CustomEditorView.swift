@@ -134,7 +134,7 @@ struct CustomEditorView: View {
                                     colorHex: Palette.colorHex(for: input.id, index: index)))
             index += 1
         }
-        return result
+        return result.sorted { $0.label.localizedCaseInsensitiveCompare($1.label) == .orderedAscending }
     }
 
     /// Resolve a network source (deviceID == "") to a concrete host device: the
