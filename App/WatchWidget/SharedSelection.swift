@@ -22,6 +22,8 @@ enum SharedSelection {
     /// Short form for the tightest slots: first word, or the initials of a
     /// multi-word name (e.g. "Decks whole house" -> "DWH", "Spotify" -> "SPOT").
     static func abbreviate(_ name: String) -> String {
+        let lower = name.lowercased()
+        if lower == "all quiet" || lower == "all off" { return "OFF" }
         let words = name.split(separator: " ")
         if words.count > 1 { return words.map { String($0.prefix(1)) }.joined().uppercased() }
         return String(name.prefix(5)).uppercased()
