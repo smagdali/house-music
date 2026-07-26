@@ -12,10 +12,10 @@ struct SettingsView: View {
                 Section("Rooms") {
                     ForEach(model.config.devices) { device in
                         HStack {
-                            VStack(alignment: .leading) {
-                                Text(device.roomName).font(.system(size: 16, weight: .bold))
+                            VStack(alignment: .leading, spacing: 3) {
+                                Text(device.roomName).font(.system(size: 19, weight: .heavy))
                                 Text("\(device.modelName)  \u{00B7}  \(device.ipAddress)")
-                                    .font(.system(size: 12)).foregroundStyle(.secondary)
+                                    .font(.system(size: 14, weight: .semibold)).foregroundStyle(Color(hex: "BEB5A8"))
                             }
                             Spacer()
                             Circle()
@@ -92,9 +92,9 @@ struct InputCurationView: View {
             ForEach(all, id: \.id) { entry in
                 Toggle(isOn: binding(entry)) {
                     HStack {
-                        Text(entry.text).font(.system(size: 15, weight: .semibold))
+                        Text(entry.text).font(.system(size: 18, weight: .bold))
                         Spacer()
-                        Text(entry.id).font(.system(size: 12)).foregroundStyle(.secondary)
+                        Text(entry.id).font(.system(size: 14, weight: .semibold)).foregroundStyle(.secondary)
                     }
                 }
                 .tint(Color(hex: "E9A23B"))

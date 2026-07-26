@@ -38,7 +38,7 @@ struct CustomEditorView: View {
 
                     if supportsPureDirect {
                         Toggle("Pure Direct", isOn: $pureDirect)
-                            .font(.system(size: 16, weight: .bold))
+                            .font(.system(size: 19, weight: .heavy))
                             .tint(Color(hex: "E9A23B"))
                             .padding(.top, 4)
                     }
@@ -56,17 +56,17 @@ struct CustomEditorView: View {
                             }
                         } label: {
                             Text("Make it so")
-                                .font(.system(size: 17, weight: .heavy))
+                                .font(.system(size: 21, weight: .heavy))
                                 .frame(maxWidth: .infinity)
-                                .padding(.vertical, 14)
+                                .padding(.vertical, 17)
                                 .background(RoundedRectangle(cornerRadius: 14).fill(Color(hex: "E9A23B")))
                                 .foregroundStyle(Color(hex: "1A1408"))
                         }
                         .disabled(source == nil || rooms.isEmpty)
 
                         Button("Save\u{2026}") { showSave = true }
-                            .font(.system(size: 15, weight: .bold))
-                            .padding(.vertical, 14).padding(.horizontal, 16)
+                            .font(.system(size: 18, weight: .heavy))
+                            .padding(.vertical, 17).padding(.horizontal, 18)
                             .overlay(RoundedRectangle(cornerRadius: 14).strokeBorder(Color(hex: "3E372E"), lineWidth: 2))
                             .disabled(source == nil || rooms.isEmpty)
                     }
@@ -203,9 +203,9 @@ struct CustomEditorView: View {
 
     private func sectionLabel(_ text: String) -> some View {
         Text(text.uppercased())
-            .font(.system(size: 12, weight: .bold))
+            .font(.system(size: 15, weight: .heavy))
             .tracking(1.5)
-            .foregroundStyle(Color(hex: "BEB5A8"))
+            .foregroundStyle(Color(hex: "D8CFC2"))
     }
 
     private func chips<T, ID: Hashable>(_ items: [T], id: KeyPath<T, ID>,
@@ -216,8 +216,8 @@ struct CustomEditorView: View {
             ForEach(items, id: id) { item in
                 Button { action(item) } label: {
                     Text(label(item))
-                        .font(.system(size: 15, weight: .bold))
-                        .padding(.horizontal, 14).padding(.vertical, 8)
+                        .font(.system(size: 18, weight: .heavy))
+                        .padding(.horizontal, 16).padding(.vertical, 10)
                         .background(Capsule().fill(isOn(item) ? Color(hex: "E9A23B") : Color(hex: "211D19")))
                         .overlay(Capsule().strokeBorder(isOn(item) ? Color.clear : Color(hex: "3E372E"), lineWidth: 2))
                         .foregroundStyle(isOn(item) ? Color(hex: "161006") : .white)

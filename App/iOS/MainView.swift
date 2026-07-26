@@ -34,9 +34,9 @@ struct MainView: View {
                     showCustom = true
                 } label: {
                     Text("+ Custom source & rooms")
-                        .font(.system(size: 16, weight: .bold))
+                        .font(.system(size: 19, weight: .heavy))
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 13)
+                        .padding(.vertical, 16)
                         .overlay(
                             RoundedRectangle(cornerRadius: 14)
                                 .strokeBorder(style: StrokeStyle(lineWidth: 2, dash: [6]))
@@ -65,7 +65,7 @@ struct MainView: View {
             Spacer()
             Button { showSettings = true } label: {
                 Image(systemName: "gearshape.fill")
-                    .font(.system(size: 24, weight: .semibold))
+                    .font(.system(size: 30, weight: .semibold))
                     .foregroundStyle(.white)
             }
         }
@@ -77,26 +77,27 @@ struct MainView: View {
         HStack(spacing: 10) {
             Circle()
                 .fill(model.activePreset.map { model.color(for: $0) } ?? Color(hex: "BEB5A8"))
-                .frame(width: 10, height: 10)
+                .frame(width: 13, height: 13)
                 .shadow(color: model.activePreset.map { model.color(for: $0) } ?? .clear, radius: 6)
             Text(model.nowPlayingText)
-                .font(.system(size: 16, weight: .semibold))
+                .font(.system(size: 21, weight: .heavy))
                 .lineLimit(1)
+                .minimumScaleFactor(0.7)
             Spacer()
             Button {
                 Task { await model.toggleMute() }
             } label: {
                 Image(systemName: model.muted ? "speaker.slash.fill" : "speaker.wave.2.fill")
-                    .font(.system(size: 15, weight: .bold))
+                    .font(.system(size: 19, weight: .bold))
                     .foregroundStyle(model.muted ? Color(hex: "0D0B09") : .white)
-                    .frame(width: 36, height: 36)
+                    .frame(width: 44, height: 44)
                     .background(Circle().fill(model.muted ? Color.white : Color.clear))
                     .overlay(Circle().strokeBorder(Color(hex: "BEB5A8"), lineWidth: model.muted ? 0 : 2))
             }
             .disabled(model.activePreset == nil)
         }
         .padding(.horizontal, 14)
-        .padding(.vertical, 11)
+        .padding(.vertical, 12)
         .background(RoundedRectangle(cornerRadius: 14).fill(Color(hex: "211D19")))
         .padding(.horizontal, 20)
         .padding(.top, 8)
@@ -106,8 +107,8 @@ struct MainView: View {
     private var toastView: some View {
         if let toast = model.toast {
             Text(toast)
-                .font(.system(size: 14, weight: .bold))
-                .padding(.horizontal, 16).padding(.vertical, 10)
+                .font(.system(size: 16, weight: .heavy))
+                .padding(.horizontal, 18).padding(.vertical, 12)
                 .background(Capsule().fill(Color(hex: "3DDC6A")))
                 .foregroundStyle(Color(hex: "161006"))
                 .padding(.bottom, 100)
@@ -128,16 +129,16 @@ struct PresetTile: View {
         VStack(alignment: .leading, spacing: 2) {
             Spacer(minLength: 14)
             Text(preset.name)
-                .font(.system(size: 19, weight: .heavy))
+                .font(.system(size: 26, weight: .heavy))
                 .lineLimit(2)
-                .minimumScaleFactor(0.7)
+                .minimumScaleFactor(0.6)
             Text(roomsLabel)
-                .font(.system(size: 13, weight: .bold))
-                .opacity(0.72)
+                .font(.system(size: 16, weight: .heavy))
+                .opacity(0.85)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(12)
-        .frame(minHeight: 84)
+        .padding(14)
+        .frame(minHeight: 108)
         .background(RoundedRectangle(cornerRadius: 18).fill(tileColor))
         .foregroundStyle(preset.source == nil ? Color.white : Color(hex: "161006"))
         .overlay(
@@ -165,29 +166,29 @@ struct VolumeBar: View {
         VStack(spacing: 6) {
             HStack {
                 Text("VOLUME")
-                    .font(.system(size: 12, weight: .bold))
+                    .font(.system(size: 15, weight: .heavy))
                     .tracking(1.5)
-                    .foregroundStyle(Color(hex: "BEB5A8"))
+                    .foregroundStyle(Color(hex: "D8CFC2"))
                 Spacer()
                 Text(percentLabel)
-                    .font(.system(size: 16, weight: .heavy).monospacedDigit())
+                    .font(.system(size: 22, weight: .heavy).monospacedDigit())
             }
             GeometryReader { geo in
                 let width = geo.size.width
                 let position = (dragging ? localValue : model.sliderPosition).clamped01
                 ZStack(alignment: .leading) {
-                    Capsule().fill(Color(hex: "3E372E")).frame(height: 4)
-                    Capsule().fill(Color(hex: "E9A23B")).frame(width: max(0, position * width), height: 4)
+                    Capsule().fill(Color(hex: "3E372E")).frame(height: 6)
+                    Capsule().fill(Color(hex: "E9A23B")).frame(width: max(0, position * width), height: 6)
                     if let tick = model.baselineTick {
-                        RoundedRectangle(cornerRadius: 1.5)
+                        RoundedRectangle(cornerRadius: 2)
                             .fill(Color.white.opacity(0.85))
-                            .frame(width: 3, height: 16)
-                            .position(x: tick.clamped01 * width, y: 11)
+                            .frame(width: 4, height: 22)
+                            .position(x: tick.clamped01 * width, y: 14)
                     }
                     Circle()
                         .fill(Color.white)
-                        .frame(width: 24, height: 24)
-                        .position(x: position * width, y: 11)
+                        .frame(width: 30, height: 30)
+                        .position(x: position * width, y: 14)
                 }
                 .contentShape(Rectangle())
                 .gesture(
@@ -209,11 +210,11 @@ struct VolumeBar: View {
                         }
                 )
             }
-            .frame(height: 22)
+            .frame(height: 28)
         }
         .padding(.horizontal, 20)
         .padding(.top, 10)
-        .padding(.bottom, 6)
+        .padding(.bottom, 8)
     }
 
     private var percentLabel: String {
@@ -230,7 +231,7 @@ struct ReorderView: View {
         NavigationStack {
             List {
                 ForEach(model.presets) { preset in
-                    Text(preset.name).font(.system(size: 17, weight: .bold))
+                    Text(preset.name).font(.system(size: 20, weight: .heavy))
                 }
                 .onMove { from, to in
                     var ids = model.presets.map(\.id)
