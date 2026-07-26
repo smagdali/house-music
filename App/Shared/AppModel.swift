@@ -186,7 +186,7 @@ final class AppModel {
     /// old presets rehydrated from CloudKit) with no regeneration.
     func color(for preset: Preset) -> Color {
         guard let source = preset.source else { return Color(white: 0.16) }
-        return Color(hex: Palette.colorHex(for: source.inputID, index: 0))
+        return Color(hex: Palette.colorHex(for: source.inputID))
     }
 
     /// Now-playing strip text. A saved preset shows its name; an unmatched
@@ -270,22 +270,20 @@ enum Palette {
     /// indistinguishable from a selected control.
     static let highlight = "E9A23B"
 
-    /// Preset tile colours by input flavour; deterministic assignment order.
-    /// Kept clear of `highlight`: analog uses a burnt orange, not the accent gold.
-    static let sourceColors = [
-        "E8602B", // burnt orange (analog / decks)
-        "3DDC6A", // green (spotify)
-        "B9A7FF", // violet (hdmi / tv)
-        "5FB2FF", // blue
-        "FF6B62", // red
-        "6BE0D5", // teal
-    ]
-
-    static func colorHex(for inputID: String, index: Int) -> String {
-        if inputID == "spotify" { return "3DDC6A" }
-        if inputID.hasPrefix("hdmi") { return "B9A7FF" }
-        if inputID.hasPrefix("audio") || inputID == "phono" || inputID == "aux" { return "E8602B" }
-        if inputID == "airplay" { return "5FB2FF" }
-        return sourceColors[index % sourceColors.count]
+    /// Distinct colours for the common inputs, all kept clear of `highlight`.
+    static func colorHex(for inputID: String) -> String {
+        switch inputID {
+        case "spotify": return "3DDC6A" // green
+        case "audio4":  return "E8602B" // burnt orange - Decks
+        case "audio5":  return "5FB2FF" // blue - AirKay
+        case "hdmi1":   return "B9A7FF" // violet - Apple TV
+        default:
+            // Every other input gets its own colour, keyed by the input id so
+            // it is distinct per source and stable across launches (String's
+            // own hashValue is per-process randomised, so roll a fixed one).
+            let pool = ["FF6B62", "6BE0D5", "E86BB0", "4FC3F7", "C77DFF"]
+            let h = inputID.unicodeScalars.reduce(5381) { ($0 &* 33) &+ Int($1.value) }
+            return pool[abs(h) % pool.count]
+        }
     }
 }

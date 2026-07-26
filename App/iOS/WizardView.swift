@@ -160,7 +160,7 @@ struct WizardView: View {
         for device in config.devices {
             guard (config.curatedInputs[device.id] ?? []).contains(where: { $0.id == "spotify" }) else { continue }
             let source = SourceRef(deviceID: device.id, inputID: "spotify", label: "Spotify",
-                                   colorHex: Palette.colorHex(for: "spotify", index: 0))
+                                   colorHex: Palette.colorHex(for: "spotify"))
             presets.append(Preset(name: "Spotify \(device.roomName)", source: source, rooms: [device.id],
                                   baselines: [device.id: Int(0.3 * Double(device.volumeRange.upperBound))]))
         }

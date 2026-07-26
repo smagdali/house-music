@@ -112,7 +112,7 @@ struct CustomEditorView: View {
                 .compactMap({ (model.config.curatedInputs[$0.id] ?? []).first { $0.id == inputID } })
                 .first {
                 result.append(SourceRef(deviceID: "", inputID: inputID, label: sample.label,
-                                        colorHex: Palette.colorHex(for: inputID, index: 0)))
+                                        colorHex: Palette.colorHex(for: inputID)))
             }
         }
 
@@ -126,13 +126,11 @@ struct CustomEditorView: View {
             }
         }
         let labelCounts = Dictionary(physical.map { ($0.input.label, 1) }, uniquingKeysWith: +)
-        var index = 1
         for (device, input) in physical {
             let repeated = (labelCounts[input.label] ?? 0) > 1
             let label = repeated ? "\(input.label) \u{00B7} \(device.roomName)" : input.label
             result.append(SourceRef(deviceID: device.id, inputID: input.id, label: label,
-                                    colorHex: Palette.colorHex(for: input.id, index: index)))
-            index += 1
+                                    colorHex: Palette.colorHex(for: input.id)))
         }
         return result.sorted { $0.label.localizedCaseInsensitiveCompare($1.label) == .orderedAscending }
     }
