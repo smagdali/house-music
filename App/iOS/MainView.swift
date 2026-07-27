@@ -8,6 +8,7 @@ struct MainView: View {
     @State private var showHelp = false
     @State private var showReorder = false
     @State private var editingPreset: Preset?
+    @State private var spotifyPrompt: Preset?
     @State private var pollTask: Task<Void, Never>?
 
     private let columns = [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)]
@@ -20,7 +21,7 @@ struct MainView: View {
                 LazyVGrid(columns: columns, spacing: 12) {
                     ForEach(model.presets) { preset in
                         PresetTile(preset: preset, active: model.activePreset?.id == preset.id)
-                            .onTapGesture { Task { await model.fire(preset) } }
+                            .onTapGesture { tap(preset) }
                             .contextMenu {
                                 Button("Edit") { editingPreset = preset }
                                 Button("Reorder") { showReorder = true }
@@ -58,8 +59,26 @@ struct MainView: View {
         .sheet(isPresented: $showReorder) { ReorderView() }
         .sheet(item: $editingPreset) { CustomEditorView(basePreset: $0) }
         .overlay(alignment: .bottom) { toastView }
+        .alert("Connect Spotify?", isPresented: .init(get: { spotifyPrompt != nil },
+                                                      set: { if !$0 { spotifyPrompt = nil } })) {
+            Button("Connect") { spotifyPrompt = nil; SpotifyAuth.begin() }
+            Button("Not now", role: .cancel) { spotifyPrompt = nil }
+        } message: {
+            Text("This preset plays Spotify. House Music needs your Spotify account connected so it can start playback in the chosen rooms. You can connect now, or later in Settings.")
+        }
         .onAppear { pollTask = model.startPolling() }
         .onDisappear { pollTask?.cancel() }
+    }
+
+    /// Fire a preset, but if it is a Spotify preset and Spotify is not connected,
+    /// ask the user to connect first (with an explanation) rather than firing a
+    /// preset that cannot actually start playback.
+    private func tap(_ preset: Preset) {
+        if preset.source?.isSpotify == true && !model.spotifyConnected {
+            spotifyPrompt = preset
+        } else {
+            Task { await model.fire(preset) }
+        }
     }
 
     private var header: some View {

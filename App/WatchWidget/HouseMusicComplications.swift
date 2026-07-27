@@ -62,25 +62,29 @@ struct ComplicationView: View {
         switch family {
         case .accessoryCircular:
             Text(SharedSelection.abbreviate(entry.name))
-                .font(.system(size: 16, weight: .heavy))
+                .font(.system(size: 22, weight: .black))
                 .minimumScaleFactor(0.4)
                 .lineLimit(1)
                 .foregroundStyle(textColor)
-                .padding(4)
+                .padding(3)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
 
         case .accessoryRectangular:
             Text(entry.name)
-                .font(.system(size: 20, weight: .heavy))
+                .font(.system(size: 26, weight: .black))
                 .minimumScaleFactor(0.5)
                 .lineLimit(2)
                 .foregroundStyle(textColor)
-                .padding(.horizontal, 10)
+                .padding(.horizontal, 8)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
 
         case .accessoryCorner:
+            // System draws the corner shape; we fill it (containerBackground)
+            // and put the abbreviation inside, with the full name as the label.
             Text(SharedSelection.abbreviate(entry.name))
-                .font(.system(size: 17, weight: .heavy))
+                .font(.system(size: 18, weight: .black))
+                .minimumScaleFactor(0.4)
+                .foregroundStyle(textColor)
                 .widgetLabel(entry.name)
 
         case .accessoryInline:
@@ -88,7 +92,7 @@ struct ComplicationView: View {
 
         default:
             Text(SharedSelection.abbreviate(entry.name))
-                .font(.system(size: 20, weight: .heavy))
+                .font(.system(size: 20, weight: .black))
                 .foregroundStyle(textColor)
         }
     }
