@@ -326,3 +326,22 @@ enum Palette {
         }
     }
 }
+
+/// Yamaha volume scales. Device units run 0...161; the numeric display the amps
+/// print is exactly half that (0...80.5 in 0.5 steps), and dB is that minus
+/// 80.5. Verified against all five devices on the live network.
+enum Volume {
+    static let unitMax = 161.0
+
+    static func numeric(position: Double) -> Double {
+        (position * unitMax).rounded() / 2
+    }
+
+    /// "50" or "50.5": drop the decimal when the value lands on a whole number.
+    static func numericLabel(position: Double) -> String {
+        let value = numeric(position: position)
+        return value == value.rounded()
+            ? String(Int(value))
+            : String(format: "%.1f", value)
+    }
+}

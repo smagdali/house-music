@@ -215,7 +215,7 @@ struct VolumeBar: View {
                     .tracking(1.5)
                     .foregroundStyle(Color(hex: "D8CFC2"))
                 Spacer()
-                Text(percentLabel)
+                Text(volumeLabel)
                     .font(.system(size: 22, weight: .heavy).monospacedDigit())
             }
             GeometryReader { geo in
@@ -262,9 +262,12 @@ struct VolumeBar: View {
         .padding(.bottom, 8)
     }
 
-    private var percentLabel: String {
-        let pct = Int(((dragging ? localValue : model.sliderPosition).clamped01 * 100).rounded())
-        return "\(pct)%"
+    /// Yamaha's numeric scale, which is what the amps print on their panels:
+    /// device units run 0...161 and the numeric display is exactly half that,
+    /// in steps of 0.5.
+    private var volumeLabel: String {
+        let position = (dragging ? localValue : model.sliderPosition).clamped01
+        return Volume.numericLabel(position: position)
     }
 }
 

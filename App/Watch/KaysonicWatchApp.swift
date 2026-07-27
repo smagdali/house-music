@@ -116,7 +116,7 @@ struct VolumeView: View {
                 .tracking(1.5)
                 .foregroundStyle(Color(hex: "BEB5A8"))
 
-            Text("\(Int(min(max(model.sliderPosition, 0), 1) * 100))%")
+            Text(Volume.numericLabel(position: min(max(model.sliderPosition, 0), 1)))
                 .font(.system(size: 44, weight: .black).monospacedDigit())
 
             Button {
