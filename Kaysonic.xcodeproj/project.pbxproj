@@ -78,6 +78,7 @@
 
 /* Begin PBXFileReference section */
 		0C660AD31BC813F720C5A645 /* KaysonicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaysonicApp.swift; sourceTree = "<group>"; };
+		10DCAD2CC50BDECFE43AE35C /* kaysonic */ = {isa = PBXFileReference; lastKnownFileType = folder; name = kaysonic; path = .; sourceTree = SOURCE_ROOT; };
 		3F696292EB7DC54DFE2DA703 /* KaysonicComplications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaysonicComplications.swift; sourceTree = "<group>"; };
 		405A92BBAFB95502BB3697B6 /* KaysonicWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaysonicWatchApp.swift; sourceTree = "<group>"; };
 		408C6F50741D5715E6A3C472 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -96,7 +97,6 @@
 		E84E6BCFAB463731A7C3D1D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EACE28C324A55AAD714FD48B /* KaysonicWatchWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = KaysonicWatchWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEA62E485E65845399C64B57 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		F7A87193C5E9A11CB16FD971 /* house-music */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "house-music"; path = .; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,7 +174,7 @@
 		9BC80E03FE4B24794E775F6F /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				F7A87193C5E9A11CB16FD971 /* house-music */,
+				10DCAD2CC50BDECFE43AE35C /* kaysonic */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
