@@ -25,6 +25,9 @@ struct PresetQuery: EntityStringQuery {
     private var all: [PresetEntity] {
         let store = ConfigStore()
         return store.orderedPresets(store.loadConfig())
+            // "All off" has its own dedicated shortcut, so leave it out here or
+            // it is offered twice.
+            .filter { !$0.isAllOff }
             .map { PresetEntity(id: $0.id, name: $0.name) }
     }
 
