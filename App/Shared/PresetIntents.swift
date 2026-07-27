@@ -14,11 +14,21 @@ struct PresetEntity: AppEntity, Identifiable {
     }
 }
 
-struct PresetQuery: EntityQuery {
+/// EntityStringQuery, not plain EntityQuery: a parameterised App Shortcut has
+/// to match the spoken preset name against the entity list, and without string
+/// matching the shortcut does not surface in Shortcuts or Siri at all.
+struct PresetQuery: EntityStringQuery {
     @MainActor
     func entities(for identifiers: [UUID]) async throws -> [PresetEntity] {
         AppModel.shared.presets
             .filter { identifiers.contains($0.id) }
+            .map { PresetEntity(id: $0.id, name: $0.name) }
+    }
+
+    @MainActor
+    func entities(matching string: String) async throws -> [PresetEntity] {
+        AppModel.shared.presets
+            .filter { $0.name.localizedCaseInsensitiveContains(string) }
             .map { PresetEntity(id: $0.id, name: $0.name) }
     }
 
@@ -47,6 +57,24 @@ struct ActivatePresetIntent: AppIntent {
     }
 }
 
+/// Turn everything off. Unparameterised, so it surfaces even when the preset
+/// entity list is unavailable, and doubles as a check that App Shortcuts are
+/// registering at all.
+struct AllOffIntent: AppIntent {
+    static let title: LocalizedStringResource = "All Off"
+    static let description = IntentDescription("Turns off every room.")
+    static let openAppWhenRun = false
+
+    @MainActor
+    func perform() async throws -> some IntentResult & ProvidesDialog {
+        let model = AppModel.shared
+        let target = model.presets.first(where: { $0.isAllOff })
+            ?? Preset(name: "All off", source: nil, rooms: [])
+        await model.fire(target)
+        return .result(dialog: "All off.")
+    }
+}
+
 struct HouseMusicShortcuts: AppShortcutsProvider {
     static var appShortcuts: [AppShortcut] {
         AppShortcut(
@@ -58,6 +86,15 @@ struct HouseMusicShortcuts: AppShortcutsProvider {
             ],
             shortTitle: "Activate preset",
             systemImageName: "hifispeaker.2"
+        )
+        AppShortcut(
+            intent: AllOffIntent(),
+            phrases: [
+                "\(.applicationName) all off",
+                "Turn everything off with \(.applicationName)",
+            ],
+            shortTitle: "All off",
+            systemImageName: "speaker.slash"
         )
     }
 }
