@@ -6,6 +6,23 @@
     <string>en</string>
     <key>CFBundleDisplayName</key>
     <string>House Music</string>
+    <!-- Siri hears "House Music" as the music genre and hands the request to
+         its media domain, so give it unambiguous names to invoke the app by. -->
+    <key>INAlternativeAppNames</key>
+    <array>
+        <dict>
+            <key>INAlternativeAppName</key>
+            <string>Nutmeg</string>
+            <key>INAlternativeAppNamePronunciationHint</key>
+            <string>nutmeg</string>
+        </dict>
+        <dict>
+            <key>INAlternativeAppName</key>
+            <string>House Rooms</string>
+            <key>INAlternativeAppNamePronunciationHint</key>
+            <string>house rooms</string>
+        </dict>
+    </array>
     <key>CFBundleExecutable</key>
     <string>$(EXECUTABLE_NAME)</string>
     <key>CFBundleIdentifier</key>
