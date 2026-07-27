@@ -15,10 +15,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C891441C5CE8E021A7B1E867"
-               BuildableName = "HouseMusic.app"
-               BlueprintName = "HouseMusic"
-               ReferencedContainer = "container:HouseMusic.xcodeproj">
+               BlueprintIdentifier = "3456E0318CB1EAEEF9C37683"
+               BuildableName = "KaysonicWatch.app"
+               BlueprintName = "KaysonicWatch"
+               ReferencedContainer = "container:Kaysonic.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,10 +32,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C891441C5CE8E021A7B1E867"
-            BuildableName = "HouseMusic.app"
-            BlueprintName = "HouseMusic"
-            ReferencedContainer = "container:HouseMusic.xcodeproj">
+            BlueprintIdentifier = "3456E0318CB1EAEEF9C37683"
+            BuildableName = "KaysonicWatch.app"
+            BlueprintName = "KaysonicWatch"
+            ReferencedContainer = "container:Kaysonic.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -55,10 +55,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C891441C5CE8E021A7B1E867"
-            BuildableName = "HouseMusic.app"
-            BlueprintName = "HouseMusic"
-            ReferencedContainer = "container:HouseMusic.xcodeproj">
+            BlueprintIdentifier = "3456E0318CB1EAEEF9C37683"
+            BuildableName = "KaysonicWatch.app"
+            BlueprintName = "KaysonicWatch"
+            ReferencedContainer = "container:Kaysonic.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <CommandLineArguments>
@@ -74,10 +74,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C891441C5CE8E021A7B1E867"
-            BuildableName = "HouseMusic.app"
-            BlueprintName = "HouseMusic"
-            ReferencedContainer = "container:HouseMusic.xcodeproj">
+            BlueprintIdentifier = "3456E0318CB1EAEEF9C37683"
+            BuildableName = "KaysonicWatch.app"
+            BlueprintName = "KaysonicWatch"
+            ReferencedContainer = "container:Kaysonic.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

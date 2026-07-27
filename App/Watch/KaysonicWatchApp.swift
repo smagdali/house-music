@@ -1,8 +1,8 @@
 import SwiftUI
-import HouseMusicKit
+import KaysonicKit
 
 @main
-struct HouseMusicWatchApp: App {
+struct KaysonicWatchApp: App {
     @State private var model = AppModel.shared
 
     init() {
@@ -26,7 +26,7 @@ struct WatchMainView: View {
             if model.presets.isEmpty {
                 VStack(spacing: 8) {
                     Image(systemName: "iphone.radiowaves.left.and.right")
-                    Text("Open House Music on your iPhone to set up.")
+                    Text("Open Kaysonic on your iPhone to set up.")
                         .font(.system(size: 13, weight: .semibold))
                         .multilineTextAlignment(.center)
                 }

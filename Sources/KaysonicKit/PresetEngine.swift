@@ -60,7 +60,7 @@ public struct PresetEngine: Sendable {
 
         func host(_ id: DeviceID) throws -> String {
             guard let device = config.device(id) else {
-                throw HouseMusicError.notConfigured("Device \(id)")
+                throw KaysonicError.notConfigured("Device \(id)")
             }
             return device.ipAddress
         }
@@ -132,7 +132,7 @@ public struct PresetEngine: Sendable {
     private func retryWhileWaking(_ write: () async throws -> Void) async {
         for _ in 0..<6 {
             do { try await write(); return }
-            catch HouseMusicError.yxcError(let code, _) where code == 5 {
+            catch KaysonicError.yxcError(let code, _) where code == 5 {
                 try? await Task.sleep(for: .milliseconds(500))
             } catch { return }
         }

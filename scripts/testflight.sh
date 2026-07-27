@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Archive House Music (iOS + embedded Watch app) and upload to TestFlight.
+# Archive Kaysonic (iOS + embedded Watch app) and upload to TestFlight.
 #
 # Usage: bash scripts/testflight.sh
 #
@@ -13,7 +13,7 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 BUILD_DIR="$ROOT_DIR/build"
-ARCHIVE="$BUILD_DIR/HouseMusic.xcarchive"
+ARCHIVE="$BUILD_DIR/Kaysonic.xcarchive"
 ENV_FILE="$ROOT_DIR/deploy/.env"
 
 if [[ -f "$ENV_FILE" ]]; then
@@ -28,8 +28,8 @@ echo "==> Regenerating project"
 (cd "$ROOT_DIR" && xcodegen generate)
 
 echo "==> Archiving"
-xcodebuild -project "$ROOT_DIR/HouseMusic.xcodeproj" \
-  -scheme HouseMusic \
+xcodebuild -project "$ROOT_DIR/Kaysonic.xcodeproj" \
+  -scheme Kaysonic \
   -configuration Release \
   -destination 'generic/platform=iOS' \
   -archivePath "$ARCHIVE" \

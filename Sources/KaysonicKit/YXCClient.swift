@@ -44,14 +44,14 @@ public struct YXCClient: Sendable {
         do {
             (data, _) = try await session.data(for: request)
         } catch {
-            throw HouseMusicError.deviceUnreachable(host)
+            throw KaysonicError.deviceUnreachable(host)
         }
         let decoded = try JSONDecoder().decode(T.self, from: data)
         if let coded = decoded as? YXCResponseCode, coded.responseCode != 0 {
-            throw HouseMusicError.yxcError(code: coded.responseCode, endpoint: endpoint)
+            throw KaysonicError.yxcError(code: coded.responseCode, endpoint: endpoint)
         }
         if let code = (try? JSONDecoder().decode(YXCResponseCode.self, from: data))?.responseCode, code != 0 {
-            throw HouseMusicError.yxcError(code: code, endpoint: endpoint)
+            throw KaysonicError.yxcError(code: code, endpoint: endpoint)
         }
         return decoded
     }

@@ -1,0 +1,697 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1DCE3CACA92401AC39D5E3FA /* SyncBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = D789009A09BB047376FAE9DF /* SyncBridge.swift */; };
+		20686D195EB02CD74EFF1429 /* KaysonicKit in Frameworks */ = {isa = PBXBuildFile; productRef = B07525CCD2B30232A6362534 /* KaysonicKit */; };
+		2266ECBC389D8DF7C3099C55 /* SharedSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD27C9E7A2CDF184FA2AAD8 /* SharedSelection.swift */; };
+		2A9B19E9A91453A0296B1128 /* PresetIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE7C3C49DA3098B28CE8B52 /* PresetIntents.swift */; };
+		30EE8BD066168A467964F3E2 /* KaysonicWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405A92BBAFB95502BB3697B6 /* KaysonicWatchApp.swift */; };
+		325CB19D4A4041E517A2891D /* CloudSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0BEB6AF0983B5A7E13A9F3 /* CloudSync.swift */; };
+		38F46E38B7BF47CF1939CD01 /* SharedSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD27C9E7A2CDF184FA2AAD8 /* SharedSelection.swift */; };
+		3D7FB74144B51067F4234B7D /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4272DCF18EECB475E95F20B4 /* HelpView.swift */; };
+		4174F8DE0341AEA9D53803A1 /* KaysonicWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = D79963452CA473619A19C119 /* KaysonicWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4F2C8FE34EA299255221ED79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E84E6BCFAB463731A7C3D1D4 /* Assets.xcassets */; };
+		6099B336CF48941F6F81A50C /* PresetIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE7C3C49DA3098B28CE8B52 /* PresetIntents.swift */; };
+		6DBA8C5C330A30BBF713B3CD /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA62E485E65845399C64B57 /* MainView.swift */; };
+		6FED83D52F98641762DF7BD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 408C6F50741D5715E6A3C472 /* Assets.xcassets */; };
+		7B5A7D38AADA3331C3D766E0 /* KaysonicComplications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F696292EB7DC54DFE2DA703 /* KaysonicComplications.swift */; };
+		80D4480146346A8954391BDE /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E936A4110DE30811BE45CA /* AppModel.swift */; };
+		85CABEB1D21DC2ED4FBB0AA3 /* WizardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FB9C869738D2ACD5389748 /* WizardView.swift */; };
+		9362070FBB89090796FA4861 /* KaysonicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C660AD31BC813F720C5A645 /* KaysonicApp.swift */; };
+		94CB6011E9A29D3E4CF66796 /* SyncBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = D789009A09BB047376FAE9DF /* SyncBridge.swift */; };
+		B2A491506C83A113969C8F76 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7093C288922AD15BF98E57C6 /* SettingsView.swift */; };
+		C0F9C43E89C66A7F367F1B1E /* KaysonicWatchWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = EACE28C324A55AAD714FD48B /* KaysonicWatchWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		DDB2B32298ACE4123FEB9898 /* KaysonicKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7684DE541870C857AE251786 /* KaysonicKit */; };
+		F1073B12C82C3A990D1D469F /* CustomEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA54BB75D1E24EDFAA9AF70 /* CustomEditorView.swift */; };
+		F3627305B87F8230E338C5AE /* CloudSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0BEB6AF0983B5A7E13A9F3 /* CloudSync.swift */; };
+		F7A0BE2EED6EF2E8BA835616 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86CA0D59AA161E25EAA5BAA4 /* Assets.xcassets */; };
+		F7CBCEA42F00A29C9C681F1C /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E936A4110DE30811BE45CA /* AppModel.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BC57B73EEF397DB602C1F805 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FCBE46B2AFE641DDDBC7EC5B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7D531E6FAE99BB60867F24AC;
+			remoteInfo = KaysonicWatchWidget;
+		};
+		DBCAA66A138F218459440CF5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FCBE46B2AFE641DDDBC7EC5B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3456E0318CB1EAEEF9C37683;
+			remoteInfo = KaysonicWatch;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		21BD5AD523480DEA9CE0A620 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				4174F8DE0341AEA9D53803A1 /* KaysonicWatch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B27F410B16728DAB00A83EF /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				C0F9C43E89C66A7F367F1B1E /* KaysonicWatchWidget.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0C660AD31BC813F720C5A645 /* KaysonicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaysonicApp.swift; sourceTree = "<group>"; };
+		3F696292EB7DC54DFE2DA703 /* KaysonicComplications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaysonicComplications.swift; sourceTree = "<group>"; };
+		405A92BBAFB95502BB3697B6 /* KaysonicWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaysonicWatchApp.swift; sourceTree = "<group>"; };
+		408C6F50741D5715E6A3C472 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4272DCF18EECB475E95F20B4 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
+		5EE7C3C49DA3098B28CE8B52 /* PresetIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetIntents.swift; sourceTree = "<group>"; };
+		7093C288922AD15BF98E57C6 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		7FD27C9E7A2CDF184FA2AAD8 /* SharedSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedSelection.swift; sourceTree = "<group>"; };
+		83E936A4110DE30811BE45CA /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		86CA0D59AA161E25EAA5BAA4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8E0BEB6AF0983B5A7E13A9F3 /* CloudSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudSync.swift; sourceTree = "<group>"; };
+		930CDED63518B898F9B47F6D /* Kaysonic.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Kaysonic.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		95FB9C869738D2ACD5389748 /* WizardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardView.swift; sourceTree = "<group>"; };
+		BBA54BB75D1E24EDFAA9AF70 /* CustomEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEditorView.swift; sourceTree = "<group>"; };
+		D789009A09BB047376FAE9DF /* SyncBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncBridge.swift; sourceTree = "<group>"; };
+		D79963452CA473619A19C119 /* KaysonicWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KaysonicWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E84E6BCFAB463731A7C3D1D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EACE28C324A55AAD714FD48B /* KaysonicWatchWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = KaysonicWatchWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		EEA62E485E65845399C64B57 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		F7A87193C5E9A11CB16FD971 /* house-music */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "house-music"; path = .; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3A71069F202008CDCFC48FA5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDB2B32298ACE4123FEB9898 /* KaysonicKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		699BC15BF0D85FF81B557C1F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20686D195EB02CD74EFF1429 /* KaysonicKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1C9298F67C1F4C8AAD7AD89F = {
+			isa = PBXGroup;
+			children = (
+				E16208B1662B68128FB3710B /* App */,
+				9BC80E03FE4B24794E775F6F /* Packages */,
+				6B101EDD4147B07BB03DEF69 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2FB7C348087DFF833E13A652 /* WatchWidget */ = {
+			isa = PBXGroup;
+			children = (
+				86CA0D59AA161E25EAA5BAA4 /* Assets.xcassets */,
+				3F696292EB7DC54DFE2DA703 /* KaysonicComplications.swift */,
+				7FD27C9E7A2CDF184FA2AAD8 /* SharedSelection.swift */,
+			);
+			path = WatchWidget;
+			sourceTree = "<group>";
+		};
+		30FDFF6271F2512AD28EFA62 /* Watch */ = {
+			isa = PBXGroup;
+			children = (
+				E84E6BCFAB463731A7C3D1D4 /* Assets.xcassets */,
+				405A92BBAFB95502BB3697B6 /* KaysonicWatchApp.swift */,
+			);
+			path = Watch;
+			sourceTree = "<group>";
+		};
+		4D0029CD1C39518939AEB0D5 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				408C6F50741D5715E6A3C472 /* Assets.xcassets */,
+				BBA54BB75D1E24EDFAA9AF70 /* CustomEditorView.swift */,
+				4272DCF18EECB475E95F20B4 /* HelpView.swift */,
+				0C660AD31BC813F720C5A645 /* KaysonicApp.swift */,
+				EEA62E485E65845399C64B57 /* MainView.swift */,
+				7093C288922AD15BF98E57C6 /* SettingsView.swift */,
+				95FB9C869738D2ACD5389748 /* WizardView.swift */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		6B101EDD4147B07BB03DEF69 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				930CDED63518B898F9B47F6D /* Kaysonic.app */,
+				D79963452CA473619A19C119 /* KaysonicWatch.app */,
+				EACE28C324A55AAD714FD48B /* KaysonicWatchWidget.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9BC80E03FE4B24794E775F6F /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				F7A87193C5E9A11CB16FD971 /* house-music */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		E16208B1662B68128FB3710B /* App */ = {
+			isa = PBXGroup;
+			children = (
+				4D0029CD1C39518939AEB0D5 /* iOS */,
+				F336CB768AF89E0EFBA7EFA1 /* Shared */,
+				30FDFF6271F2512AD28EFA62 /* Watch */,
+				2FB7C348087DFF833E13A652 /* WatchWidget */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		F336CB768AF89E0EFBA7EFA1 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				83E936A4110DE30811BE45CA /* AppModel.swift */,
+				8E0BEB6AF0983B5A7E13A9F3 /* CloudSync.swift */,
+				5EE7C3C49DA3098B28CE8B52 /* PresetIntents.swift */,
+				D789009A09BB047376FAE9DF /* SyncBridge.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3456E0318CB1EAEEF9C37683 /* KaysonicWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 32C16F41757765832F9A2107 /* Build configuration list for PBXNativeTarget "KaysonicWatch" */;
+			buildPhases = (
+				7BE77857AC921430F1D1745C /* Sources */,
+				BBEF63A7E673C1DCCA36B4F2 /* Resources */,
+				3A71069F202008CDCFC48FA5 /* Frameworks */,
+				8B27F410B16728DAB00A83EF /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F0B6413CC7B1AAE994938831 /* PBXTargetDependency */,
+			);
+			name = KaysonicWatch;
+			packageProductDependencies = (
+				7684DE541870C857AE251786 /* KaysonicKit */,
+			);
+			productName = KaysonicWatch;
+			productReference = D79963452CA473619A19C119 /* KaysonicWatch.app */;
+			productType = "com.apple.product-type.application";
+		};
+		74AACAE2203F80CDAF988255 /* Kaysonic */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 25276FEF2FCFCDB11191FE99 /* Build configuration list for PBXNativeTarget "Kaysonic" */;
+			buildPhases = (
+				130BD13572603D44CFB722A4 /* Sources */,
+				41B8EBF76DCCCD2E84BD35E0 /* Resources */,
+				699BC15BF0D85FF81B557C1F /* Frameworks */,
+				21BD5AD523480DEA9CE0A620 /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0F0C1675F54ADC2C748DEE0C /* PBXTargetDependency */,
+			);
+			name = Kaysonic;
+			packageProductDependencies = (
+				B07525CCD2B30232A6362534 /* KaysonicKit */,
+			);
+			productName = Kaysonic;
+			productReference = 930CDED63518B898F9B47F6D /* Kaysonic.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7D531E6FAE99BB60867F24AC /* KaysonicWatchWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 54E51843B3AA50B6DACFAEDD /* Build configuration list for PBXNativeTarget "KaysonicWatchWidget" */;
+			buildPhases = (
+				723A3C65F49CD527E6B8CCD7 /* Sources */,
+				99345AA347B4AD2B9E5E9E30 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KaysonicWatchWidget;
+			packageProductDependencies = (
+			);
+			productName = KaysonicWatchWidget;
+			productReference = EACE28C324A55AAD714FD48B /* KaysonicWatchWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FCBE46B2AFE641DDDBC7EC5B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					3456E0318CB1EAEEF9C37683 = {
+						DevelopmentTeam = 86H54WCPYP;
+						ProvisioningStyle = Automatic;
+					};
+					74AACAE2203F80CDAF988255 = {
+						DevelopmentTeam = 86H54WCPYP;
+						ProvisioningStyle = Automatic;
+					};
+					7D531E6FAE99BB60867F24AC = {
+						DevelopmentTeam = 86H54WCPYP;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 2281A2C71F9E05F48A50E332 /* Build configuration list for PBXProject "Kaysonic" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 1C9298F67C1F4C8AAD7AD89F;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				4D46B0395D03FB2244435F80 /* XCLocalSwiftPackageReference "." */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 6B101EDD4147B07BB03DEF69 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				74AACAE2203F80CDAF988255 /* Kaysonic */,
+				3456E0318CB1EAEEF9C37683 /* KaysonicWatch */,
+				7D531E6FAE99BB60867F24AC /* KaysonicWatchWidget */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		41B8EBF76DCCCD2E84BD35E0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6FED83D52F98641762DF7BD6 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		99345AA347B4AD2B9E5E9E30 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F7A0BE2EED6EF2E8BA835616 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BBEF63A7E673C1DCCA36B4F2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F2C8FE34EA299255221ED79 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		130BD13572603D44CFB722A4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F7CBCEA42F00A29C9C681F1C /* AppModel.swift in Sources */,
+				325CB19D4A4041E517A2891D /* CloudSync.swift in Sources */,
+				F1073B12C82C3A990D1D469F /* CustomEditorView.swift in Sources */,
+				3D7FB74144B51067F4234B7D /* HelpView.swift in Sources */,
+				9362070FBB89090796FA4861 /* KaysonicApp.swift in Sources */,
+				6DBA8C5C330A30BBF713B3CD /* MainView.swift in Sources */,
+				6099B336CF48941F6F81A50C /* PresetIntents.swift in Sources */,
+				B2A491506C83A113969C8F76 /* SettingsView.swift in Sources */,
+				1DCE3CACA92401AC39D5E3FA /* SyncBridge.swift in Sources */,
+				85CABEB1D21DC2ED4FBB0AA3 /* WizardView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		723A3C65F49CD527E6B8CCD7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B5A7D38AADA3331C3D766E0 /* KaysonicComplications.swift in Sources */,
+				2266ECBC389D8DF7C3099C55 /* SharedSelection.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7BE77857AC921430F1D1745C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				80D4480146346A8954391BDE /* AppModel.swift in Sources */,
+				F3627305B87F8230E338C5AE /* CloudSync.swift in Sources */,
+				30EE8BD066168A467964F3E2 /* KaysonicWatchApp.swift in Sources */,
+				2A9B19E9A91453A0296B1128 /* PresetIntents.swift in Sources */,
+				38F46E38B7BF47CF1939CD01 /* SharedSelection.swift in Sources */,
+				94CB6011E9A29D3E4CF66796 /* SyncBridge.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0F0C1675F54ADC2C748DEE0C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3456E0318CB1EAEEF9C37683 /* KaysonicWatch */;
+			targetProxy = DBCAA66A138F218459440CF5 /* PBXContainerItemProxy */;
+		};
+		F0B6413CC7B1AAE994938831 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7D531E6FAE99BB60867F24AC /* KaysonicWatchWidget */;
+			targetProxy = BC57B73EEF397DB602C1F805 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1497DD1964B2968BF3056696 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 86H54WCPYP;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		1F41BC426A5FAB0B4107212B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 86H54WCPYP;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		2F7BBFF6940628346D40F035 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = App/Watch/KaysonicWatch.entitlements;
+				INFOPLIST_FILE = App/Watch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = org.whitelabel.housemusic.watchkitapp;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		3636EBDDC8EC13B5CDECA135 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = App/WatchWidget/KaysonicWatchWidget.entitlements;
+				INFOPLIST_FILE = App/WatchWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.whitelabel.housemusic.watchkitapp.widget;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		99ADF7D406D2B20EEBD75B68 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = App/iOS/Kaysonic.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = App/iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.whitelabel.housemusic;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG HOUSE_SEED";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		99FEA22DB5704FD3B941DAC1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = App/Watch/KaysonicWatch.entitlements;
+				INFOPLIST_FILE = App/Watch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = org.whitelabel.housemusic.watchkitapp;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		A0F25213EFDAAF1A54332F72 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = App/iOS/Kaysonic.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = App/iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.whitelabel.housemusic;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		B74B61B19C26FB32A4796B6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = App/WatchWidget/KaysonicWatchWidget.entitlements;
+				INFOPLIST_FILE = App/WatchWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.whitelabel.housemusic.watchkitapp.widget;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2281A2C71F9E05F48A50E332 /* Build configuration list for PBXProject "Kaysonic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F41BC426A5FAB0B4107212B /* Debug */,
+				1497DD1964B2968BF3056696 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		25276FEF2FCFCDB11191FE99 /* Build configuration list for PBXNativeTarget "Kaysonic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				99ADF7D406D2B20EEBD75B68 /* Debug */,
+				A0F25213EFDAAF1A54332F72 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		32C16F41757765832F9A2107 /* Build configuration list for PBXNativeTarget "KaysonicWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				99FEA22DB5704FD3B941DAC1 /* Debug */,
+				2F7BBFF6940628346D40F035 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		54E51843B3AA50B6DACFAEDD /* Build configuration list for PBXNativeTarget "KaysonicWatchWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3636EBDDC8EC13B5CDECA135 /* Debug */,
+				B74B61B19C26FB32A4796B6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		4D46B0395D03FB2244435F80 /* XCLocalSwiftPackageReference "." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = .;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7684DE541870C857AE251786 /* KaysonicKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KaysonicKit;
+		};
+		B07525CCD2B30232A6362534 /* KaysonicKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KaysonicKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = FCBE46B2AFE641DDDBC7EC5B /* Project object */;
+}

@@ -1,5 +1,5 @@
 import XCTest
-@testable import HouseMusicKit
+@testable import KaysonicKit
 
 final class PresetEngineTests: XCTestCase {
 

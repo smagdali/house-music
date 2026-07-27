@@ -1,5 +1,5 @@
 import SwiftUI
-import HouseMusicKit
+import KaysonicKit
 
 struct MainView: View {
     @Environment(AppModel.self) private var model
@@ -66,7 +66,7 @@ struct MainView: View {
             Button("Connect") { spotifyPrompt = nil; SpotifyAuth.begin() }
             Button("Not now", role: .cancel) { spotifyPrompt = nil }
         } message: {
-            Text("This preset plays Spotify. House Music needs your Spotify account connected so it can start playback in the chosen rooms. You can connect now, or later in Settings.")
+            Text("This preset plays Spotify. Kaysonic needs your Spotify account connected so it can start playback in the chosen rooms. You can connect now, or later in Settings.")
         }
         .alert("Something else is playing", isPresented: .init(get: { conflictPreset != nil },
                                                                set: { if !$0 { conflictPreset = nil } })) {

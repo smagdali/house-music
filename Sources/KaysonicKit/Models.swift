@@ -97,7 +97,7 @@ public struct HouseConfig: Codable, Sendable, Equatable {
     }
 }
 
-public enum HouseMusicError: Error, LocalizedError {
+public enum KaysonicError: Error, LocalizedError {
     case deviceUnreachable(String)
     case yxcError(code: Int, endpoint: String)
     case notConfigured(String)

@@ -3,7 +3,7 @@ import AppKit
 
 // Headless preview of the complication look at real accessory sizes, so we can
 // iterate on colour/text/abbreviation without deploying to the watch. This
-// mirrors the visual of HouseMusicComplications.swift; it is not the widget
+// mirrors the visual of KaysonicComplications.swift; it is not the widget
 // itself (no WidgetKit chrome), just the fill + label we control.
 
 func foreground(_ hex: String) -> Color { hex.uppercased() == "211D19" ? .white : Color(hex: "161006") }

@@ -77,7 +77,7 @@ public actor SpotifyClient {
 
     func validToken() async throws -> Token {
         guard var token = tokenStore.load() else {
-            throw HouseMusicError.notConfigured("Spotify login")
+            throw KaysonicError.notConfigured("Spotify login")
         }
         if token.expiresAt.timeIntervalSinceNow < 60 {
             token = try await tokenRequest([
@@ -144,7 +144,7 @@ public actor SpotifyClient {
     public func transferPlayback(toDeviceNamed name: String, play: Bool) async throws {
         let all = try await devices()
         guard let target = all.first(where: { $0.name.localizedCaseInsensitiveContains(name) }) else {
-            throw HouseMusicError.notConfigured("Spotify Connect device \(name)")
+            throw KaysonicError.notConfigured("Spotify Connect device \(name)")
         }
         let body = try JSONSerialization.data(withJSONObject: ["device_ids": [target.id], "play": play])
         _ = try await api("PUT", "/me/player", body: body)

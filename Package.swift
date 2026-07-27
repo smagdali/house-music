@@ -2,17 +2,17 @@
 import PackageDescription
 
 let package = Package(
-    name: "HouseMusicKit",
+    name: "KaysonicKit",
     platforms: [.iOS(.v17), .watchOS(.v10), .macOS(.v14)],
     products: [
-        .library(name: "HouseMusicKit", targets: ["HouseMusicKit"])
+        .library(name: "KaysonicKit", targets: ["KaysonicKit"])
     ],
     targets: [
-        .target(name: "HouseMusicKit", path: "Sources/HouseMusicKit"),
+        .target(name: "KaysonicKit", path: "Sources/KaysonicKit"),
         .testTarget(
-            name: "HouseMusicKitTests",
-            dependencies: ["HouseMusicKit"],
-            path: "Tests/HouseMusicKitTests"
+            name: "KaysonicKitTests",
+            dependencies: ["KaysonicKit"],
+            path: "Tests/KaysonicKitTests"
         ),
     ]
 )

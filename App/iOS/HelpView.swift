@@ -11,13 +11,13 @@ struct HelpView: View {
             VStack(alignment: .leading, spacing: 26) {
                 section("AirKay: streaming from your phone", [
                     "AirKay is the AirPort Express wired into the Living Room amp, a permanent AirPlay target.",
-                    "To play phone or laptop audio (podcasts, BBC Sounds) in any rooms: AirPlay to \u{201C}AirKay\u{201D} from Control Centre, then in House Music pick AirKay as the source and choose the rooms.",
+                    "To play phone or laptop audio (podcasts, BBC Sounds) in any rooms: AirPlay to \u{201C}AirKay\u{201D} from Control Centre, then in Kaysonic pick AirKay as the source and choose the rooms.",
                     "For one room quickly, you can AirPlay straight to that room\u{2019}s speaker instead, no app needed.",
                 ])
 
                 section("Spotify", [
                     "Connect your account once in Settings. Each person connects their own on their own phone.",
-                    "Tap a Spotify preset: House Music switches the rooms on and hands your Spotify playback to them.",
+                    "Tap a Spotify preset: Kaysonic switches the rooms on and hands your Spotify playback to them.",
                     "It moves whatever you\u{2019}re already playing. If nothing is playing, it opens Spotify so you can press play.",
                     "Multi-room Spotify plays as one MusicCast group and appears in Spotify Connect named after the preset (e.g. \u{201C}Spotify \u{00B7} Whole House\u{201D}).",
                 ])

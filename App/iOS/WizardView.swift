@@ -1,5 +1,5 @@
 import SwiftUI
-import HouseMusicKit
+import KaysonicKit
 
 /// First-run setup: discover devices, confirm rooms, curate inputs, seed presets.
 struct WizardView: View {
@@ -18,7 +18,7 @@ struct WizardView: View {
             Spacer()
             switch phase {
             case .welcome:
-                Text("House Music")
+                Text("Kaysonic")
                     .font(.system(size: 34, weight: .heavy))
                 Text("One tap to put music, telly, or the decks in any combination of rooms.")
                     .multilineTextAlignment(.center)
@@ -33,7 +33,7 @@ struct WizardView: View {
                 }
                 if found.isEmpty {
                     VStack(spacing: 14) {
-                        Text("Looking for your devices. House Music needs Local Network access, and every device must be on the same Wi-Fi.")
+                        Text("Looking for your devices. Kaysonic needs Local Network access, and every device must be on the same Wi-Fi.")
                             .font(.system(size: 15))
                             .multilineTextAlignment(.center)
                             .foregroundStyle(Color(hex: "BEB5A8"))

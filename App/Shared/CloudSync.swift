@@ -1,6 +1,6 @@
 import Foundation
 import CloudKit
-import HouseMusicKit
+import KaysonicKit
 
 /// Household config sync via CloudKit. The whole HouseConfig lives as one
 /// record (JSON blob + modification stamp) in a "Household" zone of the
@@ -95,7 +95,7 @@ actor CloudSync {
     func makeShareURL() async throws -> URL {
         let location = try await createZoneIfNeeded()
         guard case .privateDB(let zoneID) = location else {
-            throw HouseMusicError.notConfigured("Only the household owner can invite")
+            throw KaysonicError.notConfigured("Only the household owner can invite")
         }
         let db = container.privateCloudDatabase
         let shareID = CKRecord.ID(recordName: CKRecordNameZoneWideShare, zoneID: zoneID)
@@ -103,7 +103,7 @@ actor CloudSync {
             return url
         }
         let share = CKShare(recordZoneID: zoneID)
-        share[CKShare.SystemFieldKey.title] = "House Music" as CKRecordValue
+        share[CKShare.SystemFieldKey.title] = "Kaysonic" as CKRecordValue
         share.publicPermission = .none
         let result = try await db.modifyRecords(saving: [share], deleting: [], savePolicy: .ifServerRecordUnchanged)
         for (_, saveResult) in result.saveResults {
@@ -111,7 +111,7 @@ actor CloudSync {
                 return url
             }
         }
-        throw HouseMusicError.notConfigured("Share URL")
+        throw KaysonicError.notConfigured("Share URL")
     }
 
     func accept(_ metadata: CKShare.Metadata) async {

@@ -1,5 +1,5 @@
 import SwiftUI
-import HouseMusicKit
+import KaysonicKit
 
 /// The two-axis editor: pick a source, pick rooms; fire it, or save as preset.
 struct CustomEditorView: View {

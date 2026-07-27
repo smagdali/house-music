@@ -1,5 +1,5 @@
 import XCTest
-@testable import HouseMusicKit
+@testable import KaysonicKit
 
 /// Integration tests against the real house. Gated behind HM_LIVE=1 so CI and
 /// normal test runs never touch the network. The only writes are a muted

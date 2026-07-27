@@ -1,5 +1,5 @@
 import Foundation
-import HouseMusicKit
+import KaysonicKit
 #if canImport(WatchConnectivity)
 import WatchConnectivity
 #endif

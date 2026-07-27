@@ -12,7 +12,7 @@ be saved as a new preset. The daily driver is one tap.
 
 ```
 +------------------------------+
-| House Music              gear|
+| Kaysonic              gear|
 | > Decks -> Upstairs          |
 +------------------------------+
 | [ Decks    ]  [ Spotify  ]   |

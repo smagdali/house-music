@@ -1,9 +1,9 @@
 import SwiftUI
 import CloudKit
-import HouseMusicKit
+import KaysonicKit
 
 @main
-struct HouseMusicApp: App {
+struct KaysonicApp: App {
     @UIApplicationDelegateAdaptor(ShareAcceptDelegate.self) var delegate
     @State private var model = AppModel.shared
 
@@ -28,7 +28,7 @@ struct HouseMusicApp: App {
             .task {
                 // Refresh the shortcut parameter values on every launch, so the
                 // preset list Siri and Shortcuts offer stays in step.
-                HouseMusicShortcuts.updateAppShortcutParameters()
+                KaysonicShortcuts.updateAppShortcutParameters()
                 await model.refreshSpotifyState()
                 await model.cloudReconcile()
             }

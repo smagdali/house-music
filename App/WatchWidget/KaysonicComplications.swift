@@ -2,7 +2,7 @@ import WidgetKit
 import SwiftUI
 
 @main
-struct HouseMusicWidgetBundle: WidgetBundle {
+struct KaysonicWidgetBundle: WidgetBundle {
     var body: some Widget {
         SelectionComplication()
     }
@@ -35,11 +35,11 @@ struct SelectionProvider: TimelineProvider {
 
 struct SelectionComplication: Widget {
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: "HouseMusicSelection", provider: SelectionProvider()) { entry in
+        StaticConfiguration(kind: "KaysonicSelection", provider: SelectionProvider()) { entry in
             ComplicationView(entry: entry)
         }
         .configurationDisplayName("Now Playing")
-        .description("Shows what House Music is playing; tap to control.")
+        .description("Shows what Kaysonic is playing; tap to control.")
         .supportedFamilies([.accessoryCircular, .accessoryCorner, .accessoryInline, .accessoryRectangular])
     }
 }

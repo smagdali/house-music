@@ -5,7 +5,7 @@
     <key>CFBundleDevelopmentRegion</key>
     <string>en</string>
     <key>CFBundleDisplayName</key>
-    <string>House Music</string>
+    <string>Kaysonic</string>
     <key>CFBundleExecutable</key>
     <string>$(EXECUTABLE_NAME)</string>
     <key>CFBundleIdentifier</key>
@@ -21,7 +21,7 @@
     <key>CFBundleVersion</key>
     <string>$(CURRENT_PROJECT_VERSION)</string>
     <key>NSLocalNetworkUsageDescription</key>
-    <string>House Music controls the audio devices (Yamaha MusicCast receivers) on your home network.</string>
+    <string>Kaysonic controls the audio devices (Yamaha MusicCast receivers) on your home network.</string>
     <key>WKApplication</key>
     <true/>
     <key>WKCompanionAppBundleIdentifier</key>

@@ -1,5 +1,5 @@
 import AppIntents
-import HouseMusicKit
+import KaysonicKit
 
 /// Siri / Shortcuts: "DJ time", "Spotify in Dining Room", "Decks upstairs".
 struct PresetEntity: AppEntity, Identifiable {
@@ -46,7 +46,7 @@ struct PresetQuery: EntityStringQuery {
 
 struct ActivatePresetIntent: AppIntent {
     static let title: LocalizedStringResource = "Activate Preset"
-    static let description = IntentDescription("Puts the house into a House Music preset.")
+    static let description = IntentDescription("Puts the house into a Kaysonic preset.")
     static let openAppWhenRun = false
 
     @Parameter(title: "Preset")
@@ -81,7 +81,7 @@ struct AllOffIntent: AppIntent {
     }
 }
 
-struct HouseMusicShortcuts: AppShortcutsProvider {
+struct KaysonicShortcuts: AppShortcutsProvider {
     static var appShortcuts: [AppShortcut] {
         AppShortcut(
             intent: ActivatePresetIntent(),
