@@ -52,30 +52,34 @@ struct ComplicationView: View {
     var body: some View {
         switch family {
         case .accessoryCircular:
-            Text(SharedSelection.abbreviate(entry.name))
-                .font(.system(size: 22, weight: .heavy))
-                .minimumScaleFactor(0.4)
-                .lineLimit(1)
-                .foregroundStyle(SharedSelection.foreground(for: entry.colorHex))
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .containerBackground(color, for: .widget)
+            // On the face watchOS desaturates complications, so lean on a
+            // legible dimmed backdrop plus a colour ring rather than a colour
+            // fill (which the system would grey out and hide the text on).
+            ZStack {
+                AccessoryWidgetBackground()
+                Circle().strokeBorder(color, lineWidth: 4)
+                Text(SharedSelection.abbreviate(entry.name))
+                    .font(.system(size: 17, weight: .heavy))
+                    .minimumScaleFactor(0.4)
+                    .lineLimit(1)
+                    .padding(5)
+            }
 
         case .accessoryRectangular:
-            HStack {
+            HStack(spacing: 8) {
+                Capsule().fill(color).frame(width: 6)
                 Text(entry.name)
                     .font(.system(size: 20, weight: .heavy))
                     .minimumScaleFactor(0.5)
                     .lineLimit(2)
-                    .foregroundStyle(SharedSelection.foreground(for: entry.colorHex))
                 Spacer(minLength: 0)
             }
-            .padding(.horizontal, 10)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-            .containerBackground(color, for: .widget)
+            .containerBackground(.clear, for: .widget)
 
         case .accessoryCorner:
             Text(SharedSelection.abbreviate(entry.name))
-                .font(.system(size: 18, weight: .heavy))
+                .font(.system(size: 17, weight: .heavy))
                 .widgetLabel(entry.name)
 
         case .accessoryInline:
