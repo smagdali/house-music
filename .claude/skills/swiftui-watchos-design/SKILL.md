@@ -51,6 +51,16 @@ Only use these values for padding and spacing: **4, 8, 12, 16, 20, 24, 32, 40, 4
 - App and widget share **one** data model (here: an App Group `UserDefaults`), not duplicate structs.
 - Medium/large families share a consistent layout (header, body, footer) with 12pt internal padding.
 
+## Accessibility: maximise contrast and size (this project's priority)
+
+The users have poor close vision; colour and legibility carry the interface. On every small surface (tiles, complications, watch):
+
+- **Max contrast.** Foreground vs background must be well past WCAG AA, aim AAA (7:1+). Dark ink on the bright source colours, white on the dark off state. Never mid-grey text on a colour.
+- **Largest reasonable font.** Fill the space: size the primary label as large as the slot allows, then let it shrink only if it overflows. Bias every size choice upward; when unsure, go bigger.
+- **Weight = heavy/black** for primary labels; never rely on thin weights on small surfaces.
+- **Colour is a first-class signal**, not decoration. Each source has its own colour; keep them distinct and saturated so the tile/complication is identifiable by colour alone at a glance.
+- One glance, one word: prefer a single bold word over a truncated phrase on the tightest slots.
+
 ## Anti-patterns
 
 - No `minimumScaleFactor` hacks to force-fit text - fix the layout instead.
@@ -71,3 +81,4 @@ Render SwiftUI to PNG headlessly with `ImageRenderer` in a `swift` script (see `
 5. Every widget family listed; `.containerBackground` present on all.
 6. App and widget share one model; refresh matches data granularity.
 7. `NavigationStack`, not bare `ZStack`; no `minimumScaleFactor` hacks.
+8. Contrast 7:1+ (dark ink on colour, white on off); primary labels heavy/black and as large as the slot allows; source colours distinct and saturated.
