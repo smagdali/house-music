@@ -12,9 +12,9 @@
     <array>
         <dict>
             <key>INAlternativeAppName</key>
-            <string>Kittyhouse</string>
+            <string>Kaysonic</string>
             <key>INAlternativeAppNamePronunciationHint</key>
-            <string>kitty house</string>
+            <string>kay sonic</string>
         </dict>
     </array>
     <key>CFBundleExecutable</key>
