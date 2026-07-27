@@ -18,23 +18,26 @@ struct PresetEntity: AppEntity, Identifiable {
 /// to match the spoken preset name against the entity list, and without string
 /// matching the shortcut does not surface in Shortcuts or Siri at all.
 struct PresetQuery: EntityStringQuery {
-    @MainActor
+    /// Read straight from the store rather than AppModel. iOS runs this query
+    /// out of process when it enumerates a parameterised shortcut's values, and
+    /// spinning up the whole model (discovery, monitor, Spotify) there is both
+    /// wasteful and liable to fail, which silently drops the shortcut.
+    private var all: [PresetEntity] {
+        let store = ConfigStore()
+        return store.orderedPresets(store.loadConfig())
+            .map { PresetEntity(id: $0.id, name: $0.name) }
+    }
+
     func entities(for identifiers: [UUID]) async throws -> [PresetEntity] {
-        AppModel.shared.presets
-            .filter { identifiers.contains($0.id) }
-            .map { PresetEntity(id: $0.id, name: $0.name) }
+        all.filter { identifiers.contains($0.id) }
     }
 
-    @MainActor
     func entities(matching string: String) async throws -> [PresetEntity] {
-        AppModel.shared.presets
-            .filter { $0.name.localizedCaseInsensitiveContains(string) }
-            .map { PresetEntity(id: $0.id, name: $0.name) }
+        all.filter { $0.name.localizedCaseInsensitiveContains(string) }
     }
 
-    @MainActor
     func suggestedEntities() async throws -> [PresetEntity] {
-        AppModel.shared.presets.map { PresetEntity(id: $0.id, name: $0.name) }
+        all
     }
 }
 

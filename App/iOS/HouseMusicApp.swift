@@ -26,6 +26,9 @@ struct HouseMusicApp: App {
                 handleSpotifyCallback(url)
             }
             .task {
+                // Refresh the shortcut parameter values on every launch, so the
+                // preset list Siri and Shortcuts offer stays in step.
+                HouseMusicShortcuts.updateAppShortcutParameters()
                 await model.refreshSpotifyState()
                 await model.cloudReconcile()
             }

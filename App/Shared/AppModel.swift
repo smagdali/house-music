@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import AppIntents
 import HouseMusicKit
 #if os(watchOS)
 import WidgetKit
@@ -194,6 +195,9 @@ final class AppModel {
     func persist() {
         store.saveConfig(config)
         presets = store.orderedPresets(config)
+        // Tell iOS the shortcut parameter's values changed, or the parameterised
+        // App Shortcut never gets populated and does not appear in Shortcuts.
+        HouseMusicShortcuts.updateAppShortcutParameters()
         SyncBridge.shared.pushConfig(config)
         #if os(iOS)
         Task { await cloudPush() }
@@ -204,6 +208,7 @@ final class AppModel {
         config = fresh
         store.saveConfig(fresh)
         presets = store.orderedPresets(fresh)
+        HouseMusicShortcuts.updateAppShortcutParameters()
     }
 
     /// Baseline tick position for the active preset, 0...1, or nil without one.
