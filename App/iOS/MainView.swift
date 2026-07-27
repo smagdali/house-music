@@ -9,6 +9,8 @@ struct MainView: View {
     @State private var showReorder = false
     @State private var editingPreset: Preset?
     @State private var spotifyPrompt: Preset?
+    @State private var conflictPreset: Preset?
+    @State private var conflictRooms: [String] = []
     @State private var pollTask: Task<Void, Never>?
 
     private let columns = [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)]
@@ -66,6 +68,16 @@ struct MainView: View {
         } message: {
             Text("This preset plays Spotify. House Music needs your Spotify account connected so it can start playback in the chosen rooms. You can connect now, or later in Settings.")
         }
+        .alert("Something else is playing", isPresented: .init(get: { conflictPreset != nil },
+                                                               set: { if !$0 { conflictPreset = nil } })) {
+            Button("Interrupt", role: .destructive) {
+                if let preset = conflictPreset { Task { await model.fire(preset) } }
+                conflictPreset = nil
+            }
+            Button("Leave it", role: .cancel) { conflictPreset = nil }
+        } message: {
+            Text("\(conflictRooms.joined(separator: " and ")) \(conflictRooms.count == 1 ? "is" : "are") playing right now. Carrying on will stop that.")
+        }
         .onAppear { pollTask = model.startPolling() }
         .onDisappear { pollTask?.cancel() }
     }
@@ -76,9 +88,16 @@ struct MainView: View {
     private func tap(_ preset: Preset) {
         if preset.source?.isSpotify == true && !model.spotifyConnected {
             spotifyPrompt = preset
-        } else {
-            Task { await model.fire(preset) }
+            return
         }
+        // Someone may be listening in a room this preset would silence.
+        let clash = model.conflicts(with: preset)
+        if !clash.isEmpty {
+            conflictRooms = clash.map(\.roomName)
+            conflictPreset = preset
+            return
+        }
+        Task { await model.fire(preset) }
     }
 
     private var header: some View {

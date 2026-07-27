@@ -88,6 +88,24 @@ final class AppModel {
         }
     }
 
+    /// Rooms that are audibly playing right now and that this preset would
+    /// silence or switch to a different source. Used to confirm before cutting
+    /// off someone else's music, since firing a preset powers off every room
+    /// that is not part of it.
+    func conflicts(with preset: Preset) -> [Device] {
+        let plan = PresetEngine.plan(for: preset, config: config)
+        let members = Set(preset.rooms)
+        return config.devices.filter { device in
+            guard let state = roomStates[device.id], state.isPlaying else { return false }
+            if plan.powerOff.contains(device.id) { return true }
+            guard members.contains(device.id) else { return false }
+            let expected = device.id == preset.source?.deviceID
+                ? (preset.source?.inputID ?? state.input)
+                : "mc_link"
+            return state.input != expected
+        }
+    }
+
     func referenceRoom(_ preset: Preset) -> Device? {
         if let source = preset.source, preset.rooms.contains(source.deviceID) {
             return config.device(source.deviceID)

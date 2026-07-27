@@ -7,6 +7,28 @@ public struct RoomState: Sendable, Equatable {
     public var input: String
     public var volume: Int
     public var mute: Bool
+    /// netusb playback state ("play"/"stop"/"pause") for network inputs.
+    /// nil for analog and HDMI inputs, which report no playback state at all.
+    public var playback: String?
+
+    public init(deviceID: DeviceID, power: Bool, input: String, volume: Int,
+                mute: Bool, playback: String? = nil) {
+        self.deviceID = deviceID
+        self.power = power
+        self.input = input
+        self.volume = volume
+        self.mute = mute
+        self.playback = playback
+    }
+
+    /// Best available answer to "is this room actually making sound", used to
+    /// avoid interrupting someone else's music. Network inputs report playback
+    /// honestly; analog and HDMI cannot, so a powered-on unmuted room counts.
+    public var isPlaying: Bool {
+        guard power, !mute else { return false }
+        if let playback { return playback == "play" }
+        return true
+    }
 }
 
 /// Polls all configured devices for status. YXC also pushes UDP events, but a
@@ -14,6 +36,13 @@ public struct RoomState: Sendable, Equatable {
 public actor HouseMonitor {
     let client: YXCClient
     public private(set) var states: [DeviceID: RoomState] = [:]
+
+    /// Inputs whose playback state netusb reports. mc_link is deliberately
+    /// excluded: a client mirrors its server, and reports stop regardless.
+    static let playbackReportingInputs: Set<String> = [
+        "spotify", "airplay", "net_radio", "bluetooth", "usb", "server",
+        "napster", "qobuz", "tidal", "deezer", "amazon_music", "juke",
+    ]
 
     public init(client: YXCClient = YXCClient()) {
         self.client = client
@@ -25,8 +54,15 @@ public actor HouseMonitor {
             for device in config.devices {
                 group.addTask { [client] in
                     guard let status = try? await client.status(host: device.ipAddress) else { return nil }
+                    // Only network inputs report playback; skip the extra call
+                    // for analog and HDMI, where it means nothing.
+                    var playback: String?
+                    if Self.playbackReportingInputs.contains(status.input) {
+                        playback = try? await client.playInfo(host: device.ipAddress).playback
+                    }
                     return RoomState(deviceID: device.id, power: status.isOn,
-                                     input: status.input, volume: status.volume, mute: status.mute)
+                                     input: status.input, volume: status.volume,
+                                     mute: status.mute, playback: playback)
                 }
             }
             var fresh: [DeviceID: RoomState] = [:]
