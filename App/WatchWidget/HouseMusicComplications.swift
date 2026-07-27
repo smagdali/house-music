@@ -49,40 +49,34 @@ struct ComplicationView: View {
 
     private var color: Color { Color(hexString: entry.colorHex) }
 
+    private var textColor: Color { SharedSelection.foreground(for: entry.colorHex) }
+
     var body: some View {
         // Every accessory-widget view MUST declare a containerBackground or
-        // watchOS fails to render it and shows the "!" placeholder.
-        content.containerBackground(for: .widget) {
-            if family == .accessoryCircular { AccessoryWidgetBackground() } else { Color.clear }
-        }
+        // watchOS renders the "!" placeholder. Fill it with the tile colour.
+        content.containerBackground(color, for: .widget)
     }
 
     @ViewBuilder
     private var content: some View {
         switch family {
         case .accessoryCircular:
-            // On the face watchOS desaturates complications, so lean on a
-            // legible ring plus text rather than a colour fill (which the
-            // system greys out, hiding the text on top).
-            ZStack {
-                Circle().strokeBorder(color, lineWidth: 4)
-                Text(SharedSelection.abbreviate(entry.name))
-                    .font(.system(size: 16, weight: .heavy))
-                    .minimumScaleFactor(0.4)
-                    .lineLimit(1)
-                    .padding(6)
-            }
+            Text(SharedSelection.abbreviate(entry.name))
+                .font(.system(size: 16, weight: .heavy))
+                .minimumScaleFactor(0.4)
+                .lineLimit(1)
+                .foregroundStyle(textColor)
+                .padding(4)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
 
         case .accessoryRectangular:
-            HStack(spacing: 8) {
-                Capsule().fill(color).frame(width: 6)
-                Text(entry.name)
-                    .font(.system(size: 20, weight: .heavy))
-                    .minimumScaleFactor(0.5)
-                    .lineLimit(2)
-                Spacer(minLength: 0)
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+            Text(entry.name)
+                .font(.system(size: 20, weight: .heavy))
+                .minimumScaleFactor(0.5)
+                .lineLimit(2)
+                .foregroundStyle(textColor)
+                .padding(.horizontal, 10)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
 
         case .accessoryCorner:
             Text(SharedSelection.abbreviate(entry.name))
@@ -95,6 +89,7 @@ struct ComplicationView: View {
         default:
             Text(SharedSelection.abbreviate(entry.name))
                 .font(.system(size: 20, weight: .heavy))
+                .foregroundStyle(textColor)
         }
     }
 }
