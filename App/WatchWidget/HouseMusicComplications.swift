@@ -56,6 +56,7 @@ struct ComplicationView: View {
                 .font(.system(size: 22, weight: .heavy))
                 .minimumScaleFactor(0.4)
                 .lineLimit(1)
+                .foregroundStyle(SharedSelection.foreground(for: entry.colorHex))
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .containerBackground(color, for: .widget)
 
@@ -65,6 +66,7 @@ struct ComplicationView: View {
                     .font(.system(size: 20, weight: .heavy))
                     .minimumScaleFactor(0.5)
                     .lineLimit(2)
+                    .foregroundStyle(SharedSelection.foreground(for: entry.colorHex))
                 Spacer(minLength: 0)
             }
             .padding(.horizontal, 10)

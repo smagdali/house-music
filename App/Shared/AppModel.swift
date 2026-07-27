@@ -68,7 +68,7 @@ final class AppModel {
     #if os(watchOS)
     /// Share the current selection with the watch complication and refresh it.
     private func publishSelection() {
-        let hex = activePreset?.source.map { Palette.colorHex(for: $0.inputID) } ?? "3E372E"
+        let hex = activePreset?.source.map { Palette.colorHex(for: $0.inputID) } ?? SharedSelection.offHex
         SharedSelection.write(name: nowPlayingText, colorHex: hex)
         WidgetCenter.shared.reloadAllTimelines()
     }

@@ -16,7 +16,16 @@ enum SharedSelection {
     static func read() -> (name: String, colorHex: String) {
         let defaults = UserDefaults(suiteName: suite)
         return (defaults?.string(forKey: nameKey) ?? "All quiet",
-                defaults?.string(forKey: colorKey) ?? "3E372E")
+                defaults?.string(forKey: colorKey) ?? offHex)
+    }
+
+    /// Tile colour for the idle/off state (matches the phone preset tiles).
+    static let offHex = "211D19"
+
+    /// Foreground for text on a tile of `colorHex`: dark on a source colour,
+    /// white on the dark off tile, exactly like the phone tiles.
+    static func foreground(for colorHex: String) -> Color {
+        colorHex.uppercased() == offHex ? .white : Color(hexString: "161006")
     }
 
     /// Short form for the tightest slots: first word, or the initials of a
