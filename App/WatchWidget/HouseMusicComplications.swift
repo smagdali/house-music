@@ -50,19 +50,27 @@ struct ComplicationView: View {
     private var color: Color { Color(hexString: entry.colorHex) }
 
     var body: some View {
+        // Every accessory-widget view MUST declare a containerBackground or
+        // watchOS fails to render it and shows the "!" placeholder.
+        content.containerBackground(for: .widget) {
+            if family == .accessoryCircular { AccessoryWidgetBackground() } else { Color.clear }
+        }
+    }
+
+    @ViewBuilder
+    private var content: some View {
         switch family {
         case .accessoryCircular:
             // On the face watchOS desaturates complications, so lean on a
-            // legible dimmed backdrop plus a colour ring rather than a colour
-            // fill (which the system would grey out and hide the text on).
+            // legible ring plus text rather than a colour fill (which the
+            // system greys out, hiding the text on top).
             ZStack {
-                AccessoryWidgetBackground()
                 Circle().strokeBorder(color, lineWidth: 4)
                 Text(SharedSelection.abbreviate(entry.name))
-                    .font(.system(size: 17, weight: .heavy))
+                    .font(.system(size: 16, weight: .heavy))
                     .minimumScaleFactor(0.4)
                     .lineLimit(1)
-                    .padding(5)
+                    .padding(6)
             }
 
         case .accessoryRectangular:
@@ -75,7 +83,6 @@ struct ComplicationView: View {
                 Spacer(minLength: 0)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-            .containerBackground(.clear, for: .widget)
 
         case .accessoryCorner:
             Text(SharedSelection.abbreviate(entry.name))
