@@ -12,15 +12,9 @@
     <array>
         <dict>
             <key>INAlternativeAppName</key>
-            <string>Nutmeg</string>
+            <string>Kittyhouse</string>
             <key>INAlternativeAppNamePronunciationHint</key>
-            <string>nutmeg</string>
-        </dict>
-        <dict>
-            <key>INAlternativeAppName</key>
-            <string>House Rooms</string>
-            <key>INAlternativeAppNamePronunciationHint</key>
-            <string>house rooms</string>
+            <string>kitty house</string>
         </dict>
     </array>
     <key>CFBundleExecutable</key>
