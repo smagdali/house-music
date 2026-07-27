@@ -69,7 +69,8 @@ final class AppModel {
     /// Share the current selection with the watch complication and refresh it.
     private func publishSelection() {
         let hex = activePreset?.source.map { Palette.colorHex(for: $0.inputID) } ?? SharedSelection.offHex
-        SharedSelection.write(name: nowPlayingText, colorHex: hex)
+        let rooms = activePreset.map { $0.isAllOff ? "" : roomList($0.rooms) } ?? ""
+        SharedSelection.write(name: nowPlayingText, colorHex: hex, rooms: rooms)
         WidgetCenter.shared.reloadAllTimelines()
     }
     #endif

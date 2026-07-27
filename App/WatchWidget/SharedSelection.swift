@@ -6,17 +6,20 @@ enum SharedSelection {
     static let suite = "group.org.whitelabel.housemusic"
     private static let nameKey = "selectionName"
     private static let colorKey = "selectionColor"
+    private static let roomsKey = "selectionRooms"
 
-    static func write(name: String, colorHex: String) {
+    static func write(name: String, colorHex: String, rooms: String) {
         let defaults = UserDefaults(suiteName: suite)
         defaults?.set(name, forKey: nameKey)
         defaults?.set(colorHex, forKey: colorKey)
+        defaults?.set(rooms, forKey: roomsKey)
     }
 
-    static func read() -> (name: String, colorHex: String) {
+    static func read() -> (name: String, colorHex: String, rooms: String) {
         let defaults = UserDefaults(suiteName: suite)
         return (defaults?.string(forKey: nameKey) ?? "All quiet",
-                defaults?.string(forKey: colorKey) ?? offHex)
+                defaults?.string(forKey: colorKey) ?? offHex,
+                defaults?.string(forKey: roomsKey) ?? "")
     }
 
     /// Tile colour for the idle/off state (matches the phone preset tiles).

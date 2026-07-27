@@ -12,6 +12,7 @@ struct SelectionEntry: TimelineEntry {
     let date: Date
     let name: String
     let colorHex: String
+    let rooms: String
 }
 
 /// Reads the current selection from the shared App Group. The app reloads the
@@ -19,10 +20,10 @@ struct SelectionEntry: TimelineEntry {
 struct SelectionProvider: TimelineProvider {
     private func current() -> SelectionEntry {
         let s = SharedSelection.read()
-        return SelectionEntry(date: Date(), name: s.name, colorHex: s.colorHex)
+        return SelectionEntry(date: Date(), name: s.name, colorHex: s.colorHex, rooms: s.rooms)
     }
     func placeholder(in context: Context) -> SelectionEntry {
-        SelectionEntry(date: Date(), name: "Decks", colorHex: "E8602B")
+        SelectionEntry(date: Date(), name: "Decks", colorHex: "E8602B", rooms: "Whole House")
     }
     func getSnapshot(in context: Context, completion: @escaping (SelectionEntry) -> Void) {
         completion(current())
@@ -52,9 +53,7 @@ struct ComplicationView: View {
     private var textColor: Color { SharedSelection.foreground(for: entry.colorHex) }
 
     var body: some View {
-        // Every accessory-widget view MUST declare a containerBackground or
-        // watchOS renders the "!" placeholder. Fill it with the tile colour.
-        content.containerBackground(color, for: .widget)
+        content
     }
 
     @ViewBuilder
@@ -68,6 +67,7 @@ struct ComplicationView: View {
                 .foregroundStyle(textColor)
                 .padding(3)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .containerBackground(color, for: .widget)
 
         case .accessoryRectangular:
             Text(entry.name)
@@ -77,15 +77,21 @@ struct ComplicationView: View {
                 .foregroundStyle(textColor)
                 .padding(.horizontal, 8)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                .containerBackground(color, for: .widget)
 
         case .accessoryCorner:
-            // System draws the corner shape; we fill it (containerBackground)
-            // and put the abbreviation inside, with the full name as the label.
-            Text(SharedSelection.abbreviate(entry.name))
-                .font(.system(size: 18, weight: .black))
-                .minimumScaleFactor(0.4)
-                .foregroundStyle(textColor)
-                .widgetLabel(entry.name)
+            // widgetCurvesContent draws the content large along the outer arc,
+            // the treatment Weather uses for its "50%". The watch face sets the
+            // metric and palette, so font size and colour here are ignored;
+            // keep the string short (about 7 characters) or it truncates.
+            // The big curved word sits on the outer arc; the rooms go on the
+            // inner arc. The curved treatment only engages when a widgetLabel
+            // is present, so always supply one (verified in the simulator).
+            Text(SharedSelection.abbreviate(entry.name).uppercased())
+                .widgetCurvesContent()
+                .widgetLabel {
+                    Text(entry.rooms.isEmpty ? entry.name : entry.rooms)
+                }
 
         case .accessoryInline:
             Text(entry.name)
@@ -94,6 +100,7 @@ struct ComplicationView: View {
             Text(SharedSelection.abbreviate(entry.name))
                 .font(.system(size: 20, weight: .black))
                 .foregroundStyle(textColor)
+                .containerBackground(color, for: .widget)
         }
     }
 }
